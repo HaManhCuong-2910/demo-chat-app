@@ -1,10 +1,8 @@
 <template>
   <header-default-layout />
-  <main>
+  <main class="container mx-auto pb-16">
     <slot> </slot>
   </main>
-
-  <footer-default-layout />
 </template>
 
 <script setup lang="ts"></script>

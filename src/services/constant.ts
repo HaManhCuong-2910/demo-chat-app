@@ -45,6 +45,7 @@ export const formatNumberMoney = (value: number | string) => {
 
 export enum ETypeButton {
   primary = "primary",
+  primaryWhite = "primary-white",
   secondary = "secondary",
 }
 

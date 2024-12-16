@@ -21,11 +21,6 @@ export default defineNuxtConfig({
     },
   },
 
-  robots: {
-    // disallow: ["/vnpayment"],
-    disallow: [],
-  },
-
   experimental: {
     inlineRouteRules: true,
   },
@@ -52,25 +47,14 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    "@nuxtjs/seo",
     "@nuxtjs/i18n",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "@vee-validate/nuxt",
     "nuxt-swiper",
     "@nuxtjs/device",
-    "@nuxtjs/robots",
     "@element-plus/nuxt",
-    "nuxt-site-config",
   ],
-
-  ogImage: {
-    enabled: false,
-  },
-
-  schemaOrg: {
-    enabled: false,
-  },
 
   i18n: {
     vueI18n: "./src/services/i18n.config.ts",

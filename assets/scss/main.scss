@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
-  font-family: Roboto, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-weight: 400;
   font-size: 1rem;
   line-height: 24px;
@@ -21,36 +23,56 @@ img {
 
 .button-common {
   &-primary {
-    background-color: #0071a9 !important;
+    background-color: #0048bd !important;
     p {
       color: #fff !important;
     }
     &:focus {
-      background-color: #0071a9 !important;
+      background-color: #0048bd !important;
       p {
         color: #fff !important;
       }
     }
     &:active,
     &:hover {
-      background-color: #0071a9 !important;
+      background-color: #0048bd !important;
     }
   }
 
-  &-secondary {
-    background-color: #f5f7f9 !important;
+  &-primary-white {
+    background-color: #0048bd !important;
     p {
-      color: #000 !important;
+      color: #fff !important;
     }
     &:focus {
-      background-color: #f5f7f9 !important;
+      background-color: #e6efffd9 !important;
       p {
         color: #000 !important;
       }
     }
     &:active,
     &:hover {
-      background-color: #f5f7f9 !important;
+      background-color: #e6efffd9 !important;
+      p {
+        color: #000 !important;
+      }
+    }
+  }
+
+  &-secondary {
+    background-color: #fff !important;
+    p {
+      color: #000 !important;
+    }
+    &:focus {
+      background-color: #e6efff !important;
+      p {
+        color: #000 !important;
+      }
+    }
+    &:active,
+    &:hover {
+      background-color: #e6efff !important;
     }
   }
 }

@@ -181,19 +181,12 @@ defineExpose({ focus });
 
   .el-input__wrapper {
     box-shadow: unset;
-    border: 1px solid #bfccd9;
-    padding: 2px 12px;
+    border: none;
+    padding: 4px 12px;
 
     .el-input__inner {
       font-size: 14px;
       line-height: 20px;
-      w &::-ms-input-placeholder {
-        transform: translateY(1px);
-      }
-
-      &::placeholder {
-        transform: translateY(1px);
-      }
     }
 
     .el-input__clear {
@@ -202,7 +195,7 @@ defineExpose({ focus });
     }
 
     &.is-focus {
-      border: 1px solid #0071a9;
+      border: none;
       box-shadow: unset;
     }
   }
