@@ -76,3 +76,78 @@ img {
     }
   }
 }
+
+.el-dialog {
+  padding: 0px !important;
+  border-radius: 12px !important;
+  .el-dialog__header {
+    padding: 0px !important;
+  }
+
+  .el-dialog__body {
+    border-radius: 12px !important;
+    overflow: hidden;
+  }
+}
+
+.cell-date-time-picker-container {
+  &.disabled {
+    .el-date-table-cell {
+      background-color: #f4f4f4;
+      border-radius: 0px;
+      cursor: not-allowed;
+      width: 100%;
+
+      .el-date-table-cell__text {
+        color: #969fa7 !important;
+      }
+    }
+  }
+
+  &.next-month {
+    .el-date-table-cell {
+      .el-date-table-cell__text {
+        @apply text-zinc-500 #{!important};
+      }
+    }
+  }
+
+  &.prev-month {
+    .el-date-table-cell {
+      .el-date-table-cell__text {
+        @apply text-zinc-500 #{!important};
+      }
+    }
+  }
+
+  .el-date-table-cell {
+    border-radius: 50%;
+    @apply size-8 flex justify-center items-center;
+    box-sizing: border-box;
+
+    .el-date-table-cell__text {
+      @apply text-zinc-500 font-medium #{!important};
+    }
+  }
+
+  &.today {
+    .el-date-table-cell__text {
+      @apply text-red-700 font-bold #{!important};
+    }
+  }
+
+  &.current {
+    &:not(.disabled) {
+      .el-date-table-cell__text {
+        @apply text-base font-medium;
+        @apply text-white bg-red-600 #{!important};
+      }
+    }
+  }
+
+  .el-date-table-cell__text {
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+  }
+}

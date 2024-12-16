@@ -7,6 +7,7 @@
         <button-common
           class="mt-4 !rounded-xl button-custom"
           :type="ETypeButton.primaryWhite"
+          @click="isShowDialog = true"
         >
           <div class="flex items-center">
             <p class="text-base">Chat</p>
@@ -19,10 +20,21 @@
       </div>
     </div>
   </div>
+  <el-dialog
+    destroy-on-close
+    v-model="isShowDialog"
+    width="500"
+    :show-close="false"
+  >
+    <body-add-edit-chat-dialog />
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { ETypeButton } from "~/src/services/constant";
+import { useHomeStore } from "../store/home.store";
+const homeStore = useHomeStore();
+const { isShowDialog } = storeToRefs(homeStore);
 </script>
 
 <style scoped lang="scss">

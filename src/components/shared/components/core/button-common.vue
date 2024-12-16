@@ -56,13 +56,7 @@ const debounce = (callback: Function, wait: number) => {
 };
 
 const handleClick = () => {
-  if (props.preventDebounce) {
-    return emit("click");
-  }
-  debounce(() => {
-    emit("click");
-  }, 200);
-  return;
+  emit("click");
 };
 </script>
 
