@@ -4,7 +4,7 @@
       id="chat-area"
       :class="[
         mode === EModeAction.fullScreen
-          ? 'fixed top-0 left-0 right-0 bottom-0'
+          ? 'fixed top-0 left-0 right-0 bottom-0 z-10'
           : '',
       ]"
       :style="`background-color: ${bgColor};`"
@@ -71,7 +71,9 @@
       <div
         :style="`height: ${
           mode === EModeAction.fullScreen ? 'calc(100vh - 92px)' : '100%'
-        }; aspect-ratio: 1 / ${ratioH};`"
+        }; ${
+          mode !== EModeAction.fullScreen ? `aspect-ratio: 1 / ${ratioH};` : ''
+        } `"
         class="relative"
         @click="
           mode === EModeAction.fullScreen
@@ -268,7 +270,7 @@
             </div>
           </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0" v-if="footer">
+        <div class="absolute bottom-0 left-0 right-0 w-full" v-if="footer">
           <chat-input-area-component />
         </div>
       </div>
