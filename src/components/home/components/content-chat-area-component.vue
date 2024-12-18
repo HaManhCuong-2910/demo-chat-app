@@ -29,7 +29,6 @@
             viewBox="0 0 26 12"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            class="absolute right-[-2px] top-[2px]"
           >
             <g clip-path="url(#clip0_0_3)">
               <path
