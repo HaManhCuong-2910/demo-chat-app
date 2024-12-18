@@ -5,6 +5,7 @@ import {
   type IDataFormAddMessage,
   type IHomeData,
 } from "../models/home.model";
+import { useToolbarStore } from "./toolbar.store";
 
 export const useHomeStore = defineStore("homeStore", () => {
   const mode = ref<EModeAction>(EModeAction.edit);
@@ -19,6 +20,7 @@ export const useHomeStore = defineStore("homeStore", () => {
   });
 
   const onAddData = (value: IDataFormAddMessage) => {
+    const { showChatList } = storeToRefs(useToolbarStore());
     if (data.value.length === 0) {
       data.value.push({
         time: value.date,
@@ -32,7 +34,7 @@ export const useHomeStore = defineStore("homeStore", () => {
           },
         ],
       });
-
+      showChatList.value = showChatList.value + 1;
       return;
     }
 
@@ -60,6 +62,7 @@ export const useHomeStore = defineStore("homeStore", () => {
           },
         ],
       });
+      showChatList.value = showChatList.value + 1;
     } else {
       data.value[
         isAddAfterDialog.value
@@ -72,6 +75,7 @@ export const useHomeStore = defineStore("homeStore", () => {
         type: value.person,
         typeMessage: value.type,
       });
+      showChatList.value = showChatList.value + 1;
     }
   };
 

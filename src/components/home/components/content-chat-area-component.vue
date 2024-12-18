@@ -70,11 +70,13 @@
 
       <div
         :style="`height: ${
-          mode === EModeAction.fullScreen ? 'calc(100vh - 92px)' : '100%'
-        }; ${
-          mode !== EModeAction.fullScreen ? `aspect-ratio: 1 / ${ratioH};` : ''
-        } `"
-        class="relative"
+          mode === EModeAction.fullScreen
+            ? 'calc(100vh - 92px)'
+            : fixHeight
+            ? `${ratioH * (797 + 92)}px`
+            : '100%'
+        }; ${!fixHeight ? `min-height: ${ratioH * (797 + 92)}px;` : ''}`"
+        class="relative overflow-y-hidden"
         @click="
           mode === EModeAction.fullScreen
             ? (mode = EModeAction.edit)
@@ -82,9 +84,12 @@
         "
       >
         <div
-          class="h-full overflow-auto px-4 py-3 pb-[120px] hide-webkit-scrollbar"
+          class="h-full px-4 py-3 pb-[120px] hide-webkit-scrollbar"
+          :style="`transform: translateY(${
+            (scrollChat / 100) * ratioH * (797 + 92 + 200) * -1
+          }px);`"
         >
-          <div v-for="(item, index) in data" :key="item.time">
+          <div v-for="(item, index) in dataShow" :key="item.time">
             <div
               v-if="index > 0 && showDate"
               class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-6"
@@ -209,7 +214,7 @@
                 "
               >
                 <p
-                  class="!leading-3 time-content whitespace-nowrap"
+                  class="!leading-3 time-content whitespace-nowrap mr-2"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                   v-if="itemChild.type === ETypeUserChat.user"
                 >
@@ -238,9 +243,16 @@
                   <img
                     :src="itemChild.value"
                     alt="image"
-                    class="max-w-full rounded-xl"
+                    class="max-w-full rounded-xl ml-1"
                   />
                 </div>
+                <p
+                  v-if="itemChild.type === ETypeUserChat.other"
+                  class="time-content self-end whitespace-nowrap ml-3"
+                  :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
+                >
+                  {{ moment(itemChild.time).format("h:mm A") }}
+                </p>
               </div>
               <div
                 class="flex flex-col ml-2 mt-2 self-end justify-self-end"
@@ -277,6 +289,7 @@
     </div>
     <div class="text-center py-4">
       <button-common
+        v-if="mode === EModeAction.preview"
         class="!rounded-xl"
         :type="ETypeButton.primaryWhite"
         @click="onDownload"
@@ -291,7 +304,12 @@
 
 <script setup lang="ts">
 import moment from "moment/min/moment-with-locales";
-import { EModeAction, ETypeAddChat, ETypeUserChat } from "../models/home.model";
+import {
+  EModeAction,
+  ETypeAddChat,
+  ETypeUserChat,
+  type IHomeData,
+} from "../models/home.model";
 import { useHomeStore } from "../store/home.store";
 import { downloadFile, ETypeButton } from "~/src/services/constant";
 import * as htmlToImage from "html-to-image";
@@ -320,6 +338,9 @@ const {
   ratioH,
   textSize,
   footer,
+  fixHeight,
+  scrollChat,
+  showChatList,
 } = storeToRefs(toolbarStore);
 
 const onDownload = () => {
@@ -335,6 +356,40 @@ const onDownload = () => {
       console.log("error", error);
     });
 };
+
+const dataShow = computed(() => {
+  let indexShow = 0,
+    isBreak = false;
+
+  const copyData: IHomeData[] = [];
+  for (
+    let index = 0;
+    index < JSON.parse(JSON.stringify(data.value)).length;
+    index++
+  ) {
+    if (isBreak) {
+      break;
+    }
+    const element = JSON.parse(JSON.stringify(data.value))[index];
+    copyData.push(element);
+    copyData[index].chats = [];
+    for (
+      let j = 0;
+      j < JSON.parse(JSON.stringify(data.value))[index].chats.length;
+      j++
+    ) {
+      indexShow++;
+      const chatItem = JSON.parse(JSON.stringify(data.value))[index].chats[j];
+      copyData[index].chats.push(chatItem);
+
+      if (indexShow === showChatList.value) {
+        isBreak = true;
+        break;
+      }
+    }
+  }
+  return copyData;
+});
 </script>
 
 <style scoped lang="scss">

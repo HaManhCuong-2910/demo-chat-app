@@ -41,6 +41,10 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
   const ratioH = ref(1);
   const showChatList = ref(0);
   const textSize = ref(16);
+
+  const fixHeight = ref(false);
+
+  const scrollChat = ref(0);
   return {
     positionAddButton,
     avatars,
@@ -57,5 +61,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     showChatList,
     textSize,
     currentDate,
+    fixHeight,
+    scrollChat,
   };
 });

@@ -128,10 +128,53 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Fix Height</p>
+      <div class="flex col-span-7">
+        <button-common
+          :text="'On'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            fixHeight === true ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="fixHeight = true"
+        />
+        <button-common
+          :text="'Off'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            fixHeight === false ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="
+            fixHeight = false;
+            scrollChat = 0;
+          "
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3" v-if="fixHeight">
+      <p class="text-base font-medium col-span-5 text-center">Scroll Chat</p>
+
+      <div class="flex col-span-7">
+        <el-slider :step="0.1" v-model="scrollChat" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-5 text-center">W x H Ratio</p>
 
       <div class="flex col-span-7">
         <el-slider v-model="ratioH" :step="0.1" :max="3" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Show Chat List</p>
+
+      <div class="flex col-span-7">
+        <el-slider v-model="showChatList" :max="maxShowList" />
       </div>
     </div>
 
@@ -164,9 +207,21 @@ const {
   ratioH,
   textSize,
   currentDate,
+  fixHeight,
+  scrollChat,
+  showChatList,
 } = storeToRefs(toolbarStore);
 
 const { data } = storeToRefs(homeStore);
+
+const maxShowList = computed(() => {
+  if (data.value.length === 0) return 0;
+  const arraysProduct = data.value.map((item) => {
+    return item.chats;
+  });
+  let newArray = arraysProduct.reduce((a, b) => a.concat(b), []);
+  return newArray.length;
+});
 </script>
 
 <style scoped lang="scss"></style>
