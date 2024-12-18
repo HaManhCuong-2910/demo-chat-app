@@ -2,7 +2,7 @@
   <div class="bg-gray-200 p-4">
     <div class="grid grid-cols-6 gap-4 items-center">
       <p class="text-base font-medium">Type</p>
-      <div class="col-span-5 flex space-x-2">
+      <div class="col-span-5 grid grid-cols-2 gap-2">
         <button-common
           :text="'Message'"
           :class="'!rounded-xl w-full'"
@@ -24,6 +24,34 @@
               : ETypeButton.secondary
           "
           @click="dataInput.type = ETypeAddChat.image"
+        />
+        <button-common
+          :text="'Cuộc gọi thoại'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.calling
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.calling;
+            dataInput.message = 'Cuộc gọi thoại';
+          "
+        />
+        <button-common
+          :text="'Kết thúc cuộc gọi'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.called
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.called;
+            dataInput.message = '00:13';
+          "
         />
       </div>
     </div>
@@ -67,7 +95,7 @@
     </div>
     <div
       class="grid grid-cols-6 gap-4 items-center mt-3"
-      v-if="dataInput.type === ETypeAddChat.message"
+      v-if="dataInput.type !== ETypeAddChat.image"
     >
       <p class="text-base font-medium">Message</p>
       <div class="col-span-5">
@@ -209,7 +237,7 @@ onBeforeMount(() => {
         person: dataEdit.type,
         type: dataEdit.typeMessage,
         message:
-          dataEdit.typeMessage === ETypeAddChat.message ? dataEdit.value : "",
+          dataEdit.typeMessage !== ETypeAddChat.image ? dataEdit.value : "",
         image:
           dataEdit.typeMessage === ETypeAddChat.image ? dataEdit.value : "",
       };

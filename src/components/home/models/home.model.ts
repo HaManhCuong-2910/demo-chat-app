@@ -6,6 +6,8 @@ export enum ETypeUserChat {
 export enum ETypeAddChat {
   message = "message",
   image = "image",
+  calling = "calling",
+  called = "called",
 }
 
 export enum EModeAction {

@@ -29,6 +29,7 @@
             viewBox="0 0 26 12"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            class="absolute right-[-2px] top-[2px]"
           >
             <g clip-path="url(#clip0_0_3)">
               <path
@@ -116,7 +117,7 @@
                 <font-awesome-icon :icon="['fas', 'minus']" class="w-4 h-4" />
               </div>
               <div
-                v-if="itemChild.typeMessage === ETypeAddChat.message"
+                v-if="itemChild.typeMessage !== ETypeAddChat.image"
                 :class="[itemChild.type, indexChild > 0 && 'mt-2']"
                 :key="itemChild.value"
                 @click="
@@ -165,7 +166,7 @@
                   "
                   :src="avatars.other"
                   alt="icon"
-                  class="w-10 h-10 rounded-full mr-2 mt-1"
+                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full mr-2 mt-1"
                 />
                 <div
                   :class="
@@ -185,7 +186,7 @@
                         : true)
                     "
                     class="mb-[2px]"
-                    :style="`font-size: ${textSize}px`"
+                    :style="`font-size: ${textSize - 3}px`"
                   >
                     {{ names.other }}
                   </p>
@@ -193,6 +194,27 @@
                     class="w-fit content min-h-7"
                     :style="`font-size: ${textSize}px`"
                   >
+                    <i
+                      class="fa-solid fa-phone text-green-600 inline -mb-[1px] mr-2"
+                    ></i>
+                    <font-awesome-icon
+                      v-if="
+                        [ETypeAddChat.calling, ETypeAddChat.called].includes(
+                          itemChild.typeMessage
+                        )
+                      "
+                      :icon="['fas', 'phone']"
+                      :class="`${
+                        itemChild.typeMessage === ETypeAddChat.calling
+                          ? 'text-green-600'
+                          : ''
+                      } inline -mb-[1px] ${
+                        itemChild.typeMessage === ETypeAddChat.called
+                          ? 'mr-12'
+                          : 'mr-2'
+                      }  phone-icon`"
+                      :style="[`font-size: ${textSize + 5}px`]"
+                    />
                     {{ itemChild.value }}
                     <svg
                       v-if="
@@ -297,16 +319,29 @@
                   v-if="itemChild.type === ETypeUserChat.other"
                   :src="avatars.other"
                   alt="icon"
-                  class="w-10 h-10 rounded-full mr-2 mt-1"
+                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full mr-2 mt-1"
                 />
-                <div>
+                <div class="relative">
                   <p
                     v-if="itemChild.type === ETypeUserChat.other"
                     class="mb-[2px]"
-                    :style="`font-size: ${textSize}px`"
+                    :style="`font-size: ${textSize - 3}px`"
                   >
                     {{ names.other }}
                   </p>
+                  <div
+                    :class="`w-9 h-9 rounded-full bg-slate-400 flex justify-center items-center absolute top-1/2 ${
+                      itemChild.type === ETypeUserChat.user
+                        ? 'right-full'
+                        : 'left-[110%]'
+                    } -translate-x-1/2`"
+                  >
+                    <font-awesome-icon
+                      :icon="['fas', 'arrow-up-from-bracket']"
+                      class="text-white text-lg"
+                    />
+                  </div>
+
                   <img
                     :src="itemChild.value"
                     alt="image"
@@ -485,12 +520,6 @@ const dataShow = computed(() => {
     margin-left: 8px;
     word-wrap: break-word;
     max-width: 100%;
-
-    svg {
-      @apply absolute;
-      top: 2px;
-      right: -2px;
-    }
   }
 
   img {
@@ -509,12 +538,6 @@ const dataShow = computed(() => {
     word-wrap: break-word;
     max-width: 100%;
     margin-right: 8px;
-
-    svg {
-      @apply absolute;
-      top: 2px;
-      left: -2px;
-    }
   }
 }
 </style>
