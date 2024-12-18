@@ -332,7 +332,7 @@
                     :class="`w-9 h-9 rounded-full bg-slate-400 flex justify-center items-center absolute top-1/2 ${
                       itemChild.type === ETypeUserChat.user
                         ? 'right-full'
-                        : 'left-[110%]'
+                        : 'left-[116%]'
                     } -translate-x-1/2`"
                   >
                     <font-awesome-icon
