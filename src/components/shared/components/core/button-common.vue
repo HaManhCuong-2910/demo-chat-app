@@ -77,6 +77,6 @@ const handleClick = () => {
 }
 
 .el-button + .el-button {
-  margin-left: 16px;
+  margin-left: 4px;
 }
 </style>

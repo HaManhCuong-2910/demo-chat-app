@@ -151,3 +151,10 @@ img {
     line-height: 32px !important;
   }
 }
+
+.hide-webkit-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

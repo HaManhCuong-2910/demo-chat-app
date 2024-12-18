@@ -8,6 +8,12 @@ export enum ETypeAddChat {
   image = "image",
 }
 
+export enum EModeAction {
+  edit = "edit",
+  preview = "preview",
+  fullScreen = "fullScreen",
+}
+
 export interface IDataFormAddMessage {
   type: ETypeAddChat;
   person: ETypeUserChat;

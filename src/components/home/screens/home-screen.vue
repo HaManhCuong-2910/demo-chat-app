@@ -1,9 +1,17 @@
 <template>
-  <div class="grid grid-cols-3 gap-4">
-    <div>Tính năng chưa mở</div>
-    <div class="col-span-2">
+  <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
+    <div>
+      <ui-feature-component />
+      <div class="mt-3">
+        <person-feature-component />
+      </div>
+      <div class="mt-3">
+        <preview-config-feature-component />
+      </div>
+    </div>
+    <div class="lg:col-span-2">
       <chat-area-component />
-      <div class="text-center">
+      <div class="sticky bottom-0" :class="`text-${positionAddButton}`">
         <button-common
           class="mt-4 !rounded-xl button-custom"
           :type="ETypeButton.primaryWhite"
@@ -33,8 +41,11 @@
 <script setup lang="ts">
 import { ETypeButton } from "~/src/services/constant";
 import { useHomeStore } from "../store/home.store";
+import { useToolbarStore } from "../store/toolbar.store";
 const homeStore = useHomeStore();
+const toolbarStore = useToolbarStore();
 const { isShowDialog } = storeToRefs(homeStore);
+const { positionAddButton } = storeToRefs(toolbarStore);
 </script>
 
 <style scoped lang="scss">

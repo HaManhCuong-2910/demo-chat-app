@@ -1,11 +1,14 @@
 import moment from "moment";
 import {
+  EModeAction,
   ETypeAddChat,
   type IDataFormAddMessage,
   type IHomeData,
 } from "../models/home.model";
 
 export const useHomeStore = defineStore("homeStore", () => {
+  const mode = ref<EModeAction>(EModeAction.edit);
+
   const data = ref<IHomeData[]>([]);
   const isEditDialog = ref(false);
   const isAddAfterDialog = ref(false);
@@ -141,6 +144,7 @@ export const useHomeStore = defineStore("homeStore", () => {
 
   const isShowDialog = ref(false);
   return {
+    mode,
     data,
     isShowDialog,
     dataDialogAdd,

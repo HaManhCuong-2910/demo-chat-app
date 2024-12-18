@@ -103,3 +103,12 @@ export const onTransformValueType = (type: number, value: any) => {
       return value;
   }
 };
+
+export const downloadFile = (linkSource: string, fileName: string) => {
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = fileName;
+  downloadLink.click();
+  downloadLink.remove();
+  return;
+};

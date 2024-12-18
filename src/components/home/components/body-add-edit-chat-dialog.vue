@@ -61,7 +61,6 @@
           id="startDate"
           name="startDate"
           required
-          is-update-time
           v-model:value="dataInput.date"
         />
       </div>
@@ -110,6 +109,17 @@
       :showSkinTones="false"
       :showPreview="false"
     />
+
+    <div class="mt-4">
+      <emoji-image-picker
+        @update-image="
+          (val) => {
+            dataInput.type = ETypeAddChat.image;
+            dataInput.image = val;
+          }
+        "
+      />
+    </div>
 
     <div class="mt-4 flex space-x-2">
       <button-common
