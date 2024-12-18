@@ -45,6 +45,8 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
   const fixHeight = ref(false);
 
   const scrollChat = ref(0);
+
+  const showOnRead = ref(true);
   return {
     positionAddButton,
     avatars,
@@ -63,5 +65,6 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     currentDate,
     fixHeight,
     scrollChat,
+    showOnRead,
   };
 });

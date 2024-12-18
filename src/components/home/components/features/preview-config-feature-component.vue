@@ -154,6 +154,33 @@
       </div>
     </div>
 
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Show on read</p>
+      <div class="flex col-span-7">
+        <button-common
+          :text="'On'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            showOnRead === true ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="showOnRead = true"
+        />
+        <button-common
+          :text="'Off'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            showOnRead === false ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="
+            showOnRead = false;
+            scrollChat = 0;
+          "
+        />
+      </div>
+    </div>
+
     <div class="grid grid-cols-12 gap-1 items-center mt-3" v-if="fixHeight">
       <p class="text-base font-medium col-span-5 text-center">Scroll Chat</p>
 
@@ -210,6 +237,7 @@ const {
   fixHeight,
   scrollChat,
   showChatList,
+  showOnRead,
 } = storeToRefs(toolbarStore);
 
 const { data } = storeToRefs(homeStore);

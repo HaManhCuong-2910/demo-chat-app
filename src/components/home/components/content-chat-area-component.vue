@@ -136,6 +136,7 @@
                   v-if="itemChild.type === ETypeUserChat.user"
                 >
                   <span
+                    v-if="showOnRead"
                     class="block !leading-3 text-end"
                     :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                     style="color: rgb(254, 240, 27)"
@@ -265,6 +266,7 @@
                   v-if="itemChild.type === ETypeUserChat.user"
                 >
                   <span
+                    v-if="showOnRead"
                     class="block !leading-3 text-end"
                     :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                     style="color: rgb(254, 240, 27)"
@@ -387,6 +389,7 @@ const {
   fixHeight,
   scrollChat,
   showChatList,
+  showOnRead,
 } = storeToRefs(toolbarStore);
 
 const onDownload = () => {
