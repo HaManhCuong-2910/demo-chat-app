@@ -138,11 +138,8 @@
                   <span
                     v-if="
                       showOnRead &&
-                      indexChild ===
-                        homeStore.onCheckFirstLastInChats(
-                          item.chats,
-                          ETypeUserChat.user
-                        ).last
+                      indexChild === item.chats.length - 1 &&
+                      index === dataShow.length - 1
                     "
                     class="block !leading-3 text-end"
                     :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
@@ -250,9 +247,20 @@
                         ETypeUserChat.other
                       ).last
                   "
-                  class="time-content self-end whitespace-nowrap"
+                  class="time-content self-end whitespace-nowrap mt-10"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                 >
+                  <span
+                    v-if="
+                      showOnRead &&
+                      indexChild === item.chats.length - 1 &&
+                      index === dataShow.length - 1
+                    "
+                    class="block !leading-3 text-start"
+                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
+                    style="color: rgb(254, 240, 27)"
+                    >1
+                  </span>
                   {{ moment(itemChild.time).format("h:mm A") }}
                 </p>
               </div>
@@ -273,7 +281,11 @@
                   v-if="itemChild.type === ETypeUserChat.user"
                 >
                   <span
-                    v-if="showOnRead"
+                    v-if="
+                      showOnRead &&
+                      indexChild === item.chats.length - 1 &&
+                      index === dataShow.length - 1
+                    "
                     class="block !leading-3 text-end"
                     :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                     style="color: rgb(254, 240, 27)"
@@ -303,9 +315,20 @@
                 </div>
                 <p
                   v-if="itemChild.type === ETypeUserChat.other"
-                  class="time-content self-end whitespace-nowrap ml-3"
+                  class="time-content self-end whitespace-nowrap ml-3 mt-10"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                 >
+                  <span
+                    v-if="
+                      showOnRead &&
+                      indexChild === item.chats.length - 1 &&
+                      index === dataShow.length - 1
+                    "
+                    class="block !leading-3 text-start"
+                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
+                    style="color: rgb(254, 240, 27)"
+                    >1
+                  </span>
                   {{ moment(itemChild.time).format("h:mm A") }}
                 </p>
               </div>
