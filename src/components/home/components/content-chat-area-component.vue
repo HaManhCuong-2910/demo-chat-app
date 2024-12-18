@@ -92,7 +92,7 @@
           <div v-for="(item, index) in dataShow" :key="item.time">
             <div
               v-if="index > 0 && showDate"
-              class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-6"
+              class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-2"
             >
               <font-awesome-icon
                 :icon="['far', 'calendar-days']"
@@ -117,7 +117,7 @@
               </div>
               <div
                 v-if="itemChild.typeMessage === ETypeAddChat.message"
-                :class="[itemChild.type, indexChild > 0 && 'mt-6']"
+                :class="[itemChild.type, indexChild > 0 && 'mt-2']"
                 :key="itemChild.value"
                 @click="
                   () => {
@@ -139,19 +139,46 @@
                     class="block !leading-3 text-end"
                     :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                     style="color: rgb(254, 240, 27)"
-                    >1</span
-                  >
-                  {{ moment(itemChild.time).format("h:mm A") }}
+                    >1
+                  </span>
+                  {{
+                    indexChild ===
+                    homeStore.onCheckFirstLastInChats(
+                      item.chats,
+                      ETypeUserChat.user
+                    ).last
+                      ? moment(itemChild.time).format("h:mm A")
+                      : ""
+                  }}
                 </p>
                 <img
-                  v-if="itemChild.type === ETypeUserChat.other"
+                  v-if="
+                    itemChild.type === ETypeUserChat.other &&
+                    (indexChild > 0
+                      ? item.chats[indexChild - 1].type !== ETypeUserChat.other
+                      : true)
+                  "
                   :src="avatars.other"
                   alt="icon"
-                  class="w-10 h-10 rounded-md mr-2 mt-1"
+                  class="w-10 h-10 rounded-full mr-2 mt-1"
                 />
-                <div>
+                <div
+                  :class="
+                    itemChild.type === ETypeUserChat.other &&
+                    (indexChild > 0
+                      ? item.chats[indexChild - 1].type === ETypeUserChat.other
+                      : false) &&
+                    'ml-12'
+                  "
+                >
                   <p
-                    v-if="itemChild.type === ETypeUserChat.other"
+                    v-if="
+                      itemChild.type === ETypeUserChat.other &&
+                      (indexChild > 0
+                        ? item.chats[indexChild - 1].type !==
+                          ETypeUserChat.other
+                        : true)
+                    "
                     class="mb-[2px]"
                     :style="`font-size: ${textSize}px`"
                   >
@@ -163,7 +190,13 @@
                   >
                     {{ itemChild.value }}
                     <svg
-                      v-if="itemChild.type === ETypeUserChat.user"
+                      v-if="
+                        itemChild.type === ETypeUserChat.user &&
+                        (indexChild > 0
+                          ? item.chats[indexChild - 1].type !==
+                            ETypeUserChat.user
+                          : true)
+                      "
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 22.23 42.69"
                       class="w-2 absolute right-[-2px] top-[2px]"
@@ -178,7 +211,13 @@
                       </g>
                     </svg>
                     <svg
-                      v-else
+                      v-if="
+                        itemChild.type === ETypeUserChat.other &&
+                        (indexChild > 0
+                          ? item.chats[indexChild - 1].type !==
+                            ETypeUserChat.other
+                          : true)
+                      "
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 22.23 42.69"
                       class="w-2 absolute left-[-2px] top-[2px]"
@@ -195,7 +234,14 @@
                   </div>
                 </div>
                 <p
-                  v-if="itemChild.type === ETypeUserChat.other"
+                  v-if="
+                    itemChild.type === ETypeUserChat.other &&
+                    indexChild ===
+                      homeStore.onCheckFirstLastInChats(
+                        item.chats,
+                        ETypeUserChat.other
+                      ).last
+                  "
                   class="time-content self-end whitespace-nowrap"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                 >
@@ -205,7 +251,7 @@
 
               <div
                 v-if="itemChild.typeMessage === ETypeAddChat.image"
-                :class="[itemChild.type, indexChild > 0 && 'mt-6']"
+                :class="[itemChild.type, indexChild > 0 && 'mt-2']"
                 @click="
                   isShowDialog = true;
                   isEditDialog = true;
@@ -230,7 +276,7 @@
                   v-if="itemChild.type === ETypeUserChat.other"
                   :src="avatars.other"
                   alt="icon"
-                  class="w-10 h-10 rounded-md mr-2 mt-1"
+                  class="w-10 h-10 rounded-full mr-2 mt-1"
                 />
                 <div>
                   <p

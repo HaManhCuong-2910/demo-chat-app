@@ -2,6 +2,7 @@ import moment from "moment";
 import {
   EModeAction,
   ETypeAddChat,
+  ETypeUserChat,
   type IDataFormAddMessage,
   type IHomeData,
 } from "../models/home.model";
@@ -146,6 +147,32 @@ export const useHomeStore = defineStore("homeStore", () => {
     }
   };
 
+  const onCheckFirstLastInChats = (
+    chats: {
+      time: string;
+      value: string;
+      type: ETypeUserChat;
+      typeMessage: ETypeAddChat;
+    }[],
+    type: ETypeUserChat
+  ) => {
+    let first = -1,
+      last = -1;
+    for (let index = 0; index < chats.length; index++) {
+      const element = chats[index];
+      if (element.type !== type) {
+        continue;
+      }
+      if (first == -1) first = index;
+      last = index;
+    }
+
+    return {
+      first,
+      last,
+    };
+  };
+
   const isShowDialog = ref(false);
   return {
     mode,
@@ -158,5 +185,6 @@ export const useHomeStore = defineStore("homeStore", () => {
     onEditData,
     onDeleteData,
     switchData,
+    onCheckFirstLastInChats,
   };
 });
