@@ -1,5 +1,5 @@
 <template>
-  <header-default-layout />
+  <!-- <header-default-layout /> -->
   <main class="container mx-auto pb-16">
     <slot> </slot>
   </main>
