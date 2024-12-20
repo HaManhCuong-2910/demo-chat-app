@@ -1,5 +1,5 @@
 <template>
-  <div class="image user relative">
+  <div class="image user relative mb-5">
     <!-- <img
       src="/zalo/share1.png"
       alt="image"

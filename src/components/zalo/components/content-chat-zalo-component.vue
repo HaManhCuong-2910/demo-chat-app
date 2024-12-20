@@ -6,8 +6,10 @@
         <status-bar-chat-zalo-component />
         <name-header-chat-zalo-component />
       </div>
-      <div class="content-area" :style="`height: 600px`">
-        <list-chat-zalo-component />
+      <div class="content-area overflow-y-hidden" :style="`min-height: 600px;`">
+        <div class="h-full">
+          <list-chat-zalo-component />
+        </div>
       </div>
       <div class="footer">
         <img src="/zalo/ico4.png" alt="zalo footer" />
