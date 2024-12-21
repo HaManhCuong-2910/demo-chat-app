@@ -9,6 +9,7 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const scrollChat = ref(0);
   const isHD = ref(false);
   const isShowArrow = ref(false);
+  const backgroundScreen = ref("/zalo/background.jpg");
   return {
     isWifi,
     battery,
@@ -20,5 +21,6 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
     scrollChat,
     isHD,
     isShowArrow,
+    backgroundScreen,
   };
 });

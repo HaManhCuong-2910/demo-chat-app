@@ -81,6 +81,26 @@
       </div>
     </div>
 
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5">Ảnh nền</p>
+
+      <div class="col-span-7">
+        Chọn ảnh nền
+        <input
+          id="files-anh-nen"
+          type="file"
+          accept="image/*"
+          @change="(event: any)=> {
+        if (!event.target?.files) return;
+        [...event.target.files].forEach(preview);
+      }"
+        />
+        <div id="preview-anh-nen" class="w-64 mt-4">
+          <img :src="backgroundScreen" alt="das" class="w-64 h-full" />
+        </div>
+      </div>
+    </div>
+
     <div class="mt-4">
       <el-button type="primary" @click="onExport">Xuất File</el-button>
       <el-button type="primary" @click="onInputFile">Nhập File</el-button>
@@ -105,6 +125,7 @@ const {
   scrollChat,
   isHD,
   isShowArrow,
+  backgroundScreen,
 } = storeToRefs(configZaloChatStore);
 const { data } = storeToRefs(listZaloChatStore);
 
@@ -149,6 +170,24 @@ const onInputFile = () => {
       reader.readAsText(file);
     }
   };
+};
+
+const preview = (file: File) => {
+  const fr = new FileReader();
+  backgroundScreen.value = "";
+  if (!!document.querySelector("#preview-anh-nen")) {
+    // @ts-ignore
+    document.querySelector("#preview-anh-nen").innerHTML = "";
+  }
+
+  fr.onload = () => {
+    const img = document.createElement("img");
+    img.src = fr.result as string;
+    img.alt = file.name;
+    backgroundScreen.value = fr.result as string;
+    document.querySelector("#preview-anh-nen")?.append(img);
+  };
+  fr.readAsDataURL(file);
 };
 </script>
 

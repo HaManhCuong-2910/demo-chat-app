@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div id="chat-area" :style="`width: ${widthPercent}%`">
+    <div
+      id="chat-area"
+      :style="`width: ${widthPercent}%; background-image: url(${backgroundScreen});`"
+    >
       <div class="header relative">
         <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
         <status-bar-chat-zalo-component />
@@ -50,8 +53,14 @@ import { useZaloChatAreaStore } from "../stores/zalo-chat-area.store";
 const listZaloChatStore = useListZaloChatStore();
 const { dataDialog } = storeToRefs(listZaloChatStore);
 const configZaloChatStore = useConfigZaloChatStore();
-const { fixHeight, ratioH, scrollChat, widthPercent, isShowArrow } =
-  storeToRefs(configZaloChatStore);
+const {
+  fixHeight,
+  ratioH,
+  scrollChat,
+  widthPercent,
+  isShowArrow,
+  backgroundScreen,
+} = storeToRefs(configZaloChatStore);
 
 const contentRef = ref<HTMLElement>();
 
