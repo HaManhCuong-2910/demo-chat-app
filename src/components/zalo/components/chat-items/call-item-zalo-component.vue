@@ -16,12 +16,24 @@
     ]"
   >
     <img
-      v-if="props.data.type === ETypeUserChat.other"
+      v-if="
+        props.data.type === ETypeUserChat.other &&
+        listData[props.index - 1]?.type !== ETypeUserChat.other
+      "
       :src="dataPerson.other.avatar"
       alt="ava"
       class="w-10 h-10 rounded-full mr-2"
     />
-    <div :class="[props.data.type]" class="w-48">
+    <div
+      :class="[
+        props.data.type,
+        props.data.type === ETypeUserChat.other &&
+        listData[props.index - 1]?.type === ETypeUserChat.other
+          ? 'ml-12'
+          : '',
+      ]"
+      class="w-48"
+    >
       <div class="p-[10px] border-b border-gray-300">
         <p
           class="font-medium"
@@ -41,7 +53,7 @@
             class="w-4 object-contain"
           />
           <p
-            class="text-[#7c798a]"
+            class="text-[#7c798a] -mt-[2px]"
             contenteditable="true"
             :style="`font-size: ${textSize - 2}px`"
           >
@@ -111,12 +123,18 @@ const dataIcons = ref<
     description: "0 phút 28 giây",
   },
   [ETypeMessage.missVideo]: {
-    img: "/zalo/h5.png",
+    img:
+      props.data.type === ETypeUserChat.user
+        ? "/zalo/bi_nho_den.jpg"
+        : "/zalo/h5.png",
     content: "Bạn bị nhỡ",
     description: "Cuộc gọi video",
   },
   [ETypeMessage.refuseVideo]: {
-    img: "/zalo/h2.png",
+    img:
+      props.data.type === ETypeUserChat.user
+        ? "/zalo/h2.png"
+        : "/zalo/tu_choi_di.jpg",
     content: "Người nhận từ chối",
     description: "Cuộc gọi thoại",
   },

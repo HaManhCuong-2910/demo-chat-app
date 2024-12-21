@@ -60,7 +60,8 @@
       <p class="text-base font-medium col-span-5">Scroll Chat</p>
 
       <div class="flex col-span-7">
-        <el-slider :step="0.1" v-model="scrollChat" />
+        <el-button type="primary" @click="scrollChat--">Lên</el-button>
+        <el-button type="danger" @click="scrollChat++">Xuống</el-button>
       </div>
     </div>
 
@@ -78,6 +79,11 @@
       <div class="flex col-span-7">
         <el-slider v-model="textSize" :max="40" />
       </div>
+    </div>
+
+    <div class="mt-4">
+      <el-button type="primary" @click="onExport">Xuất File</el-button>
+      <el-button type="primary" @click="onInputFile">Nhập File</el-button>
     </div>
   </div>
 </template>
@@ -105,6 +111,45 @@ const { data } = storeToRefs(listZaloChatStore);
 const maxShowList = computed(() => {
   return data.value.length;
 });
+
+const onExport = () => {
+  const content = JSON.stringify(data.value);
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "data.txt";
+  document.body.appendChild(link);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  document.body.removeChild(link);
+};
+
+const onInputFile = () => {
+  const inputFile = document.createElement("input");
+  inputFile.type = "file";
+  inputFile.accept = ".txt";
+  inputFile.click();
+
+  inputFile.onchange = (event: any) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      const reader = new FileReader();
+
+      // Event listener for when the file is loaded
+      reader.onload = (e) => {
+        const res = e.target?.result;
+        if (res) {
+          data.value = JSON.parse(res as string);
+          showChatList.value = data.value.length;
+        }
+        inputFile.remove();
+      };
+
+      // Read the file as text
+      reader.readAsText(file);
+    }
+  };
+};
 </script>
 
 <style scoped lang="scss"></style>

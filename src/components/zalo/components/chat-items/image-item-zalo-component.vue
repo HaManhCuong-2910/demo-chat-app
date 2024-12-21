@@ -24,7 +24,7 @@
       class="w-10 h-10 rounded-full"
     />
     <div
-      class="image relative flex flex-wrap space-x-1 space-y-1"
+      class="image relative"
       :class="[
         props.data.type,
         props.data.type === ETypeUserChat.other &&
@@ -64,19 +64,21 @@
         ]"
       ></div>
 
-      <div
-        class="rounded-xl w-full image-container"
-        :class="isHD ? 'is-hd' : ''"
-        v-for="item in props.data.images"
-        :key="item"
-      >
-        <img :src="item" alt="image" class="w-full h-full rounded-xl" />
+      <div class="flex flex-wrap space-x-1 space-y-1">
+        <div
+          class="rounded-xl w-full image-container"
+          :class="isHD ? 'is-hd' : ''"
+          v-for="item in props.data.images"
+          :key="item"
+        >
+          <img :src="item" alt="image" class="w-full h-full rounded-xl" />
+        </div>
       </div>
 
       <p
         v-if="props.data.isDate"
         contenteditable="true"
-        class="mt-2 bg-[#b6babf] w-fit !leading-[14px] p-[3px] py-[2px] text-white rounded-xl"
+        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
         :style="`font-size: ${textSize - 5}px`"
       >
         {{ moment(props.data.time).format("HH:mm") }}

@@ -9,7 +9,9 @@
         ? 'mt-5'
         : 'mt-3',
       props.data.type === ETypeUserChat.other &&
-      listData[props.index - 1]?.type !== ETypeUserChat.other
+      (listData[props.index - 1]?.type !== ETypeUserChat.other ||
+        (listData[props.index - 1]?.type === ETypeUserChat.other &&
+          listData[props.index - 1]?.typeMessage === ETypeMessage.danhthiep))
         ? 'flex items-start'
         : '',
       'relative',
@@ -19,68 +21,76 @@
     <img
       v-if="
         props.data.type === ETypeUserChat.other &&
-        listData[props.index - 1]?.type !== ETypeUserChat.other
+        (listData[props.index - 1]?.type !== ETypeUserChat.other ||
+          (listData[props.index - 1]?.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.typeMessage === ETypeMessage.danhthiep))
       "
       :src="dataPerson.other.avatar"
       alt="ava"
       class="w-10 h-10 rounded-full mr-2"
     />
-    <div
-      class="py-[10px] min-w-20 item-container"
-      :class="[
-        props.data.type === ETypeUserChat.other &&
-          listData[props.index - 1]?.type === ETypeUserChat.other &&
-          'ml-12',
-      ]"
-    >
+    <div>
       <div
-        class="replica pt-1 mb-2 flex"
-        v-if="props.data.replicaIndex !== null"
+        class="py-[10px] min-w-20 item-container"
+        :class="[
+          props.data.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
+            'ml-12',
+        ]"
       >
-        <img
-          v-if="
-            listData[props.data.replicaIndex].typeMessage === ETypeMessage.image
-          "
-          :src="listData[props.data.replicaIndex].images[0]"
-          alt="image"
-          class="w-10 max-h-8 object-contain"
-        />
-        <div class="pl-2">
-          <p
-            class="!leading-3 font-medium"
-            contenteditable="true"
-            :style="`font-size: ${textSize - 2}px`"
-          >
-            {{ dataPerson[listData[props.data.replicaIndex].type].name }}
-          </p>
-          <span
-            class="text-[#9b9b9b] block mt-[6px]"
-            :style="`font-size: ${textSize - 2}px`"
-            contenteditable="true"
-            >{{
-              props.data.replicaIndex !== null &&
+        <div
+          class="replica pt-1 mb-2 flex"
+          v-if="props.data.replicaIndex !== null"
+        >
+          <img
+            v-if="
               listData[props.data.replicaIndex].typeMessage ===
-                ETypeMessage.image
-                ? "Hình ảnh"
-                : listData[props.data.replicaIndex].value
-            }}</span
-          >
+              ETypeMessage.image
+            "
+            :src="listData[props.data.replicaIndex].images[0]"
+            alt="image"
+            class="w-10 max-h-8 object-contain"
+          />
+          <div class="pl-2">
+            <p
+              class="!leading-3 font-medium"
+              contenteditable="true"
+              :style="`font-size: ${textSize - 2}px`"
+            >
+              {{ dataPerson[listData[props.data.replicaIndex].type].name }}
+            </p>
+            <span
+              class="text-[#9b9b9b] block mt-[6px]"
+              :style="`font-size: ${textSize - 2}px`"
+              contenteditable="true"
+              >{{
+                props.data.replicaIndex !== null &&
+                listData[props.data.replicaIndex].typeMessage ===
+                  ETypeMessage.image
+                  ? "Hình ảnh"
+                  : listData[props.data.replicaIndex].value
+              }}</span
+            >
+          </div>
         </div>
+        <p
+          :class="[props.data.isBlueText && 'text-[#4391f6]']"
+          :style="`font-size: ${textSize}px`"
+          contenteditable="true"
+        >
+          {{ props.data.value }}
+        </p>
       </div>
+
       <p
-        :class="[props.data.isBlueText && 'text-[#4391f6]']"
-        :style="`font-size: ${textSize}px`"
-        contenteditable="true"
-      >
-        {{ props.data.value }}
-      </p>
-      <span
         v-if="props.data.isDate"
-        class="text-[#9b9b9bce] !leading-[0px]"
-        :style="`font-size: ${textSize - 5}px`"
         contenteditable="true"
-        >{{ moment(props.data.time).format("HH:mm") }}</span
+        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
+        :style="`font-size: ${textSize - 5}px`"
       >
+        {{ moment(props.data.time).format("HH:mm") }}
+      </p>
     </div>
 
     <div
@@ -162,8 +172,12 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 .user {
   max-width: 65%;
   width: fit-content;
-  border: 1px solid #bccdd6;
-  @apply px-3 rounded-xl bg-[#d6effc] ml-auto;
+  @apply ml-auto;
+
+  .item-container {
+    border: 1px solid #bccdd6;
+    @apply bg-[#d6effc] rounded-xl px-3;
+  }
 }
 
 .other {

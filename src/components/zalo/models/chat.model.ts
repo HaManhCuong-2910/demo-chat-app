@@ -12,6 +12,7 @@ export enum ETypeMessage {
   comeVideo = "comeVideo",
   refuseVideo = "refuseVideo",
   emoji = "emoji",
+  danhthiep = "danhthiep",
 }
 
 export enum ETypeHeart {

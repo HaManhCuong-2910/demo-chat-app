@@ -13,10 +13,9 @@
         }`"
       >
         <div
+          ref="contentRef"
           class="h-full"
-          :style="`transform: translateY(${
-            (scrollChat / 100) * ratioH * (797 + 92 + 200) * -1
-          }px);`"
+          :style="`transform: translateY(${scrollChat * -1}%);`"
         >
           <list-chat-zalo-component />
         </div>
@@ -53,6 +52,12 @@ const { dataDialog } = storeToRefs(listZaloChatStore);
 const configZaloChatStore = useConfigZaloChatStore();
 const { fixHeight, ratioH, scrollChat, widthPercent, isShowArrow } =
   storeToRefs(configZaloChatStore);
+
+const contentRef = ref<HTMLElement>();
+
+const heightContent = computed(() => {
+  return contentRef.value?.clientHeight || 0;
+});
 </script>
 
 <style scoped lang="scss">

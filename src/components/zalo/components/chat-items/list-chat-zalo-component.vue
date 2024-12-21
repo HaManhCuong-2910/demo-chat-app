@@ -5,6 +5,12 @@
         v-if="mode === EModeAction.edit"
         :placement="item.type === ETypeUserChat.user ? 'right' : 'left'"
       >
+        <business-card-zalo-component
+          v-if="item.typeMessage === ETypeMessage.danhthiep"
+          :key="item.value"
+          :data="item"
+          :index="index"
+        />
         <item-chat-zalo-component
           v-if="item.typeMessage === ETypeMessage.message"
           :key="item.value"
@@ -45,6 +51,12 @@
       </el-tooltip>
 
       <template v-if="mode === EModeAction.preview">
+        <business-card-zalo-component
+          v-if="item.typeMessage === ETypeMessage.danhthiep"
+          :key="item.value"
+          :data="item"
+          :index="index"
+        />
         <item-chat-zalo-component
           v-if="item.typeMessage === ETypeMessage.message"
           :key="item.value"
