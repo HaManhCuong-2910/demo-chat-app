@@ -30,6 +30,7 @@ export interface IDataZaloChat {
   replicaIndex: number | null;
   value: string;
   isDate: boolean;
+  dateInside: boolean;
   images: string[];
   isBlueText: boolean;
 }

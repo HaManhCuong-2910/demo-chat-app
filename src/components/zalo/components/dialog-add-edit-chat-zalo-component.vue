@@ -50,6 +50,13 @@
           size="large"
           border
         />
+
+        <el-checkbox
+          v-model="data.dateInside"
+          label="Hiện bên trong"
+          size="large"
+          border
+        />
       </div>
     </div>
     <div class="grid grid-cols-3 gap-4 items-start mt-3">
@@ -189,6 +196,7 @@ const data = ref<IDataZaloChat>({
   replicaIndex: null,
   value: "",
   isDate: false,
+  dateInside: false,
   images: [],
   isBlueText: false,
 });

@@ -81,10 +81,17 @@
         >
           {{ props.data.value }}
         </p>
+        <span
+          v-if="props.data.isDate && props.data.dateInside"
+          class="text-[#9b9b9bce] !leading-[0px]"
+          :style="`font-size: ${textSize - 5}px`"
+          contenteditable="true"
+          >{{ moment(props.data.time).format("HH:mm") }}</span
+        >
       </div>
 
       <p
-        v-if="props.data.isDate"
+        v-if="props.data.isDate && !props.data.dateInside"
         contenteditable="true"
         class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
         :class="[
