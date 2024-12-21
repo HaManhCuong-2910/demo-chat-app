@@ -1,13 +1,23 @@
 <template>
   <div>
-    <div id="chat-area">
+    <div id="chat-area" :style="`width: ${widthPercent}%`">
       <div class="header relative">
         <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
         <status-bar-chat-zalo-component />
         <name-header-chat-zalo-component />
       </div>
-      <div class="content-area overflow-y-hidden" :style="`min-height: 600px;`">
-        <div class="h-full">
+      <div
+        class="content-area overflow-y-hidden"
+        :style="`height: ${fixHeight ? `${ratioH * (797 + 92)}px` : '100%'}; ${
+          !fixHeight ? `min-height: ${ratioH * (797 + 92)}px;` : ''
+        }`"
+      >
+        <div
+          class="h-full"
+          :style="`transform: translateY(${
+            (scrollChat / 100) * ratioH * (797 + 92 + 200) * -1
+          }px);`"
+        >
           <list-chat-zalo-component />
         </div>
       </div>
@@ -34,12 +44,16 @@
 </template>
 
 <script setup lang="ts">
+import { useConfigZaloChatStore } from "../stores/config-zalo-chat.store";
 import { useListZaloChatStore } from "../stores/list-zalo-chat.store";
 import { useZaloChatAreaStore } from "../stores/zalo-chat-area.store";
 
 const listZaloChatStore = useListZaloChatStore();
 const { isArrowDown } = storeToRefs(useZaloChatAreaStore());
 const { dataDialog } = storeToRefs(listZaloChatStore);
+const configZaloChatStore = useConfigZaloChatStore();
+const { fixHeight, ratioH, scrollChat, widthPercent } =
+  storeToRefs(configZaloChatStore);
 </script>
 
 <style scoped lang="scss">

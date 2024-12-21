@@ -20,6 +20,7 @@
       </svg>
 
       <svg
+        v-if="isWifi"
         width="18.15"
         height="11"
         viewBox="0 0 18 13"
@@ -31,6 +32,7 @@
           fill="white"
         />
       </svg>
+      <p v-else class="text-xs text-white" contenteditable="true">4G</p>
 
       <svg
         width="26"
@@ -48,8 +50,10 @@
             fill="white"
           />
           <path
-            :d="`M2.3125 3H21V10H2.3125C2.13991 10 2 9.58213 2 9.06667V3.93333C2 3.41787 2.13991 3 2.3125 3Z`"
-            :fill="`white`"
+            :d="`M2.3125 3H${
+              (battery / 100) * 21
+            }V10H2.3125C2.13991 10 2 9.58213 2 9.06667V3.93333C2 3.41787 2.13991 3 2.3125 3Z`"
+            :fill="`${battery <= 20 ? 'red' : 'white'}`"
           />
         </g>
         <defs>
@@ -62,6 +66,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
+
+const configZaloChatStore = useConfigZaloChatStore();
+const { isWifi, battery } = storeToRefs(configZaloChatStore);
+</script>
 
 <style scoped lang="scss"></style>

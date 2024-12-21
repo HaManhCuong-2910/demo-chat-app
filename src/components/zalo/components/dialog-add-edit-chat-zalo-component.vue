@@ -172,10 +172,13 @@ import "emoji-mart-vue-fast/css/emoji-mart.css";
 // @ts-ignore
 import { Picker, EmojiIndex } from "emoji-mart-vue-fast/src";
 import { emojis } from "../data/emoji.source";
+import { useConfigZaloChatStore } from "../stores/config-zalo-chat.store";
 
 const emojiIndex = ref(new EmojiIndex(dataEmoji));
 
 const { data: listData, dataDialog } = storeToRefs(useListZaloChatStore());
+const configZaloChatStore = useConfigZaloChatStore();
+const { showChatList } = storeToRefs(configZaloChatStore);
 
 const data = ref<IDataZaloChat>({
   type: ETypeUserChat.user,
@@ -218,6 +221,7 @@ const handleAddMessage = () => {
     listData.value.push(data.value);
   }
   dataDialog.value.isShowDialog = false;
+  showChatList.value = listData.value.length;
 };
 
 const closeDialog = () => {

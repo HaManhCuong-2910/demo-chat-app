@@ -46,6 +46,7 @@ import {
   ETypeUserChat,
 } from "../../models/chat.model";
 import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
+import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 
 const props = defineProps({
   index: {
@@ -55,6 +56,8 @@ const props = defineProps({
 });
 
 const { data: listData, dataDialog } = storeToRefs(useListZaloChatStore());
+const configZaloChatStore = useConfigZaloChatStore();
+const { showChatList } = storeToRefs(configZaloChatStore);
 
 const switchData = (value: "up" | "down") => {
   if (value === "up") {
@@ -96,6 +99,7 @@ const onRepMessage = () => {
   };
 
   listData.value.push(data);
+  showChatList.value = listData.value.length;
 };
 </script>
 
