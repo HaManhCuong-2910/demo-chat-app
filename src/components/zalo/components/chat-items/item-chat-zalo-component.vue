@@ -51,7 +51,7 @@
             contenteditable="true"
             :style="`font-size: ${textSize - 2}px`"
           >
-            {{ dataPerson[props.data.type].name }}
+            {{ dataPerson[listData[props.data.replicaIndex].type].name }}
           </p>
           <span
             class="text-[#9b9b9b] block mt-[6px]"
