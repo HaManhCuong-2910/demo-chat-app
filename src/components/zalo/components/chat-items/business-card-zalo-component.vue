@@ -20,7 +20,23 @@
     <div>
       <div class="bg-danhthiep">
         <div class="p-2 flex items-center space-x-2">
-          <img src="/avatar.png" alt="avatar" class="w-8 h-w-8 rounded-full" />
+          <label :for="`file-${props.index}`">
+            <img
+              :src="avatar || '/avatar.png'"
+              alt="avatar"
+              class="w-8 h-8 rounded-full"
+            />
+          </label>
+          <input
+            :id="`file-${props.index}`"
+            type="file"
+            hidden
+            accept="image/*"
+            @change="(event: any)=> {
+        if (!event.target?.files) return;
+        [...event.target.files].forEach(preview);
+      }"
+          />
           <p class="text-sm text-white" contenteditable="true">dsada</p>
         </div>
       </div>
@@ -70,6 +86,20 @@ const props = defineProps({
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
 const { textSize } = storeToRefs(configZaloChatStore);
+const avatar = ref("");
+
+const preview = (file: File) => {
+  const fr = new FileReader();
+  avatar.value = "";
+
+  fr.onload = () => {
+    const img = document.createElement("img");
+    img.src = fr.result as string;
+    img.alt = file.name;
+    avatar.value = fr.result as string;
+  };
+  fr.readAsDataURL(file);
+};
 </script>
 
 <style scoped lang="scss">
