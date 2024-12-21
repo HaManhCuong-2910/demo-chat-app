@@ -4,7 +4,7 @@
       contenteditable="true"
       class="text-2xl !leading-4 font-medium text-white mb-1"
     >
-      Em iu 3
+      Tên demo
     </h3>
     <p contenteditable="true" class="text-base text-[#c6e1fb]">
       Thời gian online
