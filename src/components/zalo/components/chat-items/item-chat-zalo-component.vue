@@ -87,6 +87,12 @@
         v-if="props.data.isDate"
         contenteditable="true"
         class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
+        :class="[
+          props.data.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
+            'ml-12',
+        ]"
         :style="`font-size: ${textSize - 5}px`"
       >
         {{ moment(props.data.time).format("HH:mm") }}
