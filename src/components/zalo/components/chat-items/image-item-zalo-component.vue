@@ -192,10 +192,10 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
       display: block;
       top: 8px;
       left: 8px;
-      background-color: rgba($color: #000000, $alpha: 0.5);
-      color: #fff;
+      background-color: rgba($color: #ffffff, $alpha: 1);
+      color: #000;
       font-size: 12px;
-
+      font-weight: 500;
       @apply rounded-md px-1;
     }
   }
