@@ -1,5 +1,5 @@
 <template>
-  <home-screen />
+  <zalo-screen />
 </template>
 
 <script setup lang="ts"></script>

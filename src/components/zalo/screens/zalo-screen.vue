@@ -1,6 +1,8 @@
 <template>
-  <div class="grid grid-cols-2 gap-4">
-    <div>dsadad</div>
+  <div class="grid grid-cols-2 gap-4 mt-8">
+    <div>
+      <features-zalo-component />
+    </div>
     <div>
       <chat-area-zalo-component />
     </div>
