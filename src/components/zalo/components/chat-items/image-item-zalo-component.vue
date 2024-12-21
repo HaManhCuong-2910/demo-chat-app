@@ -66,6 +66,7 @@
 
       <div
         class="rounded-xl w-full image-container"
+        :class="isHD ? 'is-hd' : ''"
         v-for="item in props.data.images"
         :key="item"
       >
@@ -142,7 +143,7 @@ import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 
 const configZaloChatStore = useConfigZaloChatStore();
-const { textSize } = storeToRefs(configZaloChatStore);
+const { textSize, isHD } = storeToRefs(configZaloChatStore);
 
 const props = defineProps({
   data: {
@@ -180,5 +181,21 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 .image-container {
   width: 30%;
   flex-grow: 1;
+  position: relative;
+
+  &.is-hd {
+    &::before {
+      position: absolute;
+      content: "HD";
+      display: block;
+      top: 8px;
+      left: 8px;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      color: #fff;
+      font-size: 12px;
+
+      @apply rounded-md px-1;
+    }
+  }
 }
 </style>

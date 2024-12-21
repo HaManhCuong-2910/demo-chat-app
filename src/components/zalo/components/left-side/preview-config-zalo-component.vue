@@ -1,7 +1,7 @@
 <template>
   <div class="p-10 bg-gray-100 rounded-xl mt-4">
     <h3 class="text-center font-medium mb-4">Preview Configuration</h3>
-    <div>
+    <div class="grid grid-cols-3 gap-2">
       <el-checkbox
         v-model="isWifi"
         label="Wifi"
@@ -12,6 +12,20 @@
       <el-checkbox
         v-model="fixHeight"
         label="fix Height"
+        size="large"
+        class="bg-white"
+        border
+      />
+      <el-checkbox
+        v-model="isHD"
+        label="Ảnh HD"
+        size="large"
+        class="bg-white"
+        border
+      />
+      <el-checkbox
+        v-model="isShowArrow"
+        label="Mũi tên kéo xuống"
         size="large"
         class="bg-white"
         border
@@ -83,6 +97,8 @@ const {
   showChatList,
   textSize,
   scrollChat,
+  isHD,
+  isShowArrow,
 } = storeToRefs(configZaloChatStore);
 const { data } = storeToRefs(listZaloChatStore);
 

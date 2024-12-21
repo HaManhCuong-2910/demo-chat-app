@@ -14,11 +14,8 @@ export const useZaloChatAreaStore = defineStore("ZaloChatAreaStore", () => {
     },
   });
 
-  const isArrowDown = ref(false);
-
   return {
     mode,
     dataPerson,
-    isArrowDown,
   };
 });

@@ -25,7 +25,7 @@
         <img src="/zalo/ico4.png" alt="zalo footer" />
 
         <img
-          v-if="isArrowDown"
+          v-if="isShowArrow"
           :src="'/zalo/rj.png'"
           alt="image"
           class="w-11 h-11 rounded-full absolute -top-20 right-4"
@@ -49,10 +49,9 @@ import { useListZaloChatStore } from "../stores/list-zalo-chat.store";
 import { useZaloChatAreaStore } from "../stores/zalo-chat-area.store";
 
 const listZaloChatStore = useListZaloChatStore();
-const { isArrowDown } = storeToRefs(useZaloChatAreaStore());
 const { dataDialog } = storeToRefs(listZaloChatStore);
 const configZaloChatStore = useConfigZaloChatStore();
-const { fixHeight, ratioH, scrollChat, widthPercent } =
+const { fixHeight, ratioH, scrollChat, widthPercent, isShowArrow } =
   storeToRefs(configZaloChatStore);
 </script>
 

@@ -7,6 +7,8 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const showChatList = ref(0);
   const textSize = ref(16);
   const scrollChat = ref(0);
+  const isHD = ref(false);
+  const isShowArrow = ref(false);
   return {
     isWifi,
     battery,
@@ -16,5 +18,7 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
     showChatList,
     textSize,
     scrollChat,
+    isHD,
+    isShowArrow,
   };
 });

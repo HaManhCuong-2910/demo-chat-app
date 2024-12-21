@@ -21,8 +21,8 @@
       alt="ava"
       class="w-10 h-10 rounded-full mr-2"
     />
-    <div :class="[props.data.type]" class="w-44">
-      <div class="p-3 border-b border-gray-300">
+    <div :class="[props.data.type]" class="w-48">
+      <div class="p-[10px] border-b border-gray-300">
         <p
           class="font-medium"
           :class="[
@@ -30,7 +30,7 @@
               'text-[#f0616b]',
           ]"
           contenteditable="true"
-          :style="`font-size: ${textSize}px`"
+          :style="`font-size: ${textSize - 1}px`"
         >
           {{ dataIcons[props.data.typeMessage].content }}
         </p>
@@ -53,7 +53,7 @@
         <p
           class="text-[#4397fd] font-medium"
           contenteditable="true"
-          :style="`font-size: ${textSize}px`"
+          :style="`font-size: ${textSize - 2}px`"
         >
           GỌI LẠI
         </p>
