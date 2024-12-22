@@ -108,18 +108,18 @@ const preview = (file: File) => {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 80px;
+  height: 99px;
   position: relative;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  @apply w-[202px];
+  @apply w-[232px];
 }
 
 .user {
-  @apply ml-auto max-w-[202px];
+  @apply ml-auto max-w-[232px];
 }
 
 .other {
-  @apply max-w-[202px];
+  @apply max-w-[232px];
 }
 </style>

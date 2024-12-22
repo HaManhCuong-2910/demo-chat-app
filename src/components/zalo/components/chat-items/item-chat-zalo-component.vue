@@ -31,7 +31,7 @@
     />
     <div class="max-w-full">
       <div
-        class="py-[10px] min-w-20 item-container"
+        class="py-2 min-w-20 item-container"
         :class="[
           props.data.type === ETypeUserChat.other &&
             listData[props.index - 1]?.type === ETypeUserChat.other &&
@@ -183,23 +183,23 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
 <style scoped lang="scss">
 .user {
-  max-width: 75%;
+  max-width: 80%;
   width: fit-content;
   @apply ml-auto;
 
   .item-container {
     border: 1px solid #bccdd6;
-    @apply bg-[#d6effc] rounded-xl px-3;
+    @apply bg-[#d6effc] rounded-xl px-2;
   }
 }
 
 .other {
-  max-width: 75%;
+  max-width: 80%;
   width: fit-content;
 
   .item-container {
     border: 1px solid #bccdd6;
-    @apply bg-white rounded-xl px-3;
+    @apply bg-white rounded-xl px-2;
   }
 }
 
