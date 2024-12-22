@@ -60,8 +60,7 @@
       <p class="text-base font-medium col-span-5">Scroll Chat</p>
 
       <div class="flex col-span-7">
-        <el-button type="primary" @click="scrollChat--">Lên</el-button>
-        <el-button type="danger" @click="scrollChat++">Xuống</el-button>
+        <el-input-number v-model="scrollChat" :min="0" />
       </div>
     </div>
 

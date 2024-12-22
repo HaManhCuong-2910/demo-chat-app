@@ -64,10 +64,13 @@
         ]"
       ></div>
 
-      <div class="flex flex-wrap space-x-1 space-y-1">
+      <div
+        class="flex flex-wrap"
+        :class="props.data.images.length === 2 ? '' : 'space-x-1 space-y-1'"
+      >
         <div
           class="rounded-xl w-full image-container"
-          :class="isHD ? 'is-hd' : ''"
+          :class="[isHD ? 'is-hd' : '']"
           v-for="item in props.data.images"
           :key="item"
         >
@@ -164,13 +167,13 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
 <style scoped lang="scss">
 .user {
-  max-width: 65%;
+  max-width: calc(65% + 20px);
   width: fit-content;
   @apply rounded-xl ml-auto;
 }
 
 .other {
-  max-width: 65%;
+  max-width: calc(65% + 20px);
   width: fit-content;
   @apply px-3 rounded-xl;
 
