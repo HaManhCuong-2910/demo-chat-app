@@ -112,14 +112,14 @@ const preview = (file: File) => {
   position: relative;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  @apply w-48;
+  @apply w-[202px];
 }
 
 .user {
-  @apply ml-auto max-w-48;
+  @apply ml-auto max-w-[202px];
 }
 
 .other {
-  @apply max-w-48;
+  @apply max-w-[202px];
 }
 </style>

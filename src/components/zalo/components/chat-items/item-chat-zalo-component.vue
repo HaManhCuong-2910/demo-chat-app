@@ -29,7 +29,7 @@
       alt="ava"
       class="w-10 h-10 rounded-full mr-2"
     />
-    <div>
+    <div class="max-w-full">
       <div
         class="py-[10px] min-w-20 item-container"
         :class="[
@@ -75,8 +75,8 @@
           </div>
         </div>
         <p
-          :class="[props.data.isBlueText && 'text-[#4391f6]']"
-          :style="`font-size: ${textSize}px`"
+          :class="[props.data.isBlueText && 'text-[#4391f6]', 'break-words']"
+          :style="`font-size: ${textSize}px;`"
           contenteditable="true"
         >
           {{ props.data.value }}
@@ -183,7 +183,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
 <style scoped lang="scss">
 .user {
-  max-width: 65%;
+  max-width: 75%;
   width: fit-content;
   @apply ml-auto;
 
