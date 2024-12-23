@@ -78,16 +78,15 @@
 </template>
 
 <script setup lang="ts">
+import { toBase64 } from "~/src/services/constant";
 import { useToolbarStore } from "../../store/toolbar.store";
 
 const toolbarStore = useToolbarStore();
 const { avatars, names } = storeToRefs(toolbarStore);
 
-const handleChange = (event: any, type: "user" | "other") => {
+const handleChange = async (event: any, type: "user" | "other") => {
   if (event.target.files[0]) {
-    avatars.value[type] = window.webkitURL.createObjectURL(
-      event.target.files[0]
-    );
+    avatars.value[type] = await toBase64(event.target.files[0]);
   }
 };
 </script>

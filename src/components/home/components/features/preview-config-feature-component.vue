@@ -224,6 +224,22 @@
         <el-slider v-model="textSize" :max="40" />
       </div>
     </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-4">
+      <button-common
+        :text="'Xuất File'"
+        :class="'!rounded-xl w-full'"
+        :class-text="'font-medium text-base'"
+        @click="onExport"
+      />
+      <button-common
+        :type="ETypeButton.secondary"
+        :text="'Nhập File'"
+        :class="'!rounded-xl w-full'"
+        :class-text="'font-medium text-base'"
+        @click="onInputFile"
+      />
+    </div>
   </div>
 </template>
 
@@ -262,6 +278,49 @@ const maxShowList = computed(() => {
   let newArray = arraysProduct.reduce((a, b) => a.concat(b), []);
   return newArray.length;
 });
+
+const onExport = () => {
+  const content = JSON.stringify(data.value);
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "data.txt";
+  document.body.appendChild(link);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  document.body.removeChild(link);
+};
+
+const onInputFile = () => {
+  const inputFile = document.createElement("input");
+  inputFile.type = "file";
+  inputFile.accept = ".txt";
+  inputFile.click();
+
+  inputFile.onchange = (event: any) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      const reader = new FileReader();
+
+      // Event listener for when the file is loaded
+      reader.onload = (e) => {
+        const res = e.target?.result;
+        if (res) {
+          data.value = JSON.parse(res as string);
+          const arraysProduct = data.value.map((item) => {
+            return item.chats;
+          });
+          let newArray = arraysProduct.reduce((a, b) => a.concat(b), []);
+          showChatList.value = newArray.length;
+        }
+        inputFile.remove();
+      };
+
+      // Read the file as text
+      reader.readAsText(file);
+    }
+  };
+};
 </script>
 
 <style scoped lang="scss"></style>

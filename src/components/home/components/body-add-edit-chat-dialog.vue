@@ -192,7 +192,7 @@ import "emoji-mart-vue-fast/css/emoji-mart.css";
 // @ts-ignore
 import { Picker, EmojiIndex, Emoji } from "emoji-mart-vue-fast/src";
 
-import { ETypeButton } from "~/src/services/constant";
+import { ETypeButton, toBase64 } from "~/src/services/constant";
 import { ETypeAddChat, ETypeUserChat } from "../models/home.model";
 import moment from "moment";
 import { useHomeStore } from "../store/home.store";
@@ -230,11 +230,9 @@ const closeDialog = () => {
   isShowDialog.value = false;
 };
 
-const handleChange = (event: any) => {
+const handleChange = async (event: any) => {
   if (event.target.files[0]) {
-    dataInput.value.image = window.webkitURL.createObjectURL(
-      event.target.files[0]
-    );
+    dataInput.value.image = await toBase64(event.target.files[0]);
   }
 };
 

@@ -78,14 +78,13 @@
 </template>
 
 <script setup lang="ts">
+import { toBase64 } from "~/src/services/constant";
 import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
-const handleChange = (event: any, type: "user" | "other") => {
+const handleChange = async (event: any, type: "user" | "other") => {
   if (event.target.files[0]) {
-    dataPerson.value[type].avatar = window.webkitURL.createObjectURL(
-      event.target.files[0]
-    );
+    dataPerson.value[type].avatar = await toBase64(event.target.files[0]);
   }
 };
 </script>
