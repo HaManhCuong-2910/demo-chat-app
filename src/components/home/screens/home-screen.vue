@@ -18,7 +18,7 @@
           @click="isShowDialog = true"
         >
           <div class="flex items-center">
-            <p class="text-base">Chat</p>
+            <p class="text-base">Trò chuyện</p>
             <font-awesome-icon
               :icon="['fas', 'plus']"
               class="text-white ml-2 icon-plus"
@@ -31,7 +31,7 @@
   <el-dialog
     destroy-on-close
     v-model="isShowDialog"
-    width="500"
+    width="700"
     :show-close="false"
   >
     <body-add-edit-chat-dialog />

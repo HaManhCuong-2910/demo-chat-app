@@ -8,15 +8,15 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     other: "",
   });
   const names = ref({
-    user: "Me",
-    other: "Other",
+    user: "Tôi",
+    other: "Người khác",
   });
 
   const language = ref("en");
 
   const languages = ref([
     {
-      label: "English",
+      label: "Tiếng anh",
       value: "en",
     },
     {

@@ -1,10 +1,10 @@
 <template>
   <div class="bg-gray-200 p-4">
     <div class="grid grid-cols-6 gap-4 items-center">
-      <p class="text-base font-medium">Type</p>
+      <p class="text-base font-medium">Loại tin nhắn</p>
       <div class="col-span-5 grid grid-cols-2 gap-2">
         <button-common
-          :text="'Message'"
+          :text="'Tin nhắn chữ'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -15,7 +15,7 @@
           @click="dataInput.type = ETypeAddChat.message"
         />
         <button-common
-          :text="'Image'"
+          :text="'Hình ảnh'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -56,10 +56,10 @@
       </div>
     </div>
     <div class="grid grid-cols-6 gap-4 items-center mt-3">
-      <p class="text-base font-medium">Person</p>
+      <p class="text-base font-medium">Đối tượng</p>
       <div class="col-span-5 flex space-x-2">
         <button-common
-          :text="'Me'"
+          :text="'Tôi'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -70,7 +70,7 @@
           @click="dataInput.person = ETypeUserChat.user"
         />
         <button-common
-          :text="'Other'"
+          :text="'Người khác'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="grid grid-cols-6 gap-4 items-center mt-3">
-      <p class="text-base font-medium">Date</p>
+      <p class="text-base font-medium">Ngày</p>
       <div class="col-span-5">
         <input-date-time-picker-common
           id="startDate"
@@ -97,7 +97,7 @@
       class="grid grid-cols-6 gap-4 items-center mt-3"
       v-if="dataInput.type !== ETypeAddChat.image"
     >
-      <p class="text-base font-medium">Message</p>
+      <p class="text-base font-medium">Nội dung</p>
       <div class="col-span-5">
         <input-common
           :placeholder="'Message'"
@@ -111,7 +111,7 @@
       class="grid grid-cols-6 gap-4 items-center mt-3"
       v-if="dataInput.type === ETypeAddChat.image"
     >
-      <p class="text-base font-medium">Image</p>
+      <p class="text-base font-medium">Hình ảnh</p>
       <label
         for="chat_image_input"
         class="col-span-5 h-[150px] w-full bg-white rounded-xl text-center"
@@ -136,6 +136,24 @@
       @select="onSelectEmoji"
       :showSkinTones="false"
       :showPreview="false"
+      :i18n="{
+        search: 'Tìm kiếm',
+        notfound: 'Không tìm thấy biểu tượng cảm xúc',
+        categories: {
+          search: 'Kết quả tìm kiếm',
+          recent: 'Thường được sử dụng',
+          smileys: 'Biểu tượng mặt cười & Biểu tượng cảm xúc',
+          people: 'Con người và cơ thể',
+          nature: 'Động vật & Thiên nhiên',
+          foods: 'Đồ ăn & đồ uống',
+          activity: 'Hoạt động',
+          places: 'Du lịch & Địa điểm',
+          objects: 'Đối tượng',
+          symbols: 'Biểu tượng',
+          flags: 'Cờ',
+          custom: 'Phong tục',
+        },
+      }"
     />
 
     <div class="mt-4">
@@ -151,14 +169,14 @@
 
     <div class="mt-4 flex space-x-2">
       <button-common
-        :text="isEditDialog ? 'Edit' : 'Add'"
+        :text="isEditDialog ? 'Sửa' : 'Thêm'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
         @click="isEditDialog ? handleEditMessage() : handleAddMessage()"
       />
 
       <button-common
-        :text="'Cancel'"
+        :text="'Hủy'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
         :type="ETypeButton.secondary"

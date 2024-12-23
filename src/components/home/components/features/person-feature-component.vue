@@ -1,11 +1,11 @@
 <template>
   <div class="p-3 bg-gray-100 rounded-xl">
-    <h3 class="text-center font-medium mb-4">Person</h3>
+    <h3 class="text-center font-medium mb-4">Đối tượng</h3>
     <div>
       <div
         class="bg-[#0048bd] py-1 text-center text-white rounded-t-xl font-medium"
       >
-        Me
+        Tôi
       </div>
       <div class="bg-white p-2 grid grid-cols-2">
         <div class="flex items-center">
@@ -20,7 +20,7 @@
               class="absolute right-0 bottom-0"
             />
           </label>
-          <p class="text-base font-medium ml-2">Name</p>
+          <p class="text-base font-medium ml-2">Tên</p>
           <input
             id="user_avatar"
             class="hidden"
@@ -42,7 +42,7 @@
       <div
         class="bg-[#0048bd] py-1 text-center text-white rounded-t-xl font-medium mt-3"
       >
-        Other
+        Người khác
       </div>
       <div class="bg-white p-2 grid grid-cols-2">
         <div class="flex items-center">
@@ -57,7 +57,7 @@
               class="absolute right-0 bottom-0"
             />
           </label>
-          <p class="text-base font-medium ml-2">Name</p>
+          <p class="text-base font-medium ml-2">Tên</p>
           <input
             id="other_avatar"
             class="hidden"

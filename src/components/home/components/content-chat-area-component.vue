@@ -407,7 +407,7 @@
         @click="onDownload"
       >
         <div class="flex items-center">
-          <p class="text-base">Download</p>
+          <p class="text-base">Tải xuống</p>
         </div>
       </button-common>
     </div>

@@ -1,9 +1,9 @@
 <template>
   <div class="p-3 bg-gray-100 rounded-xl">
-    <h3 class="text-center font-medium mb-4">Preview Configuration</h3>
+    <h3 class="text-center font-medium mb-4">Cấu hình</h3>
 
     <div class="grid grid-cols-12 gap-1 items-center">
-      <p class="text-base font-medium col-span-5 text-center">Language</p>
+      <p class="text-base font-medium col-span-5 text-center">Ngôn ngữ</p>
       <div class="flex col-span-7">
         <el-select v-model="language" placeholder="Select" style="width: 240px">
           <el-option
@@ -17,10 +17,12 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Status Bar</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Thanh trạng thái
+      </p>
       <div class="flex col-span-7">
         <button-common
-          :text="'On'"
+          :text="'Hiện'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -29,7 +31,7 @@
           @click="statusBar = true"
         />
         <button-common
-          :text="'Off'"
+          :text="'Ẩn'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -41,7 +43,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Battery</p>
+      <p class="text-base font-medium col-span-5 text-center">Pin</p>
 
       <div class="flex col-span-7">
         <el-slider v-model="battery" />
@@ -49,17 +51,17 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Footer</p>
+      <p class="text-base font-medium col-span-5 text-center">Chân trang</p>
       <div class="flex col-span-7">
         <button-common
-          :text="'On'"
+          :text="'Hiện'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="footer === true ? ETypeButton.primary : ETypeButton.secondary"
           @click="footer = true"
         />
         <button-common
-          :text="'Off'"
+          :text="'Ẩn'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="footer === false ? ETypeButton.primary : ETypeButton.secondary"
@@ -69,7 +71,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">current Date</p>
+      <p class="text-base font-medium col-span-5 text-center">Ngày hiện tại</p>
       <div class="col-span-7">
         <input-date-time-picker-common
           id="startDate"
@@ -81,7 +83,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">show Date</p>
+      <p class="text-base font-medium col-span-5 text-center">Hiển thị Ngày</p>
       <div class="flex col-span-7">
         <button-common
           :text="'On'"
@@ -105,9 +107,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">
-        Background color
-      </p>
+      <p class="text-base font-medium col-span-5 text-center">Màu nền</p>
       <div class="flex col-span-7">
         <el-color-picker v-model="bgColor" />
         <div
@@ -120,7 +120,9 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Width Percent</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Phần trăm chiều rộng
+      </p>
 
       <div class="flex col-span-7">
         <el-slider v-model="widthPercent" />
@@ -128,10 +130,12 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Fix Height</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Cố định chiều cao
+      </p>
       <div class="flex col-span-7">
         <button-common
-          :text="'On'"
+          :text="'Bật'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -140,7 +144,7 @@
           @click="fixHeight = true"
         />
         <button-common
-          :text="'Off'"
+          :text="'Tắt'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -155,10 +159,12 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Show on read</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Hiển thị khi đọc
+      </p>
       <div class="flex col-span-7">
         <button-common
-          :text="'On'"
+          :text="'Bật'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -167,7 +173,7 @@
           @click="showOnRead = true"
         />
         <button-common
-          :text="'Off'"
+          :text="'Tắt'"
           :class="'!rounded-xl w-full'"
           :class-text="'font-medium text-base'"
           :type="
@@ -182,7 +188,9 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3" v-if="fixHeight">
-      <p class="text-base font-medium col-span-5 text-center">Scroll Chat</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Cuộn trò chuyện
+      </p>
 
       <div class="flex col-span-7">
         <el-slider :step="0.1" v-model="scrollChat" />
@@ -190,7 +198,9 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">W x H Ratio</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Tỉ lệ chiều rộng : chiều dài
+      </p>
 
       <div class="flex col-span-7">
         <el-slider v-model="ratioH" :step="0.1" :max="3" />
@@ -198,7 +208,9 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Show Chat List</p>
+      <p class="text-base font-medium col-span-5 text-center">
+        Hiển thị danh sách trò chuyện
+      </p>
 
       <div class="flex col-span-7">
         <el-slider v-model="showChatList" :max="maxShowList" />
@@ -206,7 +218,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
-      <p class="text-base font-medium col-span-5 text-center">Text Size</p>
+      <p class="text-base font-medium col-span-5 text-center">Kích thước chữ</p>
 
       <div class="flex col-span-7">
         <el-slider v-model="textSize" :max="40" />

@@ -2,7 +2,7 @@
   <div class="rounded-xl bg-gray-100 p-4">
     <div class="text-center">
       <button-common
-        :text="'Full Screen'"
+        :text="'Toàn màn hình'"
         :class="'!rounded-xl w-1/2'"
         :class-text="'font-medium text-base'"
         :type="
@@ -16,7 +16,7 @@
 
     <div class="grid grid-cols-2 gap-2 mt-3">
       <button-common
-        :text="'Edit Mode'"
+        :text="'Chế độ chỉnh sửa'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
         :type="
@@ -27,7 +27,7 @@
         @click="mode = EModeAction.edit"
       />
       <button-common
-        :text="'Preview'"
+        :text="'Chế độ xem trước'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
         :type="
