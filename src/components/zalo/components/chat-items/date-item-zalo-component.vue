@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-7 w-fit mx-auto px-2 py rounded-2xl text-white bg-[#b6babf]"
+    class="mt-7 w-fit mx-auto px-2 py-[6px] rounded-2xl text-white bg-[#b6babf]"
     :style="`font-size: ${textSize - 3}px`"
     contenteditable="true"
   >

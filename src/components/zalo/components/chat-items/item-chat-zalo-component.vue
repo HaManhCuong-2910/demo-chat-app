@@ -3,10 +3,10 @@
     :class="[
       props.data.type !== listData[props.index - 1]?.type
         ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-5'
+          ? 'mt-7 '
           : 'mt-3'
         : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-5'
+        ? 'mt-7 '
         : 'mt-3',
       props.data.type === ETypeUserChat.other &&
       (listData[props.index - 1]?.type !== ETypeUserChat.other ||
@@ -31,7 +31,7 @@
     />
     <div class="max-w-full">
       <div
-        class="py-2 min-w-20 item-container"
+        class="p-4 min-w-28 item-container"
         :class="[
           props.data.type === ETypeUserChat.other &&
             listData[props.index - 1]?.type === ETypeUserChat.other &&
@@ -40,7 +40,7 @@
         ]"
       >
         <div
-          class="replica pt-1 mb-2 flex"
+          class="replica pt-1 mb-5 flex"
           v-if="props.data.replicaIndex !== null"
         >
           <img
@@ -61,7 +61,7 @@
               {{ dataPerson[listData[props.data.replicaIndex].type].name }}
             </p>
             <span
-              class="text-[#9b9b9b] block mt-[6px]"
+              class="text-[#9b9b9b] block mt-3"
               :style="`font-size: ${textSize - 2}px`"
               contenteditable="true"
               >{{
@@ -83,7 +83,7 @@
         </p>
         <span
           v-if="props.data.isDate && props.data.dateInside"
-          class="text-[#9b9b9bce] !leading-[0px]"
+          class="text-[#9b9b9bce] mt-2 block"
           :style="`font-size: ${textSize - 5}px`"
           contenteditable="true"
           >{{ moment(props.data.time).format("HH:mm") }}</span
@@ -93,14 +93,14 @@
       <p
         v-if="props.data.isDate && !props.data.dateInside"
         contenteditable="true"
-        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
+        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
         :class="[
           props.data.type === ETypeUserChat.other &&
             listData[props.index - 1]?.type === ETypeUserChat.other &&
             listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
             'ml-12',
         ]"
-        :style="`font-size: ${textSize - 5}px`"
+        :style="`font-size: ${textSize - 6}px`"
       >
         {{ moment(props.data.time).format("HH:mm") }}
       </p>
@@ -108,7 +108,7 @@
 
     <div
       v-if="props.data.typeHeart === ETypeHeart.inactive"
-      class="w-7 h-7 absolute right-0 -bottom-4"
+      class="w-9 h-9 absolute right-0 -bottom-5"
       style="
         background-image: url('/zalo/heart-empty.png');
         background-repeat: no-repeat;
@@ -121,14 +121,14 @@
         props.data.typeHeart === ETypeHeart.active ||
         props.data.typeHeart === ETypeHeart.number
       "
-      class="heart-number absolute right-0 -bottom-4 flex items-center"
+      class="heart-number absolute right-0 -bottom-5 flex items-center"
     >
       <div
         v-if="props.data.typeHeart === ETypeHeart.number"
-        class="bg-gray-50 rounded-3xl h-5 flex items-center min-w-10 mr-2 relative"
+        class="bg-gray-50 rounded-3xl h-6 flex items-center min-w-10 mr-2 relative"
       >
         <div
-          class="w-10 h-full absolute"
+          class="w-[50px] h-full absolute left-[-6px]"
           style="
             background-image: url('/zalo/heart-number.png');
             background-repeat: no-repeat;
@@ -145,7 +145,7 @@
       </div>
 
       <div
-        class="w-7 h-7"
+        class="w-9 h-9"
         style="
           background-image: url('/zalo/heart-active.png');
           background-repeat: no-repeat;
@@ -189,7 +189,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
   .item-container {
     border: 1px solid #bccdd6;
-    @apply bg-[#d6effc] rounded-xl px-2;
+    @apply bg-[#d6effc] rounded-xl;
   }
 }
 
@@ -199,7 +199,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
   .item-container {
     border: 1px solid #bccdd6;
-    @apply bg-white rounded-xl px-2;
+    @apply bg-white rounded-xl;
   }
 }
 

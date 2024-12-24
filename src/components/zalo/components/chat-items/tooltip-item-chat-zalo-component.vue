@@ -10,16 +10,15 @@
       class="p-1 bg-white text-xs border-t border-b border-t-gray-300 border-b-gray-300 cursor-pointer text-black"
       @click="switchData('down')"
     />
-    <font-awesome-icon
+    <!-- <font-awesome-icon
       :icon="['fas', 'plus']"
       class="p-1 text-xs bg-green-300 cursor-pointer text-black"
       @click="
-        dataDialog.isShowDialog = true;
         dataDialog.isEdit = false;
         dataDialog.isAddAfterDialog = true;
         dataDialog.index = props.index;
       "
-    />
+    /> -->
     <p
       v-if="
         listData[index].typeMessage === ETypeMessage.message ||
@@ -96,6 +95,7 @@ const onRepMessage = () => {
     isDate: false,
     images: [],
     isBlueText: false,
+    dateInside: false,
   };
 
   listData.value.push(data);

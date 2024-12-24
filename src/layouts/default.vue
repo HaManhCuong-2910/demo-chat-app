@@ -1,6 +1,6 @@
 <template>
   <!-- <header-default-layout /> -->
-  <main class="container mx-auto pb-16">
+  <main class="pb-16">
     <slot> </slot>
   </main>
 </template>

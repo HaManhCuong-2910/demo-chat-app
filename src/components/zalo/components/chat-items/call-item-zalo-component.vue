@@ -3,10 +3,10 @@
     :class="[
       props.data.type !== listData[props.index - 1]?.type
         ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-5'
+          ? 'mt-7 '
           : 'mt-3'
         : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-5'
+        ? 'mt-7 '
         : 'mt-3',
       props.data.type === ETypeUserChat.other &&
       listData[props.index - 1]?.type !== ETypeUserChat.other
@@ -32,9 +32,8 @@
           ? 'ml-12'
           : '',
       ]"
-      class="w-1/3"
     >
-      <div class="p-[10px] border-b border-gray-300">
+      <div class="p-4 border-b border-gray-300">
         <p
           class="font-medium"
           :class="[
@@ -46,7 +45,7 @@
         >
           {{ dataIcons[props.data.typeMessage].content }}
         </p>
-        <div class="flex space-x-2 mt-1 items-center">
+        <div class="flex space-x-2 mt-2 items-center">
           <img
             :src="dataIcons[props.data.typeMessage].img"
             alt="image"
@@ -61,7 +60,7 @@
           </p>
         </div>
       </div>
-      <div class="p-1 text-center">
+      <div class="p-[10px] text-center">
         <p
           class="text-[#4397fd] font-medium"
           contenteditable="true"
@@ -143,14 +142,14 @@ const dataIcons = ref<
 
 <style scoped lang="scss">
 .user {
-  max-width: 65%;
+  width: 43%;
 
   border: 1px solid #bccdd6;
   @apply rounded-xl bg-[#d6effc] ml-auto;
 }
 
 .other {
-  max-width: 65%;
+  width: 43%;
 
   border: 1px solid #bccdd6;
   @apply rounded-xl bg-white;

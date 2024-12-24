@@ -1,7 +1,7 @@
 <template>
   <div class="p-10 bg-gray-100 rounded-xl mt-4">
     <h3 class="text-center font-medium mb-4">Preview Configuration</h3>
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-1 gap-2">
       <el-checkbox
         v-model="isWifi"
         label="Wifi"
@@ -9,13 +9,6 @@
         class="bg-white"
         border
       />
-      <!-- <el-checkbox
-        v-model="fixHeight"
-        label="fix Height"
-        size="large"
-        class="bg-white"
-        border
-      /> -->
       <el-checkbox
         v-model="isHD"
         label="Ảnh HD"
@@ -94,8 +87,12 @@
         [...event.target.files].forEach(preview);
       }"
         />
-        <div id="preview-anh-nen" class="w-64 mt-4">
-          <img :src="backgroundScreen" alt="das" class="w-64 h-full" />
+        <div id="preview-anh-nen" class="max-w-64 w-full mt-4">
+          <img
+            :src="backgroundScreen"
+            alt="das"
+            class="max-w-64 w-full h-full"
+          />
         </div>
       </div>
     </div>

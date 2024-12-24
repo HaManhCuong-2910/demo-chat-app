@@ -3,7 +3,7 @@
     <div class="grid grid-cols-3 gap-4 items-start">
       <p class="text-base font-medium">Loại user</p>
       <div class="col-span-2">
-        <el-radio-group v-model="data.type">
+        <el-radio-group v-model="data.type" class="gap-3">
           <el-radio :value="ETypeUserChat.user" border>Tôi</el-radio>
           <el-radio :value="ETypeUserChat.other" border>Người khác</el-radio>
         </el-radio-group>
@@ -92,24 +92,23 @@
       v-if="data.typeMessage === ETypeMessage.message"
     >
       <p class="text-base font-medium">Nội dung</p>
-      <div class="col-span-2">
+      <div class="text-start col-span-2">
         <input-common
           :placeholder="'Nội dung'"
           :type="'textarea'"
           v-model:value="data.value"
         >
         </input-common>
-
-        <picker
-          :native="false"
-          :data="emojiIndex"
-          set="apple"
-          class="mt-4 mx-auto"
-          @select="onSelectEmoji"
-          :showSkinTones="false"
-          :showPreview="false"
-        />
       </div>
+      <picker
+        :native="false"
+        :data="emojiIndex"
+        set="apple"
+        class="mt-4 col-span-3 !w-full"
+        @select="onSelectEmoji"
+        :showSkinTones="false"
+        :showPreview="false"
+      />
     </div>
 
     <div
@@ -155,6 +154,7 @@
       />
 
       <button-common
+        v-if="!props.isAddNormal"
         :text="'Đóng'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
@@ -181,6 +181,10 @@ import "emoji-mart-vue-fast/css/emoji-mart.css";
 import { Picker, EmojiIndex } from "emoji-mart-vue-fast/src";
 import { emojis } from "../data/emoji.source";
 import { useConfigZaloChatStore } from "../stores/config-zalo-chat.store";
+
+const props = defineProps({
+  isAddNormal: Boolean,
+});
 
 const emojiIndex = ref(new EmojiIndex(dataEmoji));
 
@@ -224,10 +228,11 @@ const preview = (file: File) => {
 };
 
 const handleAddMessage = () => {
+  const cloneData = JSON.parse(JSON.stringify(data.value));
   if (dataDialog.value.isAddAfterDialog) {
-    listData.value.splice(dataDialog.value.index + 1, 0, data.value);
+    listData.value.splice(dataDialog.value.index + 1, 0, cloneData);
   } else {
-    listData.value.push(data.value);
+    listData.value.push(cloneData);
   }
   dataDialog.value.isShowDialog = false;
   showChatList.value = listData.value.length;

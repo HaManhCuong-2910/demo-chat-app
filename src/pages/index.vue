@@ -1,5 +1,7 @@
 <template>
-  <home-screen />
+  <div class="container mx-auto">
+    <home-screen />
+  </div>
 </template>
 
 <script setup lang="ts"></script>

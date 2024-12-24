@@ -3,10 +3,10 @@
     :class="[
       props.data.type !== listData[props.index - 1]?.type
         ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-5'
+          ? 'mt-7 '
           : 'mt-3'
         : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-5'
+        ? 'mt-7 '
         : 'mt-3',
       props.data.type === ETypeUserChat.other &&
       listData[props.index - 1]?.type !== ETypeUserChat.other
@@ -37,7 +37,7 @@
           props.data.images.length === 1 &&
           props.data.typeMessage !== ETypeMessage.emoji
         "
-        class="absolute w-8 h-8 top-1/2 -translate-y-1/2"
+        class="absolute w-10 h-10 top-1/2 -translate-y-1/2 -left-14"
         style="
           background-image: url('/zalo/share1.png');
           background-repeat: no-repeat;
@@ -53,7 +53,7 @@
           props.data.images.length > 1 &&
           props.data.typeMessage !== ETypeMessage.emoji
         "
-        class="absolute w-8 h-16 top-1/2 -translate-y-1/2"
+        class="absolute w-10 h-20 top-1/2 -translate-y-1/2 -left-14"
         style="
           background-image: url('/zalo/jt2.png');
           background-repeat: no-repeat;
@@ -100,8 +100,8 @@
       <p
         v-if="props.data.isDate"
         contenteditable="true"
-        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[6px] py-[2px] text-white rounded-xl"
-        :style="`font-size: ${textSize - 5}px`"
+        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        :style="`font-size: ${textSize - 6}px`"
       >
         {{ moment(props.data.time).format("HH:mm") }}
       </p>
@@ -216,7 +216,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
       left: 8px;
       background-color: rgba($color: #ffffff, $alpha: 1);
       color: #000;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 500;
       @apply rounded-md px-1;
     }

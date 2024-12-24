@@ -3,10 +3,10 @@
     :class="[
       props.data.type !== listData[props.index - 1]?.type
         ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-5'
+          ? 'mt-7 '
           : 'mt-3'
         : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-5'
+        ? 'mt-7 '
         : 'mt-3',
       props.data.type === ETypeUserChat.other &&
       listData[props.index - 1]?.type !== ETypeUserChat.other
@@ -24,7 +24,7 @@
             <img
               :src="avatar || '/avatar.png'"
               alt="avatar"
-              class="w-8 h-8 rounded-full"
+              class="w-10 h-10 rounded-full"
             />
           </label>
           <input
@@ -37,11 +37,11 @@
         [...event.target.files].forEach(preview);
       }"
           />
-          <p class="text-sm text-white" contenteditable="true">dsada</p>
+          <p class="text-lg text-white" contenteditable="true">dsada</p>
         </div>
       </div>
       <div class="bg-white grid grid-cols-2 rounded-b-[8px]">
-        <div class="text-center py-1 border-r border-r-gray-200">
+        <div class="text-center py-[10px] border-r border-r-gray-200">
           <p
             contenteditable="true"
             class="text-black font-medium"
@@ -50,7 +50,7 @@
             Gọi điện
           </p>
         </div>
-        <div class="text-center py-1">
+        <div class="text-center py-[10px]">
           <p
             contenteditable="true"
             class="text-[#52a2f8] font-medium"
@@ -108,18 +108,18 @@ const preview = (file: File) => {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 110px;
+  height: 150px;
   position: relative;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  @apply w-[252px];
+  @apply w-[342px];
 }
 
 .user {
-  @apply ml-auto max-w-[252px];
+  @apply ml-auto max-w-[342px];
 }
 
 .other {
-  @apply max-w-[252px];
+  @apply max-w-[342px];
 }
 </style>

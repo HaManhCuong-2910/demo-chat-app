@@ -2,7 +2,7 @@
   <div>
     <div
       id="chat-area"
-      :style="`width: ${widthPercent}%; background-image: url(${backgroundScreen});`"
+      :style="`width: 613px; background-image: url(${backgroundScreen});`"
     >
       <div class="header relative">
         <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
@@ -30,7 +30,7 @@
           v-if="isShowArrow"
           :src="'/zalo/rj.png'"
           alt="image"
-          class="w-11 h-11 rounded-full absolute -top-20 right-4"
+          class="w-14 h-14 rounded-full absolute -top-20 right-4"
         />
       </div>
     </div>

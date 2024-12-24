@@ -2,12 +2,6 @@
   <div>
     <div class="grid grid-cols-3 gap-4">
       <button-common
-        :text="'Thêm mới'"
-        :class="'!rounded-xl'"
-        :class-text="'font-medium text-base'"
-        @click="handleAdd"
-      />
-      <button-common
         :text="'Download'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"

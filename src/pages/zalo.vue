@@ -1,5 +1,7 @@
 <template>
-  <zalo-screen />
+  <div class="px-4">
+    <zalo-screen />
+  </div>
 </template>
 
 <script setup lang="ts"></script>

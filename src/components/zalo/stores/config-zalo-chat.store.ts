@@ -5,7 +5,7 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const fixHeight = ref(true);
   const ratioH = ref(1.3);
   const showChatList = ref(0);
-  const textSize = ref(18);
+  const textSize = ref(24);
   const scrollChat = ref(0);
   const isHD = ref(false);
   const isShowArrow = ref(false);

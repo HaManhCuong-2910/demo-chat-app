@@ -1,10 +1,15 @@
 <template>
-  <div class="grid grid-cols-2 gap-4 mt-8">
-    <div>
+  <div class="grid grid-cols-10 gap-2 mt-8">
+    <div class="col-span-3">
       <features-zalo-component />
     </div>
-    <div>
-      <chat-area-zalo-component />
+    <div class="col-span-7 flex">
+      <div>
+        <chat-area-zalo-component />
+      </div>
+      <div>
+        <dialog-add-edit-chat-zalo-component :is-add-normal="true" />
+      </div>
     </div>
   </div>
 </template>
