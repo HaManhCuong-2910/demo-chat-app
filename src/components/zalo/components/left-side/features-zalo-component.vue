@@ -42,7 +42,7 @@ const handleDownload = () => {
   });
   if (!node) return;
   htmlToImage
-    .toPng(node)
+    .toJpeg(node)
     .then((dataUrl) => {
       downloadFile(dataUrl, "capture.png");
       loading.close();

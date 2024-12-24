@@ -32,7 +32,7 @@
           ? 'ml-12'
           : '',
       ]"
-      class="w-48"
+      class="w-1/3"
     >
       <div class="p-[10px] border-b border-gray-300">
         <p
