@@ -29,8 +29,8 @@
         props.data.type,
         props.data.type === ETypeUserChat.other &&
           listData[props.index - 1]?.type === ETypeUserChat.other &&
-          'ml-10',
-        props.data.images.length === 1 && '!max-w-[50%]',
+          'ml-12',
+        props.data.images.length === 1 && '!max-w-[55%]',
       ]"
     >
       <div

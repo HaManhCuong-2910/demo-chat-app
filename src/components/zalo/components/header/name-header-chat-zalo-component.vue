@@ -1,9 +1,6 @@
 <template>
   <div class="absolute bottom-[5%] left-[60px]">
-    <h3
-      contenteditable="true"
-      class="text-3xl !leading-4 font-medium text-white mb-2"
-    >
+    <h3 contenteditable="true" class="text-[28px] font-medium text-white mb-2">
       Tên demo
     </h3>
     <p contenteditable="true" class="text-xl text-[#c6e1fb]">

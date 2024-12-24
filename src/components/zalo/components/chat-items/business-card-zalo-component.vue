@@ -29,7 +29,7 @@
         props.data.type,
         props.data.type === ETypeUserChat.other &&
         listData[props.index - 1]?.type === ETypeUserChat.other
-          ? 'ml-12'
+          ? 'ml-14'
           : '',
       ]"
     >

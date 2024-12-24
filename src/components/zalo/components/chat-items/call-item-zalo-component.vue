@@ -29,7 +29,7 @@
         props.data.type,
         props.data.type === ETypeUserChat.other &&
         listData[props.index - 1]?.type === ETypeUserChat.other
-          ? 'ml-12'
+          ? 'ml-14'
           : '',
       ]"
     >
@@ -41,7 +41,7 @@
               'text-[#f0616b]',
           ]"
           contenteditable="true"
-          :style="`font-size: ${textSize - 1}px`"
+          :style="`font-size: ${textSize - 3}px`"
         >
           {{ dataIcons[props.data.typeMessage].content }}
         </p>
@@ -54,7 +54,7 @@
           <p
             class="text-[#7c798a] -mt-[2px]"
             contenteditable="true"
-            :style="`font-size: ${textSize - 2}px`"
+            :style="`font-size: ${textSize - 4}px`"
           >
             {{ dataIcons[props.data.typeMessage].description }}
           </p>
