@@ -22,7 +22,7 @@
       "
       :src="dataPerson.other.avatar"
       alt="ava"
-      class="w-10 h-10 rounded-full mr-2"
+      class="w-12 h-12 rounded-full mr-2"
     />
     <div
       :class="[

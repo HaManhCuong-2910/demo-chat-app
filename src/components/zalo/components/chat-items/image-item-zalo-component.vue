@@ -21,7 +21,7 @@
       "
       :src="dataPerson.other.avatar"
       alt="ava"
-      class="w-10 h-10 rounded-full"
+      class="w-12 h-12 rounded-full"
     />
     <div
       class="image relative"
@@ -30,6 +30,7 @@
         props.data.type === ETypeUserChat.other &&
           listData[props.index - 1]?.type === ETypeUserChat.other &&
           'ml-10',
+        props.data.images.length === 1 && '!max-w-[50%]',
       ]"
     >
       <div
@@ -37,14 +38,14 @@
           props.data.images.length === 1 &&
           props.data.typeMessage !== ETypeMessage.emoji
         "
-        class="absolute w-10 h-10 top-1/2 -translate-y-1/2 -left-14"
+        class="absolute w-10 h-10 top-1/2 -translate-y-1/2"
         style="
           background-image: url('/zalo/share1.png');
           background-repeat: no-repeat;
           background-size: contain;
         "
         :class="[
-          props.data.type === ETypeUserChat.other ? '-right-11' : '-left-11',
+          props.data.type === ETypeUserChat.other ? '-right-14' : '-left-14',
         ]"
       ></div>
 
@@ -53,14 +54,14 @@
           props.data.images.length > 1 &&
           props.data.typeMessage !== ETypeMessage.emoji
         "
-        class="absolute w-10 h-20 top-1/2 -translate-y-1/2 -left-14"
+        class="absolute w-10 h-20 top-1/2 -translate-y-1/2"
         style="
           background-image: url('/zalo/jt2.png');
           background-repeat: no-repeat;
           background-size: contain;
         "
         :class="[
-          props.data.type === ETypeUserChat.other ? '-right-11' : '-left-11',
+          props.data.type === ETypeUserChat.other ? '-right-14' : '-left-14',
         ]"
       ></div>
 

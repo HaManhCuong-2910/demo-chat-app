@@ -4,10 +4,10 @@
       props.data.type !== listData[props.index - 1]?.type
         ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
           ? 'mt-7 '
-          : 'mt-3'
+          : 'mt-2'
         : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
         ? 'mt-7 '
-        : 'mt-3',
+        : 'mt-2',
       props.data.type === ETypeUserChat.other &&
       (listData[props.index - 1]?.type !== ETypeUserChat.other ||
         (listData[props.index - 1]?.type === ETypeUserChat.other &&
@@ -27,7 +27,7 @@
       "
       :src="dataPerson.other.avatar"
       alt="ava"
-      class="w-10 h-10 rounded-full mr-2"
+      class="w-12 h-12 rounded-full mr-2"
     />
     <div class="max-w-full">
       <div

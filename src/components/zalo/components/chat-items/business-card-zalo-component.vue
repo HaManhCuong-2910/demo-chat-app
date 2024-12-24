@@ -13,11 +13,26 @@
         ? 'flex items-start'
         : '',
       'relative',
-      props.data.type,
-      props.data.type === ETypeUserChat.other ? 'ml-12' : '',
     ]"
   >
-    <div>
+    <img
+      v-if="
+        props.data.type === ETypeUserChat.other &&
+        listData[props.index - 1]?.type !== ETypeUserChat.other
+      "
+      :src="dataPerson.other.avatar"
+      alt="ava"
+      class="w-12 h-12 rounded-full mr-2"
+    />
+    <div
+      :class="[
+        props.data.type,
+        props.data.type === ETypeUserChat.other &&
+        listData[props.index - 1]?.type === ETypeUserChat.other
+          ? 'ml-12'
+          : '',
+      ]"
+    >
       <div class="bg-danhthiep">
         <div class="p-2 flex items-center space-x-2">
           <label :for="`file-${props.index}`">
@@ -40,7 +55,7 @@
           <p class="text-lg text-white" contenteditable="true">dsada</p>
         </div>
       </div>
-      <div class="bg-white grid grid-cols-2 rounded-b-[8px]">
+      <div class="bg-white grid grid-cols-2 rounded-b-[8px] w-full">
         <div class="text-center py-[10px] border-r border-r-gray-200">
           <p
             contenteditable="true"
@@ -72,6 +87,7 @@ import {
 } from "../../models/chat.model";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
+import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 
 const props = defineProps({
   data: {
@@ -86,6 +102,7 @@ const props = defineProps({
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
 const { textSize } = storeToRefs(configZaloChatStore);
+const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 const avatar = ref("");
 
 const preview = (file: File) => {

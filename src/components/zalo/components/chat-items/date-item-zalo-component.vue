@@ -1,7 +1,7 @@
 <template>
   <div
-    class="mt-7 w-fit mx-auto px-2 py-[6px] rounded-2xl text-white bg-[#b6babf]"
-    :style="`font-size: ${textSize - 3}px`"
+    class="mt-7 w-fit mx-auto px-[10px] py-[7px] rounded-2xl text-white bg-[#b6babf]"
+    :style="`font-size: ${textSize - 4}px`"
     contenteditable="true"
   >
     13:54 Hôm nay
