@@ -41,30 +41,30 @@
               'text-[#F93F4C]',
           ]"
           contenteditable="true"
-          :style="`font-size: ${textSize - 3}px`"
+          :style="`font-size: ${textSize - 6}px`"
         >
           {{ dataIcons[props.data.typeMessage].content }}
         </p>
-        <div class="flex space-x-2 mt-2 items-center">
+        <div class="flex space-x-3 mt-2 items-center">
           <img
             :src="dataIcons[props.data.typeMessage].img"
             alt="image"
-            class="w-4 object-contain"
+            class="w-5 object-contain"
           />
           <p
             class="text-[#7c798a] -mt-[2px]"
             contenteditable="true"
-            :style="`font-size: ${textSize - 4}px`"
+            :style="`font-size: ${textSize - 7}px`"
           >
             {{ dataIcons[props.data.typeMessage].description }}
           </p>
         </div>
       </div>
-      <div class="p-[10px] text-center">
+      <div class="p-[8px] text-center">
         <p
           class="text-[#4397fd] font-medium"
           contenteditable="true"
-          :style="`font-size: ${textSize - 2}px`"
+          :style="`font-size: ${textSize - 7}px`"
         >
           GỌI LẠI
         </p>
@@ -142,14 +142,14 @@ const dataIcons = ref<
 
 <style scoped lang="scss">
 .user {
-  width: 43%;
+  width: 45%;
 
   border: 1px solid #bccdd6;
   @apply rounded-xl bg-[#d6effc] ml-auto;
 }
 
 .other {
-  width: 43%;
+  width: 45%;
 
   border: 1px solid #bccdd6;
   @apply rounded-xl bg-white;

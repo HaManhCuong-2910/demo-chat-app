@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 pb-4">
+  <div class="px-4 pr-[18px] pb-4">
     <div v-for="(item, index) in dataShow">
       <el-tooltip
         v-if="mode === EModeAction.edit"
