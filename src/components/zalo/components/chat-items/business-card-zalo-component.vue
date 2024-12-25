@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="bg-white grid grid-cols-2 rounded-b-[8px] w-full">
-        <div class="text-center py-[10px] border-r border-r-gray-200">
+        <div class="text-center py-[10px] border-r-custom">
           <p
             contenteditable="true"
             class="text-black font-medium"
@@ -138,5 +138,21 @@ const preview = (file: File) => {
 
 .other {
   @apply max-w-[342px];
+}
+
+.border-r-custom {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 1px;
+    height: 50%;
+    @apply bg-gray-300;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
 }
 </style>

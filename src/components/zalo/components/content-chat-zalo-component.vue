@@ -2,17 +2,17 @@
   <div>
     <div
       id="chat-area"
-      :style="`width: 613px; background-image: url(${backgroundScreen});`"
+      :style="`width: 591px; background-image: url(${backgroundScreen});`"
     >
-      <div class="header relative">
+      <div class="header relative" style="height: 126px">
         <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
         <status-bar-chat-zalo-component />
         <name-header-chat-zalo-component />
       </div>
       <div
         class="content-area overflow-y-hidden"
-        :style="`height: ${fixHeight ? `${ratioH * (797 + 92)}px` : '100%'}; ${
-          !fixHeight ? `min-height: ${ratioH * (797 + 92)}px;` : ''
+        :style="`height: ${fixHeight ? `1037px` : '100%'}; ${
+          !fixHeight ? `min-height: 1037px;` : ''
         }`"
       >
         <div
@@ -23,7 +23,7 @@
           <list-chat-zalo-component />
         </div>
       </div>
-      <div class="footer relative">
+      <div class="footer relative" style="height: 117px">
         <img src="/zalo/ico4.png" alt="zalo footer" />
 
         <img

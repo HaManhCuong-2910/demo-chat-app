@@ -38,7 +38,7 @@
           class="font-medium"
           :class="[
             props.data.typeMessage === ETypeMessage.missVideo &&
-              'text-[#f0616b]',
+              'text-[#F93F4C]',
           ]"
           contenteditable="true"
           :style="`font-size: ${textSize - 3}px`"
