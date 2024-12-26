@@ -33,7 +33,10 @@
           : '',
       ]"
     >
-      <div class="p-4 border-b border-gray-300">
+      <div
+        class="p-4"
+        style="border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)"
+      >
         <p
           class="font-medium"
           :class="[
@@ -144,14 +147,14 @@ const dataIcons = ref<
 .user {
   width: 45%;
 
-  border: 1px solid #bccdd6;
+  border: 1.5px solid hsla(197, 8%, 65%, 0.631);
   @apply rounded-xl bg-[#d6effc] ml-auto;
 }
 
 .other {
   width: 45%;
 
-  border: 1px solid #bccdd6;
+  border: 1.5px solid hsla(197, 8%, 65%, 0.631);
   @apply rounded-xl bg-white;
 }
 </style>

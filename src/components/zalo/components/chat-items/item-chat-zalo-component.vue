@@ -188,7 +188,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
   @apply ml-auto;
 
   .item-container {
-    border: 2px solid #a0aaaea1;
+    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
     @apply bg-[#d6effc] rounded-xl;
   }
 }
@@ -198,7 +198,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
   width: fit-content;
 
   .item-container {
-    border: 2px solid #a0aaaea1;
+    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
     @apply bg-white rounded-xl;
   }
 }
