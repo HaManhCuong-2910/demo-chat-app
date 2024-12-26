@@ -33,7 +33,7 @@
           : '',
       ]"
     >
-      <div class="bg-danhthiep">
+      <div class="bg-danhthiep" :class="modeChat">
         <div class="p-2 flex items-center space-x-2">
           <label :for="`file-${props.index}`">
             <img
@@ -103,7 +103,7 @@ const props = defineProps({
 });
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
-const { textSize } = storeToRefs(configZaloChatStore);
+const { textSize, modeChat } = storeToRefs(configZaloChatStore);
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 const avatar = ref("");
 
@@ -123,7 +123,6 @@ const preview = (file: File) => {
 
 <style scoped lang="scss">
 .bg-danhthiep {
-  background-image: url("/zalo/bg-business-card.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -132,6 +131,13 @@ const preview = (file: File) => {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   @apply w-[342px];
+
+  &.dark {
+    background-image: url("/zalo/bg-business-card-dark.jpg");
+  }
+  &.light {
+    background-image: url("/zalo/bg-business-card.jpg");
+  }
 }
 
 .user {

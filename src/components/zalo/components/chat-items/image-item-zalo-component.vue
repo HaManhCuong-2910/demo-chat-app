@@ -39,11 +39,12 @@
           props.data.typeMessage !== ETypeMessage.emoji
         "
         class="absolute w-10 h-10 top-1/2 -translate-y-1/2"
-        style="
-          background-image: url('/zalo/share1.png');
-          background-repeat: no-repeat;
-          background-size: contain;
-        "
+        style="background-repeat: no-repeat; background-size: contain"
+        :style="`background-image: url(${
+          modeChat === EModeChat.dark
+            ? '/zalo/share1-dark.jpg'
+            : '/zalo/share1.png'
+        });`"
         :class="[
           props.data.type === ETypeUserChat.other ? '-right-14' : '-left-14',
         ]"
@@ -55,112 +56,127 @@
           props.data.typeMessage !== ETypeMessage.emoji
         "
         class="absolute w-10 h-20 top-1/2 -translate-y-1/2"
-        style="
-          background-image: url('/zalo/jt2.png');
-          background-repeat: no-repeat;
-          background-size: contain;
-        "
+        :style="`background-image: url(${
+          modeChat === EModeChat.dark ? '/zalo/jt2.jpg' : '/zalo/jt2.png'
+        });`"
+        style="background-repeat: no-repeat; background-size: contain"
         :class="[
           props.data.type === ETypeUserChat.other ? '-right-14' : '-left-14',
         ]"
       ></div>
 
-      <div class="flex flex-wrap gap-[2px]">
-        <div
-          class="w-full image-container"
-          :class="[
-            isHD ? 'is-hd' : '',
-            props.data.images.length > 1
-              ? index === 0
-                ? 'rounded-l-xl'
-                : index === props.data.images.length - 1
-                ? 'rounded-r-xl'
-                : ''
-              : 'rounded-xl',
-          ]"
-          v-for="(item, index) in props.data.images"
-          :key="item"
-        >
-          <img
-            :src="item"
-            alt="image"
-            class="w-full h-full"
-            :class="
+      <div class="relative">
+        <div class="flex flex-wrap gap-[2px]">
+          <div
+            class="w-full image-container"
+            :class="[
+              isHD ? 'is-hd' : '',
               props.data.images.length > 1
                 ? index === 0
                   ? 'rounded-l-xl'
                   : index === props.data.images.length - 1
                   ? 'rounded-r-xl'
                   : ''
-                : 'rounded-xl'
-            "
-          />
+                : 'rounded-xl',
+              props.data.images.length === 1 &&
+              modeChat === EModeChat.dark &&
+              props.data.type === ETypeUserChat.user
+                ? 'border-[1.5px] border-[#465c74]'
+                : '',
+            ]"
+            v-for="(item, index) in props.data.images"
+            :key="item"
+          >
+            <img
+              :src="item"
+              alt="image"
+              class="w-full h-full"
+              :class="[
+                props.data.images.length > 1
+                  ? index === 0
+                    ? 'rounded-l-xl'
+                    : index === props.data.images.length - 1
+                    ? 'rounded-r-xl'
+                    : ''
+                  : 'rounded-xl',
+              ]"
+            />
+          </div>
+        </div>
+        <div
+          v-if="props.data.typeHeart === ETypeHeart.inactive"
+          class="w-9 h-9 absolute right-0 -bottom-4 rounded-full"
+          :style="`background-image: url(${
+            modeChat === EModeChat.dark
+              ? '/zalo/heart-empty-dark.jpg'
+              : '/zalo/heart-empty.png'
+          });`"
+          style="background-repeat: no-repeat; background-size: contain"
+        ></div>
+
+        <div
+          v-if="
+            props.data.typeHeart === ETypeHeart.active ||
+            props.data.typeHeart === ETypeHeart.number
+          "
+          class="heart-number absolute right-4 -bottom-4 flex items-center"
+        >
+          <div
+            v-if="props.data.typeHeart === ETypeHeart.number"
+            class="rounded-3xl overflow-hidden h-7 flex items-center min-w-[50px] mr-2 relative"
+            :class="modeChat === EModeChat.dark ? 'bg-[#292929]' : 'bg-gray-50'"
+          >
+            <div
+              class="w-[100px] h-full absolute left-[0px]"
+              :style="`background-image: url(${
+                modeChat === EModeChat.dark
+                  ? '/zalo/heart-number-dark.png'
+                  : '/zalo/heart-number.png'
+              });`"
+              style="background-repeat: no-repeat; background-size: contain"
+            ></div>
+            <p
+              class="font-medium relative z-10 ml-[32px] mr-[6px]"
+              contenteditable="true"
+              :style="`font-size: ${textSize - 4}px`"
+              :class="modeChat === EModeChat.dark && 'text-white'"
+            >
+              1
+            </p>
+          </div>
+
+          <div
+            class="w-9 h-9 rounded-full"
+            :style="`background-image: url(${
+              modeChat === EModeChat.dark
+                ? '/zalo/heart-active-dark.png'
+                : '/zalo/heart-active.png'
+            });`"
+            style="background-repeat: no-repeat; background-size: contain"
+          ></div>
         </div>
       </div>
 
       <p
         v-if="props.data.isDate"
         contenteditable="true"
-        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        :class="modeChat === EModeChat.light && 'bg-[#b6babf]'"
         :style="`font-size: ${textSize - 6}px`"
       >
         {{ moment(props.data.time).format("HH:mm") }}
       </p>
-
-      <div
-        v-if="props.data.typeHeart === ETypeHeart.inactive"
-        class="w-7 h-7 absolute right-0 -bottom-4"
-        style="
-          background-image: url('/zalo/heart-empty.png');
-          background-repeat: no-repeat;
-          background-size: contain;
-        "
-      ></div>
-
-      <div
-        v-if="
-          props.data.typeHeart === ETypeHeart.active ||
-          props.data.typeHeart === ETypeHeart.number
-        "
-        class="heart-number absolute right-4 -bottom-4 flex items-center"
-      >
-        <div
-          v-if="props.data.typeHeart === ETypeHeart.number"
-          class="bg-gray-50 rounded-3xl h-5 flex items-center min-w-10 mr-2 relative"
-        >
-          <div
-            class="w-10 h-full absolute"
-            style="
-              background-image: url('/zalo/heart-number.png');
-              background-repeat: no-repeat;
-              background-size: contain;
-            "
-          ></div>
-          <p
-            class="font-medium relative z-10 ml-[26px] mr-[6px]"
-            contenteditable="true"
-            :style="`font-size: ${textSize - 4}px`"
-          >
-            1
-          </p>
-        </div>
-
-        <div
-          class="w-7 h-7"
-          style="
-            background-image: url('/zalo/heart-active.png');
-            background-repeat: no-repeat;
-            background-size: contain;
-          "
-        ></div>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import moment from "moment";
-import { ETypeMessage, type IDataZaloChat } from "../../models/chat.model";
+import {
+  EModeChat,
+  ETypeMessage,
+  type IDataZaloChat,
+} from "../../models/chat.model";
 import { ETypeUserChat } from "../../models/chat.model";
 import { ETypeHeart } from "../../models/chat.model";
 import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
@@ -168,7 +184,7 @@ import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 
 const configZaloChatStore = useConfigZaloChatStore();
-const { textSize, isHD } = storeToRefs(configZaloChatStore);
+const { textSize, isHD, modeChat } = storeToRefs(configZaloChatStore);
 
 const props = defineProps({
   data: {

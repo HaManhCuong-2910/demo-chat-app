@@ -3,12 +3,26 @@
     <h3 contenteditable="true" class="text-[28px] font-medium text-white mb-1">
       Tên demo
     </h3>
-    <p contenteditable="true" class="text-xl text-[#c6e1fb]">
+    <p
+      contenteditable="true"
+      class="text-xl"
+      :class="
+        isTransparentHeader || modeChat === EModeChat.dark
+          ? 'text-gray-200'
+          : 'text-[#c6e1fb]'
+      "
+    >
       Thời gian online
     </p>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { EModeChat } from "../../models/chat.model";
+import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
+
+const configZaloChatStore = useConfigZaloChatStore();
+const { isTransparentHeader, modeChat } = storeToRefs(configZaloChatStore);
+</script>
 
 <style scoped lang="scss"></style>

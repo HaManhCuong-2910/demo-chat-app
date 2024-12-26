@@ -23,6 +23,28 @@
         class="bg-white"
         border
       />
+      <el-checkbox
+        v-model="isTransparentHeader"
+        label="Background tràn viền"
+        size="large"
+        class="bg-white"
+        border
+      />
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5">Chế độ</p>
+
+      <div class="flex col-span-7">
+        <el-radio-group v-model="modeChat">
+          <el-radio :value="EModeChat.dark" class="bg-white" border
+            >Tối</el-radio
+          >
+          <el-radio :value="EModeChat.light" class="bg-white" border
+            >Sáng</el-radio
+          >
+        </el-radio-group>
+      </div>
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
@@ -30,6 +52,14 @@
 
       <div class="flex col-span-7">
         <el-slider v-model="battery" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5">Độ dày chữ</p>
+
+      <div class="flex col-span-7">
+        <el-slider v-model="fontWeight" :max="1000" />
       </div>
     </div>
 
@@ -105,6 +135,8 @@
 </template>
 
 <script setup lang="ts">
+import { pathDarkZalo, pathLightZalo } from "../../data/zalo.source";
+import { EModeChat } from "../../models/chat.model";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
 
@@ -122,12 +154,28 @@ const {
   isHD,
   isShowArrow,
   backgroundScreen,
+  isTransparentHeader,
+  fontWeight,
+  modeChat,
 } = storeToRefs(configZaloChatStore);
 const { data } = storeToRefs(listZaloChatStore);
 
 const maxShowList = computed(() => {
   return data.value.length;
 });
+
+watch(
+  () => modeChat.value,
+  () => {
+    if ([pathDarkZalo, pathLightZalo].includes(backgroundScreen.value)) {
+      if (modeChat.value === EModeChat.dark) {
+        backgroundScreen.value = pathDarkZalo;
+      } else {
+        backgroundScreen.value = pathLightZalo;
+      }
+    }
+  }
+);
 
 const onExport = () => {
   const content = JSON.stringify(data.value);

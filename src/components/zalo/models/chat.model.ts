@@ -34,3 +34,8 @@ export interface IDataZaloChat {
   images: string[];
   isBlueText: boolean;
 }
+
+export enum EModeChat {
+  dark = "dark",
+  light = "light",
+}

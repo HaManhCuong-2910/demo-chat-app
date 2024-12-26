@@ -26,6 +26,7 @@
     />
     <div
       :class="[
+        modeChat,
         props.data.type,
         props.data.type === ETypeUserChat.other &&
         listData[props.index - 1]?.type === ETypeUserChat.other
@@ -35,13 +36,20 @@
     >
       <div
         class="p-4"
-        style="border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)"
+        :style="`${
+          isDark
+            ? props.data.type === ETypeUserChat.other
+              ? 'border-bottom: 1.5px solid #292929'
+              : 'border-bottom: 1.5px solid #37434f'
+            : 'border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)'
+        }`"
       >
         <p
           class="font-medium"
           :class="[
             props.data.typeMessage === ETypeMessage.missVideo &&
               'text-[#F93F4C]',
+            modeChat === EModeChat.dark && 'text-white',
           ]"
           contenteditable="true"
           :style="`font-size: ${textSize - 4}px`"
@@ -78,6 +86,7 @@
 
 <script setup lang="ts">
 import {
+  EModeChat,
   ETypeHeart,
   ETypeMessage,
   ETypeUserChat,
@@ -90,7 +99,7 @@ import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
-const { textSize } = storeToRefs(configZaloChatStore);
+const { textSize, modeChat } = storeToRefs(configZaloChatStore);
 
 const props = defineProps({
   data: {
@@ -103,12 +112,22 @@ const props = defineProps({
   },
 });
 
+const isDark = computed(() => {
+  return modeChat.value === EModeChat.dark;
+});
+
 const dataIcons = ref<
   Record<any, { img: string; content: string; description: string }>
 >({
   [ETypeMessage.call]: {
     img:
-      props.data.type === ETypeUserChat.user ? "/zalo/h4.png" : "/zalo/h3.png",
+      props.data.type === ETypeUserChat.user
+        ? isDark.value
+          ? "/zalo/h4_dark.jpg"
+          : "/zalo/h4.png"
+        : isDark.value
+        ? "/zalo/h3_dark.jpg"
+        : "/zalo/h3.png",
     content:
       props.data.type === ETypeUserChat.user
         ? "Cuộc gọi thoại đi"
@@ -117,7 +136,13 @@ const dataIcons = ref<
   },
   [ETypeMessage.comeVideo]: {
     img:
-      props.data.type === ETypeUserChat.user ? "/zalo/h6.png" : "/zalo/h7.png",
+      props.data.type === ETypeUserChat.user
+        ? isDark.value
+          ? "/zalo/h6_dark.jpg"
+          : "/zalo/h6.png"
+        : isDark.value
+        ? "/zalo/h7_dark.jpg"
+        : "/zalo/h7.png",
     content:
       props.data.type === ETypeUserChat.user
         ? "Cuộc gọi video đi"
@@ -127,7 +152,11 @@ const dataIcons = ref<
   [ETypeMessage.missVideo]: {
     img:
       props.data.type === ETypeUserChat.user
-        ? "/zalo/bi_nho_den.jpg"
+        ? isDark.value
+          ? "/zalo/h8_dark.jpg"
+          : "/zalo/bi_nho_den.jpg"
+        : isDark.value
+        ? "/zalo/h5_dark.jpg"
         : "/zalo/h5.png",
     content: "Bạn bị nhỡ",
     description: "Cuộc gọi video",
@@ -135,7 +164,11 @@ const dataIcons = ref<
   [ETypeMessage.refuseVideo]: {
     img:
       props.data.type === ETypeUserChat.user
-        ? "/zalo/h2.png"
+        ? isDark.value
+          ? "/zalo/h2_dark.jpg"
+          : "/zalo/h2.png"
+        : isDark.value
+        ? "/zalo/h5_dark.jpg"
         : "/zalo/tu_choi_di.jpg",
     content: "Người nhận từ chối",
     description: "Cuộc gọi thoại",
@@ -146,15 +179,29 @@ const dataIcons = ref<
 <style scoped lang="scss">
 .user {
   width: 45%;
+  @apply rounded-xl ml-auto;
 
-  border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-  @apply rounded-xl bg-[#d6effc] ml-auto;
+  &.dark {
+    @apply bg-[#313d49];
+  }
+
+  &.light {
+    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+    @apply bg-[#d6effc];
+  }
 }
 
 .other {
   width: 45%;
+  @apply rounded-xl;
 
-  border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-  @apply rounded-xl bg-white;
+  &.dark {
+    @apply bg-[#292929];
+  }
+
+  &.light {
+    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+    @apply bg-white;
+  }
 }
 </style>

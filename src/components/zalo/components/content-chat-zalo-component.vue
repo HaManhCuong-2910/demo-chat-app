@@ -4,15 +4,29 @@
       id="chat-area"
       :style="`width: 591px; background-image: url(${backgroundScreen});`"
     >
-      <div class="header relative" style="height: 134px">
-        <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
+      <div
+        class="header relative"
+        :class="[
+          !isTransparentHeader && 'bg-header',
+          modeChat === EModeChat.dark ? 'dark' : 'light',
+        ]"
+        style="height: 143px"
+      >
+        <div class="absolute bottom-[20%] left-6">
+          <img src="/zalo/arrow-left.svg" alt="arrow-left" class="h-7" />
+        </div>
         <status-bar-chat-zalo-component />
         <name-header-chat-zalo-component />
+        <div class="absolute flex space-x-8 bottom-[14%] right-5">
+          <img src="/zalo/call.svg" alt="call" class="h-8" />
+          <img src="/zalo/video.svg" alt="video" class="h-8" />
+          <img src="/zalo/menu.svg" alt="menu" class="h-8" />
+        </div>
       </div>
       <div
         class="content-area overflow-y-hidden"
-        :style="`height: ${fixHeight ? `1029px` : '100%'}; ${
-          !fixHeight ? `min-height: 1029px;` : ''
+        :style="`height: ${fixHeight ? `1020px` : '100%'}; ${
+          !fixHeight ? `min-height: 1020px;` : ''
         }`"
       >
         <div
@@ -24,7 +38,14 @@
         </div>
       </div>
       <div class="footer relative" style="height: 117px">
-        <img src="/zalo/ico4.png" alt="zalo footer" />
+        <img
+          :src="
+            modeChat === EModeChat.dark
+              ? '/zalo/footer-dark.jpg'
+              : '/zalo/ico4.png'
+          "
+          alt="zalo footer"
+        />
 
         <img
           v-if="isShowArrow"
@@ -46,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import { EModeChat } from "../models/chat.model";
 import { useConfigZaloChatStore } from "../stores/config-zalo-chat.store";
 import { useListZaloChatStore } from "../stores/list-zalo-chat.store";
 import { useZaloChatAreaStore } from "../stores/zalo-chat-area.store";
@@ -60,6 +82,8 @@ const {
   widthPercent,
   isShowArrow,
   backgroundScreen,
+  isTransparentHeader,
+  modeChat,
 } = storeToRefs(configZaloChatStore);
 
 const contentRef = ref<HTMLElement>();
@@ -71,9 +95,18 @@ const heightContent = computed(() => {
 
 <style scoped lang="scss">
 #chat-area {
-  background-image: url("/zalo/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.bg-header {
+  &.dark {
+    background-color: #22262b;
+  }
+
+  &.light {
+    background-image: linear-gradient(45deg, #0486fe, #00aaf5);
+  }
 }
 </style>
