@@ -44,7 +44,7 @@
               'text-[#F93F4C]',
           ]"
           contenteditable="true"
-          :style="`font-size: ${textSize - 6}px`"
+          :style="`font-size: ${textSize - 4}px`"
         >
           {{ dataIcons[props.data.typeMessage].content }}
         </p>
@@ -55,9 +55,9 @@
             class="w-5 object-contain"
           />
           <p
-            class="text-[#7c798a] -mt-[2px]"
+            class="text-[#7c798a] -mt-[2px] font-[500]"
             contenteditable="true"
-            :style="`font-size: ${textSize - 7}px`"
+            :style="`font-size: ${textSize - 6}px`"
           >
             {{ dataIcons[props.data.typeMessage].description }}
           </p>

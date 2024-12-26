@@ -52,7 +52,9 @@
         [...event.target.files].forEach(preview);
       }"
           />
-          <p class="text-lg text-white" contenteditable="true">dsada</p>
+          <p class="text-lg text-white font-[480]" contenteditable="true">
+            dsada
+          </p>
         </div>
       </div>
       <div class="bg-white grid grid-cols-2 rounded-b-[8px] w-full">

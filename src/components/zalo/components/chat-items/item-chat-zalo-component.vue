@@ -56,13 +56,13 @@
             <p
               class="!leading-3 font-medium"
               contenteditable="true"
-              :style="`font-size: ${textSize - 2}px`"
+              :style="`font-size: ${textSize - 4}px`"
             >
               {{ dataPerson[listData[props.data.replicaIndex].type].name }}
             </p>
             <span
               class="text-[#9b9b9b] block mt-3"
-              :style="`font-size: ${textSize - 2}px`"
+              :style="`font-size: ${textSize - 4}px`"
               contenteditable="true"
               >{{
                 props.data.replicaIndex !== null &&
@@ -75,7 +75,10 @@
           </div>
         </div>
         <p
-          :class="[props.data.isBlueText && 'text-[#4391f6]', 'break-words']"
+          :class="[
+            props.data.isBlueText && 'text-[#4391f6]',
+            'break-words font-medium !leading-8',
+          ]"
           :style="`font-size: ${textSize}px;`"
           contenteditable="true"
         >
@@ -83,7 +86,7 @@
         </p>
         <span
           v-if="props.data.isDate && props.data.dateInside"
-          class="text-[#9b9b9bce] mt-2 block"
+          class="text-[#9b9b9bce] mt-2 block font-medium"
           :style="`font-size: ${textSize - 5}px`"
           contenteditable="true"
           >{{ moment(props.data.time).format("HH:mm") }}</span
@@ -93,7 +96,7 @@
       <p
         v-if="props.data.isDate && !props.data.dateInside"
         contenteditable="true"
-        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        class="mt-1 bg-[#b6babf] w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl font-medium"
         :class="[
           props.data.type === ETypeUserChat.other &&
             listData[props.index - 1]?.type === ETypeUserChat.other &&
@@ -183,7 +186,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
 <style scoped lang="scss">
 .user {
-  max-width: 80%;
+  max-width: 81%;
   width: fit-content;
   @apply ml-auto;
 
@@ -194,7 +197,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 }
 
 .other {
-  max-width: 80%;
+  max-width: 89%;
   width: fit-content;
 
   .item-container {

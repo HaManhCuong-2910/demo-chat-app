@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-[5%] left-[60px]">
+  <div class="absolute bottom-[10%] left-[60px]">
     <h3 contenteditable="true" class="text-[28px] font-medium text-white mb-1">
       Tên demo
     </h3>

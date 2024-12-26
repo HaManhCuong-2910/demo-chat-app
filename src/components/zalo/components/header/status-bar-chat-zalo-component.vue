@@ -1,6 +1,6 @@
 <template>
   <div
-    class="status-bar absolute top-0 left-0 w-full pl-10 pr-[15px] pt-4 flex justify-between"
+    class="status-bar absolute top-0 left-0 w-full pl-10 pr-[15px] pt-[14px] flex justify-between"
   >
     <p contenteditable="true" class="text-2xl font-medium text-white">16:23</p>
     <div class="flex space-x-2 items-center">

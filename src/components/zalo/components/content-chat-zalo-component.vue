@@ -4,15 +4,15 @@
       id="chat-area"
       :style="`width: 591px; background-image: url(${backgroundScreen});`"
     >
-      <div class="header relative" style="height: 126px">
+      <div class="header relative" style="height: 134px">
         <img src="/zalo/ico7.png" alt="zalo header" class="w-full" />
         <status-bar-chat-zalo-component />
         <name-header-chat-zalo-component />
       </div>
       <div
         class="content-area overflow-y-hidden"
-        :style="`height: ${fixHeight ? `1037px` : '100%'}; ${
-          !fixHeight ? `min-height: 1037px;` : ''
+        :style="`height: ${fixHeight ? `1029px` : '100%'}; ${
+          !fixHeight ? `min-height: 1029px;` : ''
         }`"
       >
         <div
