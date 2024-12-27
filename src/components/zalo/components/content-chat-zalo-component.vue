@@ -25,7 +25,7 @@
         </div>
       </div>
       <div
-        class="content-area"
+        class="content-area overflow-y-hidden"
         :style="`height: ${fixHeight ? `1020px` : '100%'}; ${
           !fixHeight ? `min-height: 1020px;` : ''
         }`"

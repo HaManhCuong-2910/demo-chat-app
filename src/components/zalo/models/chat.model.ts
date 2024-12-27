@@ -1,6 +1,7 @@
 export enum ETypeUserChat {
   user = "user",
   other = "other",
+  none = "none",
 }
 
 export enum ETypeMessage {

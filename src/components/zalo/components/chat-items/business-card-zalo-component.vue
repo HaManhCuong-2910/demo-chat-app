@@ -77,15 +77,33 @@
           </p>
         </div>
       </div>
+      <p
+        v-if="props.data.isDate && !props.data.dateInside"
+        contenteditable="true"
+        class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        :class="[
+          modeChat === EModeChat.light && 'bg-[#b6babf]',
+          props.data.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.type === ETypeUserChat.other &&
+            listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
+            'ml-12',
+        ]"
+        :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
+      >
+        {{ moment(props.data.time).format("HH:mm") }}
+      </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import moment from "moment";
 import {
   ETypeHeart,
   ETypeUserChat,
   type IDataZaloChat,
+  EModeChat,
+  ETypeMessage,
 } from "../../models/chat.model";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
 import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
@@ -103,7 +121,7 @@ const props = defineProps({
 });
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
-const { textSize, modeChat } = storeToRefs(configZaloChatStore);
+const { textSize, modeChat, fontWeight } = storeToRefs(configZaloChatStore);
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 const avatar = ref("");
 

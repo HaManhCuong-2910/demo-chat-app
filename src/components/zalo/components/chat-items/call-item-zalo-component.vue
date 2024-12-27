@@ -26,7 +26,6 @@
     />
     <div
       :class="[
-        modeChat,
         props.data.type,
         props.data.type === ETypeUserChat.other &&
         listData[props.index - 1]?.type === ETypeUserChat.other
@@ -34,50 +33,62 @@
           : '',
       ]"
     >
-      <div
-        class="p-4"
-        :style="`${
-          isDark
-            ? props.data.type === ETypeUserChat.other
-              ? 'border-bottom: 1.5px solid #292929'
-              : 'border-bottom: 1.5px solid #37434f'
-            : 'border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)'
-        }`"
-      >
-        <p
-          class="font-medium"
-          :class="[
-            props.data.typeMessage === ETypeMessage.missVideo &&
-              'text-[#F93F4C]',
-            modeChat === EModeChat.dark && 'text-white',
-          ]"
-          contenteditable="true"
-          :style="`font-size: ${textSize - 4}px`"
+      <div :class="['item-container', modeChat]">
+        <div
+          class="p-4"
+          :style="`${
+            isDark
+              ? props.data.type === ETypeUserChat.other
+                ? 'border-bottom: 1.5px solid #292929'
+                : 'border-bottom: 1.5px solid #37434f'
+              : 'border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)'
+          }`"
         >
-          {{ dataIcons[props.data.typeMessage].content }}
-        </p>
-        <div class="flex space-x-3 mt-2 items-center">
-          <img
-            :src="dataIcons[props.data.typeMessage].img"
-            alt="image"
-            class="w-5 object-contain"
-          />
           <p
-            class="text-[#7c798a] -mt-[2px] font-[500]"
+            class="font-medium"
+            :class="[
+              props.data.typeMessage === ETypeMessage.missVideo &&
+                'text-[#F93F4C]',
+              modeChat === EModeChat.dark && 'text-white',
+            ]"
             contenteditable="true"
-            :style="`font-size: ${textSize - 6}px`"
+            :style="`font-size: ${textSize - 4}px`"
           >
-            {{ dataIcons[props.data.typeMessage].description }}
+            {{ dataIcons[props.data.typeMessage].content }}
+          </p>
+          <div class="flex space-x-3 mt-2 items-center">
+            <img
+              :src="dataIcons[props.data.typeMessage].img"
+              alt="image"
+              class="w-5 object-contain"
+            />
+            <p
+              class="text-[#7c798a] -mt-[2px] font-[500]"
+              contenteditable="true"
+              :style="`font-size: ${textSize - 6}px`"
+            >
+              {{ dataIcons[props.data.typeMessage].description }}
+            </p>
+          </div>
+        </div>
+        <div class="p-[8px] text-center">
+          <p
+            class="text-[#4397fd] font-medium"
+            contenteditable="true"
+            :style="`font-size: ${textSize - 7}px`"
+          >
+            GỌI LẠI
           </p>
         </div>
       </div>
-      <div class="p-[8px] text-center">
+      <div v-if="props.data.isDate && !props.data.dateInside">
         <p
-          class="text-[#4397fd] font-medium"
           contenteditable="true"
-          :style="`font-size: ${textSize - 7}px`"
+          class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+          :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
+          :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
         >
-          GỌI LẠI
+          {{ moment(props.data.time).format("HH:mm") }}
         </p>
       </div>
     </div>
@@ -85,6 +96,7 @@
 </template>
 
 <script setup lang="ts">
+import moment from "moment";
 import {
   EModeChat,
   ETypeHeart,
@@ -99,7 +111,7 @@ import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
-const { textSize, modeChat } = storeToRefs(configZaloChatStore);
+const { textSize, modeChat, fontWeight } = storeToRefs(configZaloChatStore);
 
 const props = defineProps({
   data: {
@@ -179,29 +191,34 @@ const dataIcons = ref<
 <style scoped lang="scss">
 .user {
   width: 45%;
-  @apply rounded-xl ml-auto;
+  @apply ml-auto;
 
-  &.dark {
-    @apply bg-[#313d49];
-  }
+  .item-container {
+    @apply rounded-xl;
+    &.dark {
+      @apply bg-[#313d49];
+    }
 
-  &.light {
-    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-    @apply bg-[#d6effc];
+    &.light {
+      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+      @apply bg-[#d6effc];
+    }
   }
 }
 
 .other {
   width: 45%;
-  @apply rounded-xl;
 
-  &.dark {
-    @apply bg-[#292929];
-  }
+  .item-container {
+    @apply rounded-xl;
+    &.dark {
+      @apply bg-[#292929];
+    }
 
-  &.light {
-    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-    @apply bg-white;
+    &.light {
+      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+      @apply bg-white;
+    }
   }
 }
 </style>

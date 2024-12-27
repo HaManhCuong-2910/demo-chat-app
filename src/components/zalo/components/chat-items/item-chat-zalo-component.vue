@@ -31,7 +31,7 @@
     />
     <div class="max-w-full">
       <div
-        class="p-4 min-w-28 item-container"
+        class="p-[14px] min-w-28 item-container"
         :class="[
           modeChat,
           props.data.type === ETypeUserChat.other &&
@@ -105,7 +105,7 @@
           props.data.type === ETypeUserChat.other &&
             listData[props.index - 1]?.type === ETypeUserChat.other &&
             listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
-            'ml-12',
+            'ml-14',
         ]"
         :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
       >
