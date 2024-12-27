@@ -2,6 +2,7 @@
   <div>
     <div
       id="chat-area"
+      class="overflow-y-hidden"
       :style="`width: 591px; background-image: url(${backgroundScreen});`"
     >
       <div
@@ -10,7 +11,7 @@
           !isTransparentHeader && 'bg-header',
           modeChat === EModeChat.dark ? 'dark' : 'light',
         ]"
-        style="height: 143px"
+        style="height: 143px; z-index: 100"
       >
         <div class="absolute bottom-[20%] left-6">
           <img src="/zalo/arrow-left.svg" alt="arrow-left" class="h-7" />
@@ -24,7 +25,7 @@
         </div>
       </div>
       <div
-        class="content-area overflow-y-hidden"
+        class="content-area"
         :style="`height: ${fixHeight ? `1020px` : '100%'}; ${
           !fixHeight ? `min-height: 1020px;` : ''
         }`"
