@@ -213,13 +213,13 @@
         @click="isEditDialog ? handleEditMessage() : handleAddMessage()"
       />
 
-      <button-common
+      <!-- <button-common
         :text="'Hủy'"
         :class="'!rounded-xl'"
         :class-text="'font-medium text-base'"
         :type="ETypeButton.secondary"
         @click="closeDialog"
-      />
+      /> -->
     </div>
   </div>
 </template>
