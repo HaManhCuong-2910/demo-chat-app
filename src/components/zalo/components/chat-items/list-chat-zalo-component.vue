@@ -5,92 +5,18 @@
         v-if="mode === EModeAction.edit"
         :placement="item.type === ETypeUserChat.user ? 'right' : 'left'"
       >
-        <business-card-zalo-component
-          v-if="item.typeMessage === ETypeMessage.danhthiep"
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-        <item-chat-zalo-component
-          v-if="item.typeMessage === ETypeMessage.message"
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <image-item-zalo-component
-          v-if="
-            item.typeMessage === ETypeMessage.image ||
-            item.typeMessage === ETypeMessage.emoji
-          "
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <call-item-zalo-component
-          v-if="
-            [
-              ETypeMessage.call,
-              ETypeMessage.comeVideo,
-              ETypeMessage.missVideo,
-              ETypeMessage.refuseVideo,
-            ].includes(item.typeMessage)
-          "
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <date-item-zalo-component
-          v-if="item.typeMessage === ETypeMessage.date"
-        />
+        <div>
+          <container-all-chat-component :index="index" :item="item" />
+        </div>
         <template #content>
           <tooltip-item-chat-zalo-component :index="index" />
         </template>
       </el-tooltip>
 
       <template v-if="mode === EModeAction.preview">
-        <business-card-zalo-component
-          v-if="item.typeMessage === ETypeMessage.danhthiep"
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-        <item-chat-zalo-component
-          v-if="item.typeMessage === ETypeMessage.message"
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <image-item-zalo-component
-          v-if="
-            item.typeMessage === ETypeMessage.image ||
-            item.typeMessage === ETypeMessage.emoji
-          "
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <call-item-zalo-component
-          v-if="
-            [
-              ETypeMessage.call,
-              ETypeMessage.comeVideo,
-              ETypeMessage.missVideo,
-              ETypeMessage.refuseVideo,
-            ].includes(item.typeMessage)
-          "
-          :key="item.value"
-          :data="item"
-          :index="index"
-        />
-
-        <date-item-zalo-component
-          v-if="item.typeMessage === ETypeMessage.date"
-        />
+        <div>
+          <container-all-chat-component :index="index" :item="item" />
+        </div>
       </template>
     </div>
   </div>

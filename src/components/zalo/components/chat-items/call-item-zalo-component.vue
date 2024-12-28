@@ -1,96 +1,62 @@
 <template>
-  <div
-    :class="[
-      props.data.type !== listData[props.index - 1]?.type
-        ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-7 '
-          : 'mt-3'
-        : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-7 '
-        : 'mt-3',
-      props.data.type === ETypeUserChat.other &&
-      listData[props.index - 1]?.type !== ETypeUserChat.other
-        ? 'flex items-start'
-        : '',
-      'relative',
-    ]"
-  >
-    <img
-      v-if="
-        props.data.type === ETypeUserChat.other &&
-        listData[props.index - 1]?.type !== ETypeUserChat.other
-      "
-      :src="dataPerson.other.avatar"
-      alt="ava"
-      class="w-12 h-12 rounded-full mr-2"
-    />
-    <div
-      :class="[
-        props.data.type,
-        props.data.type === ETypeUserChat.other &&
-        listData[props.index - 1]?.type === ETypeUserChat.other
-          ? 'ml-14'
-          : '',
-      ]"
-    >
-      <div :class="['item-container', modeChat]">
-        <div
-          class="p-4"
-          :style="`${
-            isDark
-              ? props.data.type === ETypeUserChat.other
-                ? 'border-bottom: 1.5px solid #292929'
-                : 'border-bottom: 1.5px solid #37434f'
-              : 'border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)'
-          }`"
+  <div :class="[props.data.type]">
+    <div :class="['item-container', modeChat]">
+      <div
+        class="p-4"
+        :style="`${
+          isDark
+            ? props.data.type === ETypeUserChat.other
+              ? 'border-bottom: 1.5px solid #292929'
+              : 'border-bottom: 1.5px solid #37434f'
+            : 'border-bottom: 1.5px solid hsla(197, 8%, 65%, 0.631)'
+        }`"
+      >
+        <p
+          class="font-medium"
+          :class="[
+            props.data.typeMessage === ETypeMessage.missVideo &&
+              'text-[#F93F4C]',
+            modeChat === EModeChat.dark && 'text-white',
+          ]"
+          contenteditable="true"
+          :style="`font-size: ${textSize - 4}px`"
         >
+          {{ dataIcons[props.data.typeMessage].content }}
+        </p>
+        <div class="flex space-x-3 mt-2 items-center">
+          <img
+            :src="dataIcons[props.data.typeMessage].img"
+            alt="image"
+            class="w-5 object-contain"
+          />
           <p
-            class="font-medium"
-            :class="[
-              props.data.typeMessage === ETypeMessage.missVideo &&
-                'text-[#F93F4C]',
-              modeChat === EModeChat.dark && 'text-white',
-            ]"
+            class="text-[#7c798a] -mt-[2px] font-[500]"
             contenteditable="true"
-            :style="`font-size: ${textSize - 4}px`"
+            :style="`font-size: ${textSize - 6}px`"
           >
-            {{ dataIcons[props.data.typeMessage].content }}
-          </p>
-          <div class="flex space-x-3 mt-2 items-center">
-            <img
-              :src="dataIcons[props.data.typeMessage].img"
-              alt="image"
-              class="w-5 object-contain"
-            />
-            <p
-              class="text-[#7c798a] -mt-[2px] font-[500]"
-              contenteditable="true"
-              :style="`font-size: ${textSize - 6}px`"
-            >
-              {{ dataIcons[props.data.typeMessage].description }}
-            </p>
-          </div>
-        </div>
-        <div class="p-[8px] text-center">
-          <p
-            class="text-[#4397fd] font-medium"
-            contenteditable="true"
-            :style="`font-size: ${textSize - 7}px`"
-          >
-            GỌI LẠI
+            {{ dataIcons[props.data.typeMessage].description }}
           </p>
         </div>
       </div>
-      <div v-if="props.data.isDate && !props.data.dateInside">
+      <div class="p-[8px] text-center">
         <p
+          class="text-[#4397fd] font-medium"
           contenteditable="true"
-          class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
-          :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
-          :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
+          :style="`font-size: ${textSize - 7}px`"
         >
-          {{ moment(props.data.time).format("HH:mm") }}
+          GỌI LẠI
         </p>
       </div>
+    </div>
+    <div v-if="props.data.isDate && !props.data.dateInside">
+      <p
+        contenteditable="true"
+        class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
+        :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
+      >
+        {{ moment(props.data.time).format("HH:mm") }}
+      </p>
     </div>
   </div>
 </template>
