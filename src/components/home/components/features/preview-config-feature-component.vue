@@ -225,6 +225,14 @@
       </div>
     </div>
 
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Độ đậm chữ</p>
+
+      <div class="flex col-span-7">
+        <el-slider v-model="fontWeight" :max="1000" />
+      </div>
+    </div>
+
     <div class="mt-4 grid grid-cols-2 gap-4">
       <button-common
         :text="'Xuất File'"
@@ -261,6 +269,7 @@ const {
   widthPercent,
   ratioH,
   textSize,
+  fontWeight,
   currentDate,
   fixHeight,
   scrollChat,

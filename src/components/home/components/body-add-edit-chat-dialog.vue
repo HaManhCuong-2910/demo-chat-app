@@ -53,6 +53,20 @@
             dataInput.message = '00:13';
           "
         />
+        <button-common
+          :text="'Ngày tháng'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.date
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.date;
+            dataInput.message = 'Thứ Sáu, ngày 27 tháng 12, 2024';
+          "
+        />
       </div>
     </div>
     <div class="grid grid-cols-6 gap-4 items-center mt-3">
@@ -79,6 +93,30 @@
               : ETypeButton.secondary
           "
           @click="dataInput.person = ETypeUserChat.other"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-4 items-center mt-3">
+      <p class="text-base font-medium">Hiện giờ</p>
+      <div class="col-span-5 flex space-x-2">
+        <button-common
+          :text="'Hiện'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.isShowTime ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="dataInput.isShowTime = true"
+        />
+        <button-common
+          :text="'Ẩn'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            !dataInput.isShowTime ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="dataInput.isShowTime = false"
         />
       </div>
     </div>
@@ -193,7 +231,11 @@ import "emoji-mart-vue-fast/css/emoji-mart.css";
 import { Picker, EmojiIndex, Emoji } from "emoji-mart-vue-fast/src";
 
 import { ETypeButton, toBase64 } from "~/src/services/constant";
-import { ETypeAddChat, ETypeUserChat } from "../models/home.model";
+import {
+  ETypeAddChat,
+  ETypeUserChat,
+  type IDataFormAddMessage,
+} from "../models/home.model";
 import moment from "moment";
 import { useHomeStore } from "../store/home.store";
 
@@ -208,12 +250,13 @@ const {
   isAddAfterDialog,
 } = storeToRefs(homeStore);
 
-const dataInput = ref({
+const dataInput = ref<IDataFormAddMessage>({
   type: ETypeAddChat.message,
   person: ETypeUserChat.user,
   date: moment().format("YYYY-MM-DD HH:mm"),
   message: "",
   image: "",
+  isShowTime: false,
 });
 
 const handleAddMessage = () => {
@@ -256,6 +299,7 @@ onBeforeMount(() => {
           dataEdit.typeMessage !== ETypeAddChat.image ? dataEdit.value : "",
         image:
           dataEdit.typeMessage === ETypeAddChat.image ? dataEdit.value : "",
+        isShowTime: dataEdit.isShowTime,
       };
     }
   }

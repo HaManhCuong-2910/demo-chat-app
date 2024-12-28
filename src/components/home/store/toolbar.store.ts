@@ -37,10 +37,11 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
 
   const bgColor = ref("#b6c6d6");
 
-  const widthPercent = ref(100);
+  const widthPercent = ref(59);
   const ratioH = ref(1);
   const showChatList = ref(0);
   const textSize = ref(16);
+  const fontWeight = ref(400);
 
   const fixHeight = ref(false);
 
@@ -62,6 +63,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     ratioH,
     showChatList,
     textSize,
+    fontWeight,
     currentDate,
     fixHeight,
     scrollChat,

@@ -91,20 +91,6 @@
         >
           <div v-for="(item, index) in dataShow" :key="item.time">
             <div
-              v-if="index > 0 && showDate"
-              class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-2"
-            >
-              <font-awesome-icon
-                :icon="['far', 'calendar-days']"
-                class="text-sm text-white mr-1"
-              />
-              {{ moment(item.time).locale(language).format("dddd, LL") }}
-              <font-awesome-icon
-                :icon="['fas', 'chevron-right']"
-                class="text-xs text-white ml-1"
-              />
-            </div>
-            <div
               class="container-item-child flex items-center"
               v-for="(itemChild, indexChild) in item.chats"
             >
@@ -116,7 +102,24 @@
                 <font-awesome-icon :icon="['fas', 'minus']" class="w-4 h-4" />
               </div>
               <div
-                v-if="itemChild.typeMessage !== ETypeAddChat.image"
+                v-if="showDate && itemChild.typeMessage === ETypeAddChat.date"
+                class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-5"
+              >
+                <font-awesome-icon
+                  :icon="['far', 'calendar-days']"
+                  class="text-sm text-white mr-1"
+                />
+                {{ itemChild.value }}
+                <font-awesome-icon
+                  :icon="['fas', 'chevron-right']"
+                  class="text-xs text-white ml-1"
+                />
+              </div>
+              <div
+                v-if="
+                  itemChild.typeMessage !== ETypeAddChat.image &&
+                  itemChild.typeMessage !== ETypeAddChat.date
+                "
                 :class="[itemChild.type, indexChild > 0 && 'mt-2']"
                 :key="itemChild.value"
                 @click="
@@ -132,8 +135,14 @@
               >
                 <p
                   class="!leading-3 time-content whitespace-nowrap"
-                  :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                  v-if="itemChild.type === ETypeUserChat.user"
+                  :style="`font-size: ${Math.max(
+                    textSize - 5,
+                    11
+                  )}px;font-weight: ${fontWeight}`"
+                  v-if="
+                    itemChild.type === ETypeUserChat.user &&
+                    itemChild.isShowTime
+                  "
                 >
                   <span
                     v-if="
@@ -142,19 +151,14 @@
                       index === dataShow.length - 1
                     "
                     class="block !leading-3 text-end"
-                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                    style="color: rgb(254, 240, 27)"
+                    :style="`font-size: ${Math.max(
+                      textSize - 5,
+                      11
+                    )}px;font-weight: ${fontWeight}`"
+                    style="color: rgb(262, 228, 0)"
                     >1
                   </span>
-                  {{
-                    indexChild ===
-                    homeStore.onCheckFirstLastInChats(
-                      item.chats,
-                      ETypeUserChat.user
-                    ).last
-                      ? moment(itemChild.time).format("h:mm A")
-                      : ""
-                  }}
+                  {{ moment(itemChild.time).format("h:mm") }}
                 </p>
                 <img
                   v-if="
@@ -165,7 +169,7 @@
                   "
                   :src="avatars.other"
                   alt="icon"
-                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full mr-2 mt-1"
+                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl mr-3 mt-1"
                 />
                 <div
                   :class="
@@ -173,7 +177,7 @@
                     (indexChild > 0
                       ? item.chats[indexChild - 1].type === ETypeUserChat.other
                       : false) &&
-                    'ml-12'
+                    'ml-[52px]'
                   "
                 >
                   <p
@@ -189,101 +193,103 @@
                   >
                     {{ names.other }}
                   </p>
-                  <div
-                    class="w-fit content min-h-7"
-                    :style="`font-size: ${textSize}px`"
-                  >
-                    <i
-                      class="fa-solid fa-phone text-green-600 inline -mb-[1px] mr-2"
-                    ></i>
-                    <font-awesome-icon
-                      v-if="
-                        [ETypeAddChat.calling, ETypeAddChat.called].includes(
-                          itemChild.typeMessage
-                        )
-                      "
-                      :icon="['fas', 'phone']"
-                      :class="`${
-                        itemChild.typeMessage === ETypeAddChat.calling
-                          ? 'text-green-600'
-                          : ''
-                      } inline -mb-[1px] ${
-                        itemChild.typeMessage === ETypeAddChat.called
-                          ? 'mr-12'
-                          : 'mr-2'
-                      }  phone-icon`"
-                      :style="[`font-size: ${textSize + 5}px`]"
-                    />
-                    {{ itemChild.value }}
-                    <svg
-                      v-if="
-                        itemChild.type === ETypeUserChat.user &&
-                        (indexChild > 0
-                          ? item.chats[indexChild - 1].type !==
-                            ETypeUserChat.user
-                          : true)
-                      "
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 22.23 42.69"
-                      class="w-2 absolute right-[-2px] top-[2px]"
-                      style="fill: rgb(254, 240, 27)"
+                  <div class="flex items-end">
+                    <div
+                      class="w-fit content min-h-7"
+                      :style="`font-size: ${textSize}px;font-weight: ${fontWeight}`"
                     >
-                      <g data-name="Layer 2">
-                        <path
-                          class="kakao_tail_svg__cls-1"
-                          d="M22.23.08s-7.59-1.37-15 7.05C-.74 16.13 0 21.65 0 21.65v21h16.45s.05-21.9.05-26.56c0-6.22 1.62-10.33 5.73-16.01Z"
-                          data-name="Layer 1"
-                        ></path>
-                      </g>
-                    </svg>
-                    <svg
+                      <font-awesome-icon
+                        v-if="
+                          [ETypeAddChat.calling, ETypeAddChat.called].includes(
+                            itemChild.typeMessage
+                          )
+                        "
+                        :icon="['fas', 'phone']"
+                        :class="`${
+                          itemChild.typeMessage === ETypeAddChat.calling
+                            ? 'text-green-600'
+                            : ''
+                        } inline -mb-[1px] ${
+                          itemChild.typeMessage === ETypeAddChat.called
+                            ? 'mr-12'
+                            : 'mr-2'
+                        }  phone-icon`"
+                        :style="[`font-size: ${textSize + 5}px`]"
+                      />
+                      {{ itemChild.value }}
+                      <svg
+                        v-if="
+                          itemChild.type === ETypeUserChat.user &&
+                          (indexChild > 0
+                            ? item.chats[indexChild - 1].type !==
+                              ETypeUserChat.user
+                            : true)
+                        "
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 22.23 42.69"
+                        class="w-2 absolute right-[-2px] top-[2px]"
+                        style="fill: rgb(262, 228, 0)"
+                      >
+                        <g data-name="Layer 2">
+                          <path
+                            class="kakao_tail_svg__cls-1"
+                            d="M22.23.08s-7.59-1.37-15 7.05C-.74 16.13 0 21.65 0 21.65v21h16.45s.05-21.9.05-26.56c0-6.22 1.62-10.33 5.73-16.01Z"
+                            data-name="Layer 1"
+                          ></path>
+                        </g>
+                      </svg>
+                      <svg
+                        v-if="
+                          itemChild.type === ETypeUserChat.other &&
+                          (indexChild > 0
+                            ? item.chats[indexChild - 1].type !==
+                              ETypeUserChat.other
+                            : true)
+                        "
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 22.23 42.69"
+                        class="w-2 absolute left-[-2px] top-[2px]"
+                        style="fill: rgb(255, 255, 255); transform: scaleX(-1)"
+                      >
+                        <g data-name="Layer 2">
+                          <path
+                            class="kakao_tail_svg__cls-1"
+                            d="M22.23.08s-7.59-1.37-15 7.05C-.74 16.13 0 21.65 0 21.65v21h16.45s.05-21.9.05-26.56c0-6.22 1.62-10.33 5.73-16.01Z"
+                            data-name="Layer 1"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+
+                    <p
                       v-if="
                         itemChild.type === ETypeUserChat.other &&
-                        (indexChild > 0
-                          ? item.chats[indexChild - 1].type !==
-                            ETypeUserChat.other
-                          : true)
+                        itemChild.isShowTime
                       "
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 22.23 42.69"
-                      class="w-2 absolute left-[-2px] top-[2px]"
-                      style="fill: rgb(255, 255, 255); transform: scaleX(-1)"
+                      class="time-content self-end whitespace-nowrap mt-1"
+                      :style="`font-size: ${Math.max(
+                        textSize - 5,
+                        11
+                      )}px; transform: translateY(4px);font-weight: ${fontWeight}`"
                     >
-                      <g data-name="Layer 2">
-                        <path
-                          class="kakao_tail_svg__cls-1"
-                          d="M22.23.08s-7.59-1.37-15 7.05C-.74 16.13 0 21.65 0 21.65v21h16.45s.05-21.9.05-26.56c0-6.22 1.62-10.33 5.73-16.01Z"
-                          data-name="Layer 1"
-                        ></path>
-                      </g>
-                    </svg>
+                      <span
+                        v-if="
+                          showOnRead &&
+                          indexChild === item.chats.length - 1 &&
+                          index === dataShow.length - 1
+                        "
+                        class="block !leading-3 text-start"
+                        :style="`font-size: ${Math.max(
+                          textSize - 5,
+                          11
+                        )}px;font-weight: ${fontWeight}`"
+                        style="color: rgb(262, 228, 0)"
+                        >1
+                      </span>
+                      {{ moment(itemChild.time).format("h:mm") }}
+                    </p>
                   </div>
                 </div>
-                <p
-                  v-if="
-                    itemChild.type === ETypeUserChat.other &&
-                    indexChild ===
-                      homeStore.onCheckFirstLastInChats(
-                        item.chats,
-                        ETypeUserChat.other
-                      ).last
-                  "
-                  class="time-content self-end whitespace-nowrap mt-10"
-                  :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                >
-                  <span
-                    v-if="
-                      showOnRead &&
-                      indexChild === item.chats.length - 1 &&
-                      index === dataShow.length - 1
-                    "
-                    class="block !leading-3 text-start"
-                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                    style="color: rgb(254, 240, 27)"
-                    >1
-                  </span>
-                  {{ moment(itemChild.time).format("h:mm A") }}
-                </p>
               </div>
 
               <div
@@ -298,8 +304,14 @@
               >
                 <p
                   class="!leading-3 time-content whitespace-nowrap mr-2"
-                  :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                  v-if="itemChild.type === ETypeUserChat.user"
+                  :style="`font-size: ${Math.max(
+                    textSize - 5,
+                    11
+                  )}px;font-weight: ${fontWeight}`"
+                  v-if="
+                    itemChild.type === ETypeUserChat.user &&
+                    itemChild.isShowTime
+                  "
                 >
                   <span
                     v-if="
@@ -308,11 +320,14 @@
                       index === dataShow.length - 1
                     "
                     class="block !leading-3 text-end"
-                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                    style="color: rgb(254, 240, 27)"
+                    :style="`font-size: ${Math.max(
+                      textSize - 5,
+                      11
+                    )}px;font-weight: ${fontWeight}`"
+                    style="color: rgb(262, 228, 0)"
                     >1</span
                   >
-                  {{ moment(itemChild.time).format("h:mm A") }}
+                  {{ moment(itemChild.time).format("h:mm") }}
                 </p>
                 <img
                   v-if="itemChild.type === ETypeUserChat.other"
@@ -348,7 +363,10 @@
                   />
                 </div>
                 <p
-                  v-if="itemChild.type === ETypeUserChat.other"
+                  v-if="
+                    itemChild.type === ETypeUserChat.other &&
+                    itemChild.isShowTime
+                  "
                   class="time-content self-end whitespace-nowrap ml-3 mt-10"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                 >
@@ -359,11 +377,14 @@
                       index === dataShow.length - 1
                     "
                     class="block !leading-3 text-start"
-                    :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
-                    style="color: rgb(254, 240, 27)"
+                    :style="`font-size: ${Math.max(
+                      textSize - 5,
+                      11
+                    )}px;font-weight: ${fontWeight}`"
+                    style="color: rgb(262, 228, 0)"
                     >1
                   </span>
-                  {{ moment(itemChild.time).format("h:mm A") }}
+                  {{ moment(itemChild.time).format("h:mm") }}
                 </p>
               </div>
               <div
@@ -449,6 +470,7 @@ const {
   widthPercent,
   ratioH,
   textSize,
+  fontWeight,
   footer,
   fixHeight,
   scrollChat,
@@ -515,7 +537,7 @@ const dataShow = computed(() => {
 
   .content {
     @apply py-[7px] px-3 rounded-xl relative;
-    background-color: rgb(254, 240, 27);
+    background-color: rgb(262, 228, 0);
     margin-left: 8px;
     word-wrap: break-word;
     max-width: 100%;

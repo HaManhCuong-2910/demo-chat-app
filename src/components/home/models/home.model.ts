@@ -8,6 +8,7 @@ export enum ETypeAddChat {
   image = "image",
   calling = "calling",
   called = "called",
+  date = "date",
 }
 
 export enum EModeAction {
@@ -22,6 +23,7 @@ export interface IDataFormAddMessage {
   date: string;
   message: string;
   image: string;
+  isShowTime: boolean;
 }
 
 export interface IHomeData {
@@ -31,5 +33,6 @@ export interface IHomeData {
     value: string;
     type: ETypeUserChat;
     typeMessage: ETypeAddChat;
+    isShowTime: boolean;
   }[];
 }
