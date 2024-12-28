@@ -35,11 +35,47 @@
 
       <p v-else class="text-xl text-white" contenteditable="true">4G</p>
 
-      <div
-        class="battery-container flex justify-center items-center font-medium"
+      <svg
+        width="44"
+        height="20"
+        viewBox="0 0 44 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        18
-      </div>
+        <g clip-path="url(#clip0_1_15)">
+          <mask
+            id="mask0_1_15"
+            style="mask-type: luminance"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="44"
+            height="17"
+          >
+            <path d="M44 0H0V17H44V0Z" fill="white" />
+          </mask>
+          <g mask="url(#mask0_1_15)">
+            <path
+              opacity="0.44"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M40.7408 5.7716L41.4901 6.1899C42.5492 6.78085 43.1852 7.7757 43.1852 8.84105C43.1852 9.9064 42.5492 10.9013 41.4901 11.4922L40.7408 11.9105V5.7716ZM3.25927 0.996914H35.8519C37.652 0.996914 39.1111 2.21846 39.1111 3.72531V13.9568C39.1111 15.4636 37.652 16.6852 35.8519 16.6852H3.25927C1.45922 16.6852 0 15.4636 0 13.9568V3.72531C0 2.21846 1.45922 0.996914 3.25927 0.996914ZM3.25927 2.36112C2.35925 2.36112 1.62963 2.97188 1.62963 3.72531V13.9568C1.62963 14.7102 2.35925 15.321 3.25927 15.321H35.8519C36.7518 15.321 37.4814 14.7102 37.4814 13.9568V3.72531C37.4814 2.97188 36.7518 2.36112 35.8519 2.36112H3.25927Z"
+              fill="white"
+            />
+            <path
+              :d="`M3.91346 4.25H${Math.round(
+                (battery / 100) * 35
+              )}.5385V14.1667H3.91346C3.62139 14.1667 3.38462 13.5747 3.38462 12.8445V5.57222C3.38462 4.84198 3.62139 4.25 3.91346 4.25Z`"
+              :fill="`${battery <= 20 ? 'red' : 'white'}`"
+            />
+          </g>
+        </g>
+        <defs>
+          <clipPath id="clip0_1_15">
+            <rect width="44" height="17" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
     </div>
   </div>
 </template>
@@ -53,9 +89,10 @@ const { isWifi, battery } = storeToRefs(configZaloChatStore);
 
 <style scoped lang="scss">
 .battery-container {
-  width: 32px;
+  width: 35px;
   height: 20px;
   border-radius: 7px;
   background-color: #fff;
+  line-height: 10px;
 }
 </style>
