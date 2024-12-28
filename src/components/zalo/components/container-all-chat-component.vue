@@ -26,6 +26,13 @@
       :index="index"
     />
 
+    <ghi-am-component
+      v-if="item.typeMessage === ETypeMessage.ghiam"
+      :key="item.value"
+      :data="item"
+      :index="index"
+    />
+
     <business-card-zalo-component
       v-if="item.typeMessage === ETypeMessage.danhthiep"
       :key="item.value"

@@ -1,8 +1,14 @@
 <template>
-  <div :class="[props.data.type, props.data.type === ETypeUserChat.other]">
+  <div :class="[props.data.type]">
     <div class="relative">
-      <div class="bg-danhthiep" :class="modeChat">
-        <div class="p-3 flex items-center space-x-3">
+      <div
+        class="bg-danhthiep"
+        :style="`background-image: url('${
+          bgBank || '/zalo/bg-business-card.jpg'
+        }');`"
+        :class="modeChat"
+      >
+        <div class="p-3 flex items-center space-x-3 relative z-10 w-fit">
           <label :for="`file-bank-${props.index}`">
             <img
               :src="bank || '/capture.jpg'"
@@ -28,7 +34,7 @@
           </p>
         </div>
 
-        <div class="absolute bottom-3 left-3">
+        <div class="absolute bottom-3 left-3 z-10">
           <div>
             <p class="text-2xl text-white font-medium">0336272203</p>
             <p
@@ -40,7 +46,7 @@
           </div>
         </div>
 
-        <div class="absolute bottom-3 right-3">
+        <div class="absolute bottom-3 right-3 z-10">
           <label :for="`file-qr-bank-${props.index}`">
             <img
               :src="qrBank || '/capture.jpg'"
@@ -63,6 +69,22 @@
         }"
           />
         </div>
+
+        <label :for="`file-background-bank-${props.index}`" class="bg-bank">
+        </label>
+        <input
+          :id="`file-background-bank-${props.index}`"
+          type="file"
+          hidden
+          accept="image/*"
+          @change="(event: any)=> {
+          if (!event.target?.files) return;
+          [...event.target.files].forEach((file)=>preview(file,(val: string)=> {
+            bgBank = '';
+            bgBank = val;
+          }));
+        }"
+        />
       </div>
       <div class="bg-white grid grid-cols-2 rounded-b-[8px] w-full">
         <div class="text-center py-3 right-line">
@@ -141,13 +163,7 @@
       v-if="props.data.isDate && !props.data.dateInside"
       contenteditable="true"
       class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
-      :class="[
-        modeChat === EModeChat.light && 'bg-[#b6babf]',
-        props.data.type === ETypeUserChat.other &&
-          listData[props.index - 1]?.type === ETypeUserChat.other &&
-          listData[props.index - 1]?.typeMessage !== ETypeMessage.danhthiep &&
-          'ml-12',
-      ]"
+      :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
       :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
     >
       {{ moment(props.data.time).format("HH:mm") }}
@@ -209,13 +225,6 @@ const preview = (file: File, callBack: Function) => {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   @apply w-[362px];
-
-  &.dark {
-    background-image: url("/zalo/bg-business-card-dark.jpg");
-  }
-  &.light {
-    background-image: url("/zalo/bg-business-card.jpg");
-  }
 }
 
 .user {
@@ -242,6 +251,15 @@ const preview = (file: File, callBack: Function) => {
   }
 }
 
+.bg-bank {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .right-line {
   position: relative;
 
@@ -250,7 +268,7 @@ const preview = (file: File, callBack: Function) => {
     content: "";
     display: block;
     width: 1px;
-    height: 20px;
+    height: 30px;
     top: 50%;
     right: 0;
     transform: translateY(-50%);

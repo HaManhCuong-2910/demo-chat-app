@@ -15,6 +15,7 @@ export enum ETypeMessage {
   emoji = "emoji",
   danhthiep = "danhthiep",
   bank = "bank",
+  ghiam = "ghiam",
 }
 
 export enum ETypeHeart {

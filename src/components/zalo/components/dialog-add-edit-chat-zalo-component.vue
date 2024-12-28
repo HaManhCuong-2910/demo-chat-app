@@ -20,6 +20,7 @@
           <el-radio :value="ETypeMessage.date" border>Ngày tháng</el-radio>
           <el-radio :value="ETypeMessage.danhthiep" border>Danh thiếp</el-radio>
           <el-radio :value="ETypeMessage.bank" border>Ngân hàng</el-radio>
+          <el-radio :value="ETypeMessage.ghiam" border>Ghi âm</el-radio>
           <el-radio :value="ETypeMessage.call" border>Cuộc gọi</el-radio>
           <el-radio :value="ETypeMessage.comeVideo" border>Gọi video</el-radio>
           <el-radio :value="ETypeMessage.missVideo" border>video nhỡ</el-radio>
