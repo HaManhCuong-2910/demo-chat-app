@@ -1,5 +1,5 @@
 <template>
-  <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
+  <div class="grid lg:grid-cols-4 grid-cols-1 gap-4">
     <div>
       <ui-feature-component />
       <div class="mt-3">
@@ -26,6 +26,9 @@
           </div>
         </button-common>
       </div>
+    </div>
+    <div>
+      <body-add-edit-chat-dialog />
     </div>
   </div>
   <el-dialog
