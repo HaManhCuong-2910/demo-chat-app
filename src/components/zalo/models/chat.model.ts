@@ -1,6 +1,7 @@
 export enum ETypeUserChat {
   user = "user",
   other = "other",
+  none = "none",
 }
 
 export enum ETypeMessage {
@@ -13,6 +14,8 @@ export enum ETypeMessage {
   refuseVideo = "refuseVideo",
   emoji = "emoji",
   danhthiep = "danhthiep",
+  bank = "bank",
+  ghiam = "ghiam",
 }
 
 export enum ETypeHeart {

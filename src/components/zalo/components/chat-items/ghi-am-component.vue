@@ -1,60 +1,19 @@
 <template>
-  <div class="max-w-full relative" :class="[props.data.type]">
-    <div class="p-[14px] min-w-28 item-container relative" :class="[modeChat]">
+  <div :class="[props.data.type]">
+    <div class="relative">
       <div
-        class="replica pt-1 mb-5 flex"
-        v-if="props.data.replicaIndex !== null"
+        class="bg-ghi-am"
+        :style="`background-image: url('${
+          dataImage[modeChat][props.data.type]
+        }');`"
       >
-        <img
-          v-if="
-            listData[props.data.replicaIndex].typeMessage === ETypeMessage.image
-          "
-          :src="listData[props.data.replicaIndex].images[0]"
-          alt="image"
-          class="w-10 max-h-8 object-contain"
-        />
-        <div class="pl-2">
-          <p
-            class="!leading-3 font-medium"
-            :class="modeChat === EModeChat.dark && 'text-white'"
-            contenteditable="true"
-            :style="`font-size: ${textSize - 4}px`"
-          >
-            {{ dataPerson[listData[props.data.replicaIndex].type].name }}
-          </p>
-          <span
-            class="text-[#9b9b9b] block mt-3"
-            :style="`font-size: ${textSize - 4}px`"
-            contenteditable="true"
-            >{{
-              props.data.replicaIndex !== null &&
-              listData[props.data.replicaIndex].typeMessage ===
-                ETypeMessage.image
-                ? "Hình ảnh"
-                : listData[props.data.replicaIndex].value
-            }}</span
-          >
-        </div>
+        <p
+          class="absolute bottom-[14px] text-gray-500 left-[25%] text-sm font-medium"
+          contenteditable="true"
+        >
+          00:03
+        </p>
       </div>
-      <p
-        :class="[
-          props.data.isBlueText && '!text-[#4391f6]',
-          'break-words !leading-8',
-          modeChat === EModeChat.dark ? 'text-[#dfe2e7]' : '',
-        ]"
-        :style="`font-size: ${textSize}px;font-weight: ${fontWeight};`"
-        contenteditable="true"
-      >
-        {{ props.data.value }}
-      </p>
-      <span
-        v-if="props.data.isDate && props.data.dateInside"
-        class="text-[#9b9b9bce] mt-2 block"
-        :style="`font-size: ${textSize - 5}px;font-weight: ${fontWeight};`"
-        contenteditable="true"
-        >{{ moment(props.data.time).format("HH:mm") }}</span
-      >
-
       <div
         v-if="props.data.typeHeart === ETypeHeart.inactive"
         class="w-9 h-9 absolute right-0 -bottom-5"
@@ -108,7 +67,6 @@
         ></div>
       </div>
     </div>
-
     <p
       v-if="props.data.isDate && !props.data.dateInside"
       contenteditable="true"
@@ -125,14 +83,14 @@
 import moment from "moment";
 import {
   EModeChat,
+  ETypeHeart,
   ETypeMessage,
   ETypeUserChat,
+  type IDataZaloChat,
 } from "../../models/chat.model";
-import { ETypeHeart } from "../../models/chat.model";
-import { type IDataZaloChat } from "../../models/chat.model";
-import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
-import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 import { useConfigZaloChatStore } from "../../stores/config-zalo-chat.store";
+import { useListZaloChatStore } from "../../stores/list-zalo-chat.store";
+
 const props = defineProps({
   data: {
     type: Object as PropType<IDataZaloChat>,
@@ -144,51 +102,41 @@ const props = defineProps({
   },
 });
 
+const dataImage = ref({
+  [EModeChat.dark]: {
+    [ETypeUserChat.none]: "/zalo/ghi-am-user-dark.jpg",
+    [ETypeUserChat.user]: "/zalo/ghi-am-user-dark.jpg",
+    [ETypeUserChat.other]: "/zalo/ghi-am-other-dark.jpg",
+  },
+  [EModeChat.light]: {
+    [ETypeUserChat.none]: "/zalo/ghi-am-user-dark.jpg",
+    [ETypeUserChat.user]: "/zalo/ghi-am-user.jpg",
+    [ETypeUserChat.other]: "/zalo/ghi-am-other.jpg",
+  },
+});
+
 const configZaloChatStore = useConfigZaloChatStore();
-const { textSize, fontWeight, modeChat } = storeToRefs(configZaloChatStore);
 const { data: listData } = storeToRefs(useListZaloChatStore());
-const { dataPerson } = storeToRefs(useZaloChatAreaStore());
+const { textSize, modeChat, fontWeight } = storeToRefs(configZaloChatStore);
 </script>
 
 <style scoped lang="scss">
+.bg-ghi-am {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 80px;
+  position: relative;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  @apply w-[300px];
+}
+
 .user {
-  max-width: 81%;
-  width: fit-content;
-  @apply ml-auto;
-
-  .item-container {
-    @apply rounded-xl;
-
-    &.dark {
-      @apply bg-[#313d49];
-    }
-
-    &.light {
-      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-      @apply bg-[#d6effc];
-    }
-  }
+  @apply ml-auto max-w-[300px];
 }
 
 .other {
-  max-width: 89%;
-  width: fit-content;
-
-  .item-container {
-    @apply rounded-xl;
-
-    &.dark {
-      @apply bg-[#292929];
-    }
-
-    &.light {
-      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-      @apply bg-white;
-    }
-  }
-}
-
-.replica {
-  border-left: 2px solid #3d91f6;
+  @apply max-w-[300px];
 }
 </style>

@@ -4,7 +4,7 @@ import { EModeChat } from "../models/chat.model";
 export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const isWifi = ref(true);
   const battery = ref(100);
-  const fontWeight = ref(500);
+  const fontWeight = ref(328);
   const widthPercent = ref(100);
   const fixHeight = ref(true);
   const ratioH = ref(1.3);

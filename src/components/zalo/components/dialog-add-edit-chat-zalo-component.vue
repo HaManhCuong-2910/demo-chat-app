@@ -19,6 +19,8 @@
           <el-radio :value="ETypeMessage.emoji" border>Emoji</el-radio>
           <el-radio :value="ETypeMessage.date" border>Ngày tháng</el-radio>
           <el-radio :value="ETypeMessage.danhthiep" border>Danh thiếp</el-radio>
+          <el-radio :value="ETypeMessage.bank" border>Ngân hàng</el-radio>
+          <el-radio :value="ETypeMessage.ghiam" border>Ghi âm</el-radio>
           <el-radio :value="ETypeMessage.call" border>Cuộc gọi</el-radio>
           <el-radio :value="ETypeMessage.comeVideo" border>Gọi video</el-radio>
           <el-radio :value="ETypeMessage.missVideo" border>video nhỡ</el-radio>
@@ -228,6 +230,9 @@ const preview = (file: File) => {
 };
 
 const handleAddMessage = () => {
+  if (data.value.typeMessage === ETypeMessage.date) {
+    data.value.type = ETypeUserChat.none;
+  }
   const cloneData = JSON.parse(JSON.stringify(data.value));
   if (dataDialog.value.isAddAfterDialog) {
     listData.value.splice(dataDialog.value.index + 1, 0, cloneData);
@@ -236,6 +241,10 @@ const handleAddMessage = () => {
   }
   dataDialog.value.isShowDialog = false;
   showChatList.value = listData.value.length;
+  data.value.type =
+    data.value.type === ETypeUserChat.none
+      ? ETypeUserChat.user
+      : data.value.type;
 };
 
 const closeDialog = () => {

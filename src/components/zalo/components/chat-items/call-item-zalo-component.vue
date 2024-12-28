@@ -1,39 +1,6 @@
 <template>
-  <div
-    :class="[
-      props.data.type !== listData[props.index - 1]?.type
-        ? listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-          ? 'mt-7 '
-          : 'mt-3'
-        : listData[props.index - 1]?.typeHeart !== ETypeHeart.none
-        ? 'mt-7 '
-        : 'mt-3',
-      props.data.type === ETypeUserChat.other &&
-      listData[props.index - 1]?.type !== ETypeUserChat.other
-        ? 'flex items-start'
-        : '',
-      'relative',
-    ]"
-  >
-    <img
-      v-if="
-        props.data.type === ETypeUserChat.other &&
-        listData[props.index - 1]?.type !== ETypeUserChat.other
-      "
-      :src="dataPerson.other.avatar"
-      alt="ava"
-      class="w-12 h-12 rounded-full mr-2"
-    />
-    <div
-      :class="[
-        modeChat,
-        props.data.type,
-        props.data.type === ETypeUserChat.other &&
-        listData[props.index - 1]?.type === ETypeUserChat.other
-          ? 'ml-14'
-          : '',
-      ]"
-    >
+  <div :class="[props.data.type]">
+    <div :class="['item-container', modeChat]">
       <div
         class="p-4"
         :style="`${
@@ -81,10 +48,21 @@
         </p>
       </div>
     </div>
+    <div v-if="props.data.isDate && !props.data.dateInside">
+      <p
+        contenteditable="true"
+        class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
+        :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
+        :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
+      >
+        {{ moment(props.data.time).format("HH:mm") }}
+      </p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import moment from "moment";
 import {
   EModeChat,
   ETypeHeart,
@@ -99,7 +77,7 @@ import { useZaloChatAreaStore } from "../../stores/zalo-chat-area.store";
 const configZaloChatStore = useConfigZaloChatStore();
 const { data: listData } = storeToRefs(useListZaloChatStore());
 const { dataPerson } = storeToRefs(useZaloChatAreaStore());
-const { textSize, modeChat } = storeToRefs(configZaloChatStore);
+const { textSize, modeChat, fontWeight } = storeToRefs(configZaloChatStore);
 
 const props = defineProps({
   data: {
@@ -179,29 +157,34 @@ const dataIcons = ref<
 <style scoped lang="scss">
 .user {
   width: 45%;
-  @apply rounded-xl ml-auto;
+  @apply ml-auto;
 
-  &.dark {
-    @apply bg-[#313d49];
-  }
+  .item-container {
+    @apply rounded-xl;
+    &.dark {
+      @apply bg-[#313d49];
+    }
 
-  &.light {
-    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-    @apply bg-[#d6effc];
+    &.light {
+      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+      @apply bg-[#d6effc];
+    }
   }
 }
 
 .other {
   width: 45%;
-  @apply rounded-xl;
 
-  &.dark {
-    @apply bg-[#292929];
-  }
+  .item-container {
+    @apply rounded-xl;
+    &.dark {
+      @apply bg-[#292929];
+    }
 
-  &.light {
-    border: 1.5px solid hsla(197, 8%, 65%, 0.631);
-    @apply bg-white;
+    &.light {
+      border: 1.5px solid hsla(197, 8%, 65%, 0.631);
+      @apply bg-white;
+    }
   }
 }
 </style>

@@ -12,6 +12,10 @@ export const useZaloChatAreaStore = defineStore("ZaloChatAreaStore", () => {
       name: "Hà Mạnh Cường",
       avatar: "/avatar.png",
     },
+    none: {
+      name: "",
+      avatar: "",
+    },
   });
 
   return {
