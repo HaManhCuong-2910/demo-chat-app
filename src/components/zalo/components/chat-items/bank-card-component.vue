@@ -11,7 +11,7 @@
         <div class="p-3 flex items-center space-x-3 relative z-10 w-fit">
           <label :for="`file-bank-${props.index}`">
             <img
-              :src="bank || '/capture.jpg'"
+              :src="bank || '/logo-bank.png'"
               alt="capture"
               class="w-10 h-10 rounded-lg"
             />
@@ -49,7 +49,7 @@
         <div class="absolute bottom-3 right-3 z-10">
           <label :for="`file-qr-bank-${props.index}`">
             <img
-              :src="qrBank || '/capture.jpg'"
+              :src="qrBank || '/logo-bank.png'"
               alt="capture"
               class="w-20 h-20 rounded-lg"
             />
@@ -64,7 +64,6 @@
           [...event.target.files].forEach((file)=>preview(file,(val: string)=> {
             qrBank = '';
             qrBank = val;
-            console.log('qrBank',qrBank)
           }));
         }"
           />
