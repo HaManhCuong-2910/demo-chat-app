@@ -11,7 +11,7 @@
         <div class="p-3 flex items-center space-x-3 relative z-10 w-fit">
           <label :for="`file-bank-${props.index}`">
             <img
-              :src="bank || '/logo-bank.png'"
+              :src="bank || '/zalo/logo-bank.jpg'"
               alt="capture"
               class="w-10 h-10 rounded-lg"
             />
@@ -49,9 +49,9 @@
         <div class="absolute bottom-3 right-3 z-10">
           <label :for="`file-qr-bank-${props.index}`">
             <img
-              :src="qrBank || '/logo-bank.png'"
+              :src="qrBank || '/zalo/qr-code.png'"
               alt="capture"
-              class="w-20 h-20 rounded-lg"
+              class="w-20 h-20 rounded-lg object-contain"
             />
           </label>
           <input
