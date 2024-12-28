@@ -32,6 +32,7 @@ export const useHomeStore = defineStore("homeStore", () => {
               value.type === ETypeAddChat.image ? value.image : value.message,
             type: value.person,
             typeMessage: value.type,
+            isShowTime: value.isShowTime,
           },
         ],
       });
@@ -60,6 +61,7 @@ export const useHomeStore = defineStore("homeStore", () => {
               value.type === ETypeAddChat.image ? value.image : value.message,
             type: value.person,
             typeMessage: value.type,
+            isShowTime: value.isShowTime,
           },
         ],
       });
@@ -74,6 +76,7 @@ export const useHomeStore = defineStore("homeStore", () => {
         value: value.type === ETypeAddChat.image ? value.image : value.message,
         type: value.person,
         typeMessage: value.type,
+        isShowTime: value.isShowTime,
       });
       showChatList.value = showChatList.value + 1;
     }
@@ -87,6 +90,7 @@ export const useHomeStore = defineStore("homeStore", () => {
       value: value.type === ETypeAddChat.image ? value.image : value.message,
       type: value.person,
       typeMessage: value.type,
+      isShowTime: value.isShowTime,
     };
   };
 
