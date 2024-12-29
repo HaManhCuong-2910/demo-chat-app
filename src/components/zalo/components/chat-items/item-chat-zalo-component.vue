@@ -50,7 +50,7 @@
       <span
         v-if="props.data.isDate && props.data.dateInside"
         class="text-[#9b9b9bce] mt-2 block"
-        :style="`font-size: ${textSize - 5}px;font-weight: ${fontWeight};`"
+        :style="`font-size: ${textSize - 8}px;font-weight: ${fontWeight};`"
         contenteditable="true"
         >{{ moment(props.data.time).format("HH:mm") }}</span
       >
@@ -107,6 +107,8 @@
           style="background-repeat: no-repeat; background-size: contain"
         ></div>
       </div>
+
+      <heart-inactive-number-component :data="props.data" />
     </div>
 
     <p

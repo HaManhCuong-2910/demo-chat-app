@@ -13,6 +13,7 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const scrollChat = ref(0);
   const isHD = ref(false);
   const isShowArrow = ref(false);
+  const isShowTimeChat = ref(false);
   const modeChat = ref<EModeChat>(EModeChat.light);
   const backgroundScreen = ref(
     modeChat.value === EModeChat.light ? pathLightZalo : pathDarkZalo
@@ -21,6 +22,7 @@ export const useConfigZaloChatStore = defineStore("ConfigZaloChatStore", () => {
   const isTransparentHeader = ref(false);
 
   return {
+    isShowTimeChat,
     isWifi,
     battery,
     fontWeight,

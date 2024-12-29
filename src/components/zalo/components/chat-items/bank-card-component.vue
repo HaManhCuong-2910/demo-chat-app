@@ -157,6 +157,8 @@
           style="background-repeat: no-repeat; background-size: contain"
         ></div>
       </div>
+
+      <heart-inactive-number-component :data="props.data" />
     </div>
     <p
       v-if="props.data.isDate && !props.data.dateInside"

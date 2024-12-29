@@ -14,8 +14,11 @@
         <p
           class="font-medium"
           :class="[
-            props.data.typeMessage === ETypeMessage.missVideo &&
-              'text-[#F93F4C]',
+            props.data.typeMessage === ETypeMessage.missVideo ||
+            (props.data.typeMessage === ETypeMessage.refuseVideo &&
+              props.data.type === ETypeUserChat.other)
+              ? 'text-[#F93F4C]'
+              : '',
             modeChat === EModeChat.dark && 'text-white',
           ]"
           contenteditable="true"
@@ -146,9 +149,9 @@ const dataIcons = ref<
           ? "/zalo/h2_dark.jpg"
           : "/zalo/h2.png"
         : isDark.value
-        ? "/zalo/h5_dark.jpg"
-        : "/zalo/tu_choi_di.jpg",
-    content: "Người nhận từ chối",
+        ? "/zalo/tu-choi-di-dark.jpg"
+        : "/zalo/tu-choi-di.jpg",
+    content: "Bạn đã từ chối",
     description: "Cuộc gọi thoại",
   },
 });

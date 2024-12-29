@@ -3,7 +3,7 @@
     :class="[
       listData[props.index - 1]?.typeHeart !== ETypeHeart.none
         ? 'mt-8'
-        : 'mt-4',
+        : 'mt-2',
       props.item.type === ETypeUserChat.other && 'flex items-start',
     ]"
   >

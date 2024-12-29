@@ -96,6 +96,8 @@
           style="background-repeat: no-repeat; background-size: contain"
         ></div>
       </div>
+
+      <heart-inactive-number-component :data="props.data" />
     </div>
     <div
       class="w-full rounded-md bg-[#b6babf] py-2 text-white text-center"

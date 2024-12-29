@@ -23,6 +23,7 @@ export enum ETypeHeart {
   active = "active",
   inactive = "inactive",
   number = "number",
+  inactive_number = "inactive_number",
 }
 
 export interface IDataZaloChat {

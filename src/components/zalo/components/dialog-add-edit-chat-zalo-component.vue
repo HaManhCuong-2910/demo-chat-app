@@ -85,6 +85,9 @@
           <el-radio :value="ETypeHeart.number" border
             >Trái tim hiện số</el-radio
           >
+          <el-radio :value="ETypeHeart.inactive_number" border
+            >Trái tim rỗng và hiện số</el-radio
+          >
         </el-radio-group>
       </div>
     </div>

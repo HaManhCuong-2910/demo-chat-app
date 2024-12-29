@@ -30,6 +30,13 @@
         class="bg-white"
         border
       />
+      <el-checkbox
+        v-model="isShowTimeChat"
+        label="Hiện thời gian online"
+        size="large"
+        class="bg-white"
+        border
+      />
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
@@ -157,6 +164,7 @@ const {
   isTransparentHeader,
   fontWeight,
   modeChat,
+  isShowTimeChat,
 } = storeToRefs(configZaloChatStore);
 const { data } = storeToRefs(listZaloChatStore);
 
