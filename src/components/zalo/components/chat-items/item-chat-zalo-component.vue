@@ -154,7 +154,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 
 <style scoped lang="scss">
 .user {
-  max-width: 81%;
+  max-width: 471px;
   width: fit-content;
   @apply ml-auto;
 
@@ -173,7 +173,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 }
 
 .other {
-  max-width: 81%;
+  max-width: 471px;
   width: fit-content;
 
   .item-container {
