@@ -33,7 +33,7 @@
             class="w-5 object-contain"
           />
           <p
-            class="text-[#7c798a] -mt-[2px] font-[500]"
+            class="text-[#7c798a] -mt-[2px] font-[500] text-nowrap whitespace-nowrap"
             contenteditable="true"
             :style="`font-size: ${textSize - 6}px`"
           >
