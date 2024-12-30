@@ -74,7 +74,7 @@
       contenteditable="true"
       class="mt-1 w-fit !leading-[14px] p-[8px] py-[6px] text-white rounded-xl"
       :class="[modeChat === EModeChat.light && 'bg-[#b6babf]']"
-      :style="`font-size: ${textSize - 6}px;font-weight: ${fontWeight};`"
+      :style="`font-size: ${textSize - 8}px;font-weight: ${fontWeight};`"
     >
       {{ moment(props.data.time).format("HH:mm") }}
     </p>
