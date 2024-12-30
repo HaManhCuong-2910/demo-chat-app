@@ -173,7 +173,7 @@ const { dataPerson } = storeToRefs(useZaloChatAreaStore());
 }
 
 .other {
-  max-width: 74%;
+  max-width: 81%;
   width: fit-content;
 
   .item-container {
