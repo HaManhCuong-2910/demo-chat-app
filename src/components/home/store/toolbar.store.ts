@@ -41,7 +41,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
   const ratioH = ref(1);
   const showChatList = ref(0);
   const textSize = ref(16);
-  const fontWeight = ref(400);
+  const fontWeight = ref(500);
 
   const fixHeight = ref(false);
 

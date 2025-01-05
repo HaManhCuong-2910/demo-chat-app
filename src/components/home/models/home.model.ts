@@ -24,6 +24,7 @@ export interface IDataFormAddMessage {
   message: string;
   image: string;
   isShowTime: boolean;
+  isShowAvatar: boolean;
 }
 
 export interface IHomeData {
@@ -34,5 +35,6 @@ export interface IHomeData {
     type: ETypeUserChat;
     typeMessage: ETypeAddChat;
     isShowTime: boolean;
+    isShowAvatar: boolean;
   }[];
 }

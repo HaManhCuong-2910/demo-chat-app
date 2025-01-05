@@ -103,7 +103,17 @@
               </div>
               <div
                 v-if="showDate && itemChild.typeMessage === ETypeAddChat.date"
-                class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-5"
+                @click="
+                  () => {
+                    if (mode === EModeAction.edit) {
+                      isShowDialog = true;
+                      isEditDialog = true;
+                      dataDialogAdd.index = indexChild;
+                      dataDialogAdd.indexParent = index;
+                    }
+                  }
+                "
+                class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-5 mb-3"
               >
                 <font-awesome-icon
                   :icon="['far', 'calendar-days']"
@@ -163,9 +173,7 @@
                 <img
                   v-if="
                     itemChild.type === ETypeUserChat.other &&
-                    (indexChild > 0
-                      ? item.chats[indexChild - 1].type !== ETypeUserChat.other
-                      : true)
+                    itemChild.isShowAvatar
                   "
                   :src="avatars.other"
                   alt="icon"
@@ -174,19 +182,14 @@
                 <div
                   :class="
                     itemChild.type === ETypeUserChat.other &&
-                    (indexChild > 0
-                      ? item.chats[indexChild - 1].type === ETypeUserChat.other
-                      : false) &&
+                    !itemChild.isShowAvatar &&
                     'ml-[52px]'
                   "
                 >
                   <p
                     v-if="
                       itemChild.type === ETypeUserChat.other &&
-                      (indexChild > 0
-                        ? item.chats[indexChild - 1].type !==
-                          ETypeUserChat.other
-                        : true)
+                      itemChild.isShowAvatar
                     "
                     class="mb-[2px]"
                     :style="`font-size: ${textSize - 3}px`"
@@ -220,10 +223,7 @@
                       <svg
                         v-if="
                           itemChild.type === ETypeUserChat.user &&
-                          (indexChild > 0
-                            ? item.chats[indexChild - 1].type !==
-                              ETypeUserChat.user
-                            : true)
+                          itemChild.isShowAvatar
                         "
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 22.23 42.69"
@@ -241,10 +241,7 @@
                       <svg
                         v-if="
                           itemChild.type === ETypeUserChat.other &&
-                          (indexChild > 0
-                            ? item.chats[indexChild - 1].type !==
-                              ETypeUserChat.other
-                            : true)
+                          itemChild.isShowAvatar
                         "
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 22.23 42.69"
@@ -333,7 +330,7 @@
                   v-if="itemChild.type === ETypeUserChat.other"
                   :src="avatars.other"
                   alt="icon"
-                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full mr-2 mt-1"
+                  class="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl mr-2 mt-1"
                 />
                 <div class="relative">
                   <p
@@ -529,11 +526,12 @@ const dataShow = computed(() => {
 
 <style scoped lang="scss">
 .user {
-  max-width: 65%;
+  max-width: 82%;
   margin-left: auto;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  word-break: break-word;
 
   .content {
     @apply py-[7px] px-3 rounded-xl relative;
@@ -549,10 +547,11 @@ const dataShow = computed(() => {
 }
 
 .other {
-  max-width: 65%;
+  max-width: 82%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  word-break: break-word;
   .content {
     @apply py-[7px] px-3 rounded-xl relative;
     background-color: rgb(255, 255, 255);

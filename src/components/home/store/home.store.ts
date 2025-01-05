@@ -33,6 +33,7 @@ export const useHomeStore = defineStore("homeStore", () => {
             type: value.person,
             typeMessage: value.type,
             isShowTime: value.isShowTime,
+            isShowAvatar: value.isShowAvatar,
           },
         ],
       });
@@ -62,6 +63,7 @@ export const useHomeStore = defineStore("homeStore", () => {
             type: value.person,
             typeMessage: value.type,
             isShowTime: value.isShowTime,
+            isShowAvatar: value.isShowAvatar,
           },
         ],
       });
@@ -77,6 +79,7 @@ export const useHomeStore = defineStore("homeStore", () => {
         type: value.person,
         typeMessage: value.type,
         isShowTime: value.isShowTime,
+        isShowAvatar: value.isShowAvatar,
       });
       showChatList.value = showChatList.value + 1;
     }
@@ -91,6 +94,7 @@ export const useHomeStore = defineStore("homeStore", () => {
       type: value.person,
       typeMessage: value.type,
       isShowTime: value.isShowTime,
+      isShowAvatar: value.isShowAvatar,
     };
   };
 

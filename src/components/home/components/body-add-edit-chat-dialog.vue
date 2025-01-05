@@ -120,6 +120,32 @@
         />
       </div>
     </div>
+
+    <div class="grid grid-cols-6 gap-4 items-center mt-3">
+      <p class="text-base font-medium">Hiện avatar</p>
+      <div class="col-span-5 flex space-x-2">
+        <button-common
+          :text="'Hiện'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.isShowAvatar ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="dataInput.isShowAvatar = true"
+        />
+        <button-common
+          :text="'Ẩn'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            !dataInput.isShowAvatar
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="dataInput.isShowAvatar = false"
+        />
+      </div>
+    </div>
     <div class="grid grid-cols-6 gap-4 items-center mt-3">
       <p class="text-base font-medium">Ngày</p>
       <div class="col-span-5">
@@ -257,6 +283,7 @@ const dataInput = ref<IDataFormAddMessage>({
   message: "",
   image: "",
   isShowTime: false,
+  isShowAvatar: true,
 });
 
 const handleAddMessage = () => {
@@ -300,6 +327,7 @@ onBeforeMount(() => {
         image:
           dataEdit.typeMessage === ETypeAddChat.image ? dataEdit.value : "",
         isShowTime: dataEdit.isShowTime,
+        isShowAvatar: dataEdit.isShowAvatar,
       };
     }
   }
