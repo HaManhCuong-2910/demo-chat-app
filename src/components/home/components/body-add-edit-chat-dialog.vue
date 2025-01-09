@@ -176,19 +176,26 @@
       v-if="dataInput.type === ETypeAddChat.image"
     >
       <p class="text-base font-medium">Hình ảnh</p>
-      <label
-        for="chat_image_input"
-        class="col-span-5 h-[150px] w-full bg-white rounded-xl text-center"
-      >
-        <img :src="dataInput.image" alt="image" class="object-contain h-full" />
-      </label>
-      <input
-        id="chat_image_input"
-        class="hidden"
-        type="file"
-        accept="image/*"
-        @change="handleChange"
-      />
+      <div class="col-span-5">
+        <input
+          id="chat_image_preview_files"
+          type="file"
+          accept="image/*"
+          multiple
+          @change="(event: any)=> {
+        if (!event.target?.files) return;
+        [...event.target.files].forEach(preview);
+      }"
+        />
+        <div class="grid grid-cols-3 gap-2">
+          <img
+            v-for="item in dataInput.images"
+            :key="item"
+            :src="item"
+            alt="images"
+          />
+        </div>
+      </div>
     </div>
 
     <picker
@@ -225,7 +232,7 @@
         @update-image="
           (val) => {
             dataInput.type = ETypeAddChat.image;
-            dataInput.image = val;
+            dataInput.images = [val];
           }
         "
       />
@@ -281,7 +288,7 @@ const dataInput = ref<IDataFormAddMessage>({
   person: ETypeUserChat.user,
   date: moment().format("YYYY-MM-DD HH:mm"),
   message: "",
-  image: "",
+  images: [],
   isShowTime: false,
   isShowAvatar: true,
 });
@@ -298,12 +305,25 @@ const handleEditMessage = () => {
 
 const closeDialog = () => {
   isShowDialog.value = false;
+  if (!!document.querySelector("#chat_image_preview_files")) {
+    dataInput.value.images = [];
+    // @ts-ignore
+    document.getElementById("chat_image_preview_files").value = null;
+  }
 };
 
-const handleChange = async (event: any) => {
-  if (event.target.files[0]) {
-    dataInput.value.image = await toBase64(event.target.files[0]);
+const preview = (file: File) => {
+  const fr = new FileReader();
+  dataInput.value.images = [];
+  if (!!document.querySelector("#chat_image_preview")) {
+    // @ts-ignore
+    document.querySelector("#chat_image_preview").innerHTML = "";
   }
+
+  fr.onload = () => {
+    dataInput.value.images.push(fr.result as string);
+  };
+  fr.readAsDataURL(file);
 };
 
 const onSelectEmoji = (emoji: any) => {
@@ -316,16 +336,13 @@ onBeforeMount(() => {
       dataHome.value[dataDialogAdd.value.indexParent].chats[
         dataDialogAdd.value.index
       ];
-
     if (dataEdit) {
       dataInput.value = {
         date: dataEdit.time,
         person: dataEdit.type,
         type: dataEdit.typeMessage,
-        message:
-          dataEdit.typeMessage !== ETypeAddChat.image ? dataEdit.value : "",
-        image:
-          dataEdit.typeMessage === ETypeAddChat.image ? dataEdit.value : "",
+        message: dataEdit.value,
+        images: dataEdit.images,
         isShowTime: dataEdit.isShowTime,
         isShowAvatar: dataEdit.isShowAvatar,
       };

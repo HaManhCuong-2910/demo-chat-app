@@ -1,5 +1,9 @@
 import moment from "moment";
-import { EPositionToolbar, EUserInterface } from "../models/toolbar.model";
+import {
+  EMode,
+  EPositionToolbar,
+  EUserInterface,
+} from "../models/toolbar.model";
 
 export const useToolbarStore = defineStore("toolbarStore", () => {
   const positionAddButton = ref<EPositionToolbar>(EPositionToolbar.center);
@@ -28,6 +32,10 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
       value: "ko",
     },
   ]);
+
+  const isWifi = ref(false);
+
+  const mode = ref<EMode>(EMode.light);
 
   const userInterface = ref<EUserInterface>(EUserInterface.ios);
 
@@ -66,6 +74,8 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
 
   const showOnRead = ref(true);
   return {
+    isWifi,
+    mode,
     userInterfaces,
     userInterface,
     positionAddButton,

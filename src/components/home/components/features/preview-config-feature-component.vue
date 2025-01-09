@@ -61,6 +61,30 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Chế độ</p>
+      <div class="flex col-span-7">
+        <button-common
+          :text="'Sáng'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            mode === EMode.light ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="mode = EMode.light"
+        />
+        <button-common
+          :text="'Tối'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            mode === EMode.dark ? ETypeButton.primary : ETypeButton.secondary
+          "
+          @click="mode = EMode.dark"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-5 text-center">Pin</p>
 
       <div class="flex col-span-7">
@@ -273,10 +297,12 @@
 import { ETypeButton } from "~/src/services/constant";
 import { useToolbarStore } from "../../store/toolbar.store";
 import { useHomeStore } from "../../store/home.store";
+import { EMode } from "../../models/toolbar.model";
 
 const toolbarStore = useToolbarStore();
 const homeStore = useHomeStore();
 const {
+  mode,
   userInterface,
   userInterfaces,
   languages,

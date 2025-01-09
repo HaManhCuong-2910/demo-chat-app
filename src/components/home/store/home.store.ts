@@ -28,8 +28,8 @@ export const useHomeStore = defineStore("homeStore", () => {
         chats: [
           {
             time: value.date,
-            value:
-              value.type === ETypeAddChat.image ? value.image : value.message,
+            value: value.message,
+            images: value.images,
             type: value.person,
             typeMessage: value.type,
             isShowTime: value.isShowTime,
@@ -58,8 +58,8 @@ export const useHomeStore = defineStore("homeStore", () => {
         chats: [
           {
             time: value.date,
-            value:
-              value.type === ETypeAddChat.image ? value.image : value.message,
+            value: value.message,
+            images: value.images,
             type: value.person,
             typeMessage: value.type,
             isShowTime: value.isShowTime,
@@ -75,7 +75,8 @@ export const useHomeStore = defineStore("homeStore", () => {
           : data.value.length - 1
       ].chats.push({
         time: value.date,
-        value: value.type === ETypeAddChat.image ? value.image : value.message,
+        value: value.message,
+        images: value.images,
         type: value.person,
         typeMessage: value.type,
         isShowTime: value.isShowTime,
@@ -90,8 +91,9 @@ export const useHomeStore = defineStore("homeStore", () => {
       dataDialogAdd.value.index
     ] = {
       time: value.date,
-      value: value.type === ETypeAddChat.image ? value.image : value.message,
+      value: value.message,
       type: value.person,
+      images: value.images,
       typeMessage: value.type,
       isShowTime: value.isShowTime,
       isShowAvatar: value.isShowAvatar,

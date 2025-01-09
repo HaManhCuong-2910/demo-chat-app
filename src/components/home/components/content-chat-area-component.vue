@@ -57,7 +57,10 @@
             class="col-span-10"
             :class="userInterface === EUserInterface.android && 'text-left'"
           >
-            <h3 class="text-xl font-medium" :class="isDarkMode && 'text-white'">
+            <h3
+              class="text-xl font-medium truncate max-w-[94%]"
+              :class="isDarkMode && 'text-white'"
+            >
               {{ names.other }}
             </h3>
           </div>
@@ -380,12 +383,20 @@
                       class="text-white text-lg"
                     />
                   </div>
-
-                  <img
-                    :src="itemChild.value"
-                    alt="image"
-                    class="max-w-full rounded-xl ml-1"
-                  />
+                  <div class="flex flex-wrap gap-[2px]">
+                    <div
+                      v-for="(item, index) in itemChild.images"
+                      :key="item"
+                      class="w-full image-container"
+                    >
+                      <img
+                        :src="item"
+                        alt="image"
+                        class="w-full h-full"
+                        :class="['rounded-xl']"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <p
                   v-if="
@@ -477,7 +488,7 @@ import { useHomeStore } from "../store/home.store";
 import { downloadFile, ETypeButton } from "~/src/services/constant";
 import * as htmlToImage from "html-to-image";
 import { useToolbarStore } from "../store/toolbar.store";
-import { EUserInterface } from "../models/toolbar.model";
+import { EMode, EUserInterface } from "../models/toolbar.model";
 
 const toolbarStore = useToolbarStore();
 const homeStore = useHomeStore();
@@ -490,6 +501,7 @@ const {
   mode,
 } = storeToRefs(homeStore);
 const {
+  mode: ModeChat,
   userInterface,
   language,
   avatars,
@@ -510,11 +522,7 @@ const {
 } = storeToRefs(toolbarStore);
 
 const isDarkMode = computed(() => {
-  return (
-    moment(currentDate.value).diff(
-      moment(currentDate.value).set("h", 12).set("m", 0)
-    ) >= 0
-  );
+  return ModeChat.value === EMode.dark;
 });
 
 const onDownload = () => {
@@ -607,4 +615,10 @@ const dataShow = computed(() => {
 //   $bg-color: var(--bg-color);
 //   background-color: rgba($color: $bg-color, $alpha: 0.9);
 // }
+
+.image-container {
+  width: 30%;
+  flex-grow: 1;
+  position: relative;
+}
 </style>

@@ -32,6 +32,7 @@
     "@vee-validate/yup": "^4.12.4",
     "emoji-mart-vue-fast": "^15.0.3",
     "html-to-image": "^1.11.11",
+    "lightgallery": "^2.8.2",
     "maska": "^2.1.11",
     "mitt": "^3.0.1",
     "moment": "^2.29.4",

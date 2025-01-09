@@ -1,9 +1,9 @@
 <template>
-  <div class="status-bar-container px-4 grid grid-cols-2 py-1">
+  <div class="status-bar-container px-4 grid grid-cols-2 py-[6px]">
     <p class="text-base font-medium" :class="props.isDarkMode && 'text-white'">
       {{ moment(currentDate).format("HH:mm") }}
     </p>
-    <div class="text-end flex space-x-1 justify-end items-center">
+    <div class="text-end flex space-x-[6px] justify-end items-center">
       <svg
         class="w-[18.15px]"
         width="19"
@@ -21,6 +21,7 @@
       </svg>
 
       <svg
+        v-if="isWifi"
         class="w-[16px]"
         width="18"
         height="13"
@@ -33,6 +34,14 @@
           :fill="props.isDarkMode ? 'white' : 'black'"
         />
       </svg>
+      <p
+        v-else
+        class="text-base -mt-[1px]"
+        :class="props.isDarkMode && 'text-white'"
+        contenteditable="true"
+      >
+        4G
+      </p>
       <svg
         width="26"
         height="12"
@@ -75,7 +84,7 @@ const props = defineProps({
   isDarkMode: Boolean,
 });
 
-const { battery, currentDate } = storeToRefs(useToolbarStore());
+const { battery, currentDate, isWifi } = storeToRefs(useToolbarStore());
 </script>
 
 <style scoped></style>
