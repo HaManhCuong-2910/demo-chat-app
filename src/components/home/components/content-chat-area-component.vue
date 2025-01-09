@@ -7,11 +7,11 @@
           ? 'fixed top-0 left-0 right-0 bottom-0 z-10'
           : 'relative',
       ]"
-      :style="`background-color: ${isDarkMode ? '#080808' : bgColor};`"
+      :style="`background-color: ${isDarkMode ? '#111111' : bgColor};`"
     >
       <div
         class="absolute top-0 left-0 w-full z-10 header-container"
-        :style="`background-color: ${isDarkMode ? '#080808' : bgColor}F2;`"
+        :style="`background-color: ${isDarkMode ? '#111111' : bgColor}F2;`"
       >
         <div v-if="statusBar">
           <status-bar-android
@@ -105,13 +105,6 @@
               class="container-item-child flex items-center"
               v-for="(itemChild, indexChild) in item.chats"
             >
-              <div
-                v-if="mode === EModeAction.edit"
-                class="bg-red-300 rounded-full flex justify-center items-center w-7 h-7 mr-2 cursor-pointer"
-                @click="homeStore.onDeleteData(indexChild, index)"
-              >
-                <font-awesome-icon :icon="['fas', 'minus']" class="w-4 h-4" />
-              </div>
               <div
                 v-if="showDate && itemChild.typeMessage === ETypeAddChat.date"
                 @click="
@@ -218,24 +211,7 @@
                       class="w-fit content min-h-7"
                       :style="`font-size: ${textSize}px;font-weight: ${fontWeight}`"
                     >
-                      <font-awesome-icon
-                        v-if="
-                          [ETypeAddChat.calling, ETypeAddChat.called].includes(
-                            itemChild.typeMessage
-                          )
-                        "
-                        :icon="['fas', 'phone']"
-                        :class="`${
-                          itemChild.typeMessage === ETypeAddChat.calling
-                            ? 'text-green-600'
-                            : ''
-                        } inline -mb-[1px] ${
-                          itemChild.typeMessage === ETypeAddChat.called
-                            ? 'mr-12'
-                            : 'mr-2'
-                        }  phone-icon`"
-                        :style="[`font-size: ${textSize + 5}px`]"
-                      />
+                      <icon-call-chat-component :data="itemChild" />
                       {{ itemChild.value }}
                       <svg
                         v-if="
@@ -383,7 +359,7 @@
                       class="text-white text-lg"
                     />
                   </div>
-                  <div class="flex flex-wrap gap-[2px]">
+                  <div class="flex flex-wrap w-full gap-1">
                     <div
                       v-for="(item, index) in itemChild.images"
                       :key="item"
@@ -441,6 +417,11 @@
                   :icon="['fas', 'arrow-down']"
                   class="p-1 bg-white text-xs border-t border-b border-t-gray-300 border-b-gray-300 cursor-pointer"
                   @click="homeStore.switchData(indexChild, index, 'down')"
+                />
+                <font-awesome-icon
+                  :icon="['fas', 'minus']"
+                  class="p-1 bg-red-300 text-xs border-t border-b border-t-gray-300 border-b-gray-300 cursor-pointer"
+                  @click="homeStore.onDeleteData(indexChild, index)"
                 />
                 <font-awesome-icon
                   :icon="['fas', 'plus']"
@@ -617,8 +598,7 @@ const dataShow = computed(() => {
 // }
 
 .image-container {
-  width: 30%;
-  flex-grow: 1;
+  flex: 1 1 30%;
   position: relative;
 }
 </style>

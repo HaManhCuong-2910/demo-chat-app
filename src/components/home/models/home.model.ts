@@ -8,6 +8,9 @@ export enum ETypeAddChat {
   image = "image",
   calling = "calling",
   called = "called",
+  call_canceled = "call_canceled",
+  video_call_green = "video_call_green",
+  video_call_black = "video_call_black",
   date = "date",
 }
 

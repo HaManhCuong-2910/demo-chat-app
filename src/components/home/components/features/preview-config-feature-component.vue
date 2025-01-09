@@ -2,6 +2,16 @@
   <div class="p-3 bg-gray-100 rounded-xl">
     <h3 class="text-center font-medium mb-4">Cấu hình</h3>
 
+    <div class="text-center mb-4">
+      <el-checkbox
+        v-model="isWifi"
+        label="Wifi"
+        size="large"
+        class="bg-white"
+        border
+      />
+    </div>
+
     <div class="grid grid-cols-12 gap-1 items-center">
       <p class="text-base font-medium col-span-5 text-center">Ngôn ngữ</p>
       <div class="flex col-span-7">
@@ -302,6 +312,7 @@ import { EMode } from "../../models/toolbar.model";
 const toolbarStore = useToolbarStore();
 const homeStore = useHomeStore();
 const {
+  isWifi,
   mode,
   userInterface,
   userInterfaces,

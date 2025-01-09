@@ -36,7 +36,8 @@
           "
           @click="
             dataInput.type = ETypeAddChat.calling;
-            dataInput.message = 'Cuộc gọi thoại';
+            dataInput.message =
+              language === 'ko' ? '음성통화' : 'Cuộc gọi thoại';
           "
         />
         <button-common
@@ -51,6 +52,48 @@
           @click="
             dataInput.type = ETypeAddChat.called;
             dataInput.message = '00:13';
+          "
+        />
+        <button-common
+          :text="'Hủy cuộc gọi'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.call_canceled
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.call_canceled;
+            dataInput.message = language === 'ko' ? '취소' : 'Đã hủy';
+          "
+        />
+        <button-common
+          :text="'Cuộc gọi video'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.video_call_black
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.video_call_black;
+            dataInput.message = '2:13';
+          "
+        />
+        <button-common
+          :text="'Cuộc gọi video xanh'"
+          :class="'!rounded-xl w-full'"
+          :class-text="'font-medium text-base'"
+          :type="
+            dataInput.type === ETypeAddChat.video_call_green
+              ? ETypeButton.primary
+              : ETypeButton.secondary
+          "
+          @click="
+            dataInput.type = ETypeAddChat.video_call_green;
+            dataInput.message = 'Cuộc gọi video';
           "
         />
         <button-common
@@ -271,9 +314,10 @@ import {
 } from "../models/home.model";
 import moment from "moment";
 import { useHomeStore } from "../store/home.store";
+import { useToolbarStore } from "../store/toolbar.store";
 
 const emojiIndex = ref(new EmojiIndex(data));
-
+const { language } = storeToRefs(useToolbarStore());
 const homeStore = useHomeStore();
 const {
   data: dataHome,

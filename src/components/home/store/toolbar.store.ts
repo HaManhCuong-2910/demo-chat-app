@@ -33,7 +33,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     },
   ]);
 
-  const isWifi = ref(false);
+  const isWifi = ref(true);
 
   const mode = ref<EMode>(EMode.light);
 
