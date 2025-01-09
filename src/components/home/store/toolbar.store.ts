@@ -1,5 +1,5 @@
 import moment from "moment";
-import { EPositionToolbar } from "../models/toolbar.model";
+import { EPositionToolbar, EUserInterface } from "../models/toolbar.model";
 
 export const useToolbarStore = defineStore("toolbarStore", () => {
   const positionAddButton = ref<EPositionToolbar>(EPositionToolbar.center);
@@ -22,6 +22,23 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
     {
       label: "Tiếng Việt",
       value: "vi",
+    },
+    {
+      label: "Tiếng Hàn",
+      value: "ko",
+    },
+  ]);
+
+  const userInterface = ref<EUserInterface>(EUserInterface.ios);
+
+  const userInterfaces = ref([
+    {
+      label: "Android",
+      value: EUserInterface.android,
+    },
+    {
+      label: "IOS",
+      value: EUserInterface.ios,
     },
   ]);
 
@@ -49,6 +66,8 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
 
   const showOnRead = ref(true);
   return {
+    userInterfaces,
+    userInterface,
     positionAddButton,
     avatars,
     names,

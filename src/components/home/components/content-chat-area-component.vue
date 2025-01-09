@@ -5,78 +5,86 @@
       :class="[
         mode === EModeAction.fullScreen
           ? 'fixed top-0 left-0 right-0 bottom-0 z-10'
-          : '',
+          : 'relative',
       ]"
-      :style="`background-color: ${bgColor};`"
+      :style="`background-color: ${isDarkMode ? '#080808' : bgColor};`"
     >
       <div
-        class="status-bar-container px-4 grid grid-cols-2 py-1"
-        v-if="statusBar"
+        class="absolute top-0 left-0 w-full z-10 header-container"
+        :style="`background-color: ${isDarkMode ? '#080808' : bgColor}F2;`"
       >
-        <p class="text-base font-medium">
-          {{ moment(currentDate).format("HH:mm") }}
-        </p>
-        <div class="text-end flex space-x-1 justify-end items-center">
-          <img
-            src="/reception.svg"
-            alt="icon"
-            class="w-[18.15px] object-contain"
+        <div v-if="statusBar">
+          <status-bar-android
+            v-if="userInterface === EUserInterface.android"
+            :is-dark-mode="isDarkMode"
           />
-          <img src="/wifi.svg" alt="icon" class="w-[16px] object-contain" />
+          <status-bar-ios v-else :is-dark-mode="isDarkMode" />
+        </div>
+
+        <div class="header-chat grid grid-cols-12 p-4 text-center items-center">
           <svg
-            width="26"
-            height="12"
-            viewBox="0 0 26 12"
+            v-if="userInterface === EUserInterface.ios"
+            width="12"
+            height="24"
+            viewBox="0 0 12 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_0_3)">
-              <path
-                opacity="0.44"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M24.0741 4.07407L24.5169 4.36934C25.1427 4.78648 25.5185 5.48873 25.5185 6.24074C25.5185 6.99275 25.1427 7.695 24.5169 8.11214L24.0741 8.40741V4.07407ZM1.92593 0.703703H21.1852C22.2489 0.703703 23.1111 1.56597 23.1111 2.62963V9.85185C23.1111 10.9155 22.2489 11.7778 21.1852 11.7778H1.92593C0.862266 11.7778 0 10.9155 0 9.85185V2.62963C0 1.56597 0.862266 0.703703 1.92593 0.703703ZM1.92593 1.66667C1.3941 1.66667 0.962963 2.0978 0.962963 2.62963V9.85185C0.962963 10.3837 1.3941 10.8148 1.92593 10.8148H21.1852C21.717 10.8148 22.1481 10.3837 22.1481 9.85185V2.62963C22.1481 2.0978 21.717 1.66667 21.1852 1.66667H1.92593Z"
-                fill="black"
-              />
-              <path
-                :d="`M2.3125 3H${
-                  (battery / 100) * 21
-                }V10H2.3125C2.13991 10 2 9.58213 2 9.06667V3.93333C2 3.41787 2.13991 3 2.3125 3Z`"
-                :fill="`${battery <= 20 ? 'red' : 'black'}`"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_0_3">
-                <rect width="26" height="12" fill="white" />
-              </clipPath>
-            </defs>
+            <path
+              d="M2.05306 12L11.7572 1.52762C12.0873 1.17137 12.0799 0.601572 11.7406 0.254947C11.4013 -0.0916775 10.8586 -0.083872 10.5285 0.272381L0.242806 11.3724C-0.0809354 11.7218 -0.0809354 12.2782 0.242806 12.6276L10.5285 23.7276C10.8586 24.0839 11.4013 24.0917 11.7406 23.7451C12.0799 23.3984 12.0873 22.8286 11.7572 22.4724L2.05306 12Z"
+              :fill="isDarkMode ? 'white' : 'black'"
+            />
           </svg>
-        </div>
-      </div>
-      <div class="header-chat grid grid-cols-4 p-4 text-center">
-        <img src="/arrow-left.svg" alt="icon" class="w-6" />
-        <div class="col-span-2 text-center">
-          <h3 class="text-xl font-medium">{{ names.other }}</h3>
-        </div>
-        <div class="flex justify-end space-x-4 items-center mr-4">
-          <img
-            :src="'/icon-search.svg'"
-            alt="icon"
-            class="w-4 object-contain"
-          />
-          <font-awesome-icon :icon="['fas', 'bars']" class="text-xl" />
+
+          <svg
+            v-else
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.8377 12H2.16229M2.16229 12L11.4534 2.70886M2.16229 12L11.4534 21.2912"
+              :stroke="isDarkMode ? 'white' : 'black'"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <div
+            class="col-span-10"
+            :class="userInterface === EUserInterface.android && 'text-left'"
+          >
+            <h3 class="text-xl font-medium" :class="isDarkMode && 'text-white'">
+              {{ names.other }}
+            </h3>
+          </div>
+          <div class="flex justify-end space-x-4 items-center mr-2">
+            <font-awesome-icon
+              :icon="['fas', 'magnifying-glass']"
+              class="text-[18px]"
+              :class="isDarkMode && 'text-white'"
+            />
+            <font-awesome-icon
+              :icon="['fas', 'bars']"
+              class="text-xl"
+              :class="isDarkMode && 'text-white'"
+            />
+          </div>
         </div>
       </div>
 
       <div
         :style="`height: ${
           mode === EModeAction.fullScreen
-            ? 'calc(100vh - 92px)'
+            ? '100vh'
             : fixHeight
-            ? `${ratioH * (797 + 92)}px`
+            ? `${ratioH * (797 + 92 + 92)}px`
             : '100%'
-        }; ${!fixHeight ? `min-height: ${ratioH * (797 + 92)}px;` : ''}`"
-        class="relative overflow-y-hidden"
+        }; ${!fixHeight ? `min-height: ${ratioH * (797 + 92 + 92)}px;` : ''}`"
+        class="relative overflow-y-hidden pt-[92px]"
         @click="
           mode === EModeAction.fullScreen
             ? (mode = EModeAction.edit)
@@ -84,9 +92,9 @@
         "
       >
         <div
-          class="h-full px-4 py-3 pb-[120px] hide-webkit-scrollbar"
+          class="h-full px-4 py-3 pb-[150px] hide-webkit-scrollbar"
           :style="`transform: translateY(${
-            (scrollChat / 100) * ratioH * (797 + 92 + 200) * -1
+            (scrollChat / 100) * ratioH * (797 + 92 + 92 + 200) * -1
           }px);`"
         >
           <div v-for="(item, index) in dataShow" :key="item.time">
@@ -113,7 +121,8 @@
                     }
                   }
                 "
-                class="bg-black bg-opacity-15 py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-5 mb-3"
+                class="py-1 px-3 rounded-xl text-xs text-white flex items-center w-fit mx-auto mt-5 mb-3"
+                :class="isDarkMode ? 'bg-[#2d2d2d]' : 'bg-black bg-opacity-15'"
               >
                 <font-awesome-icon
                   :icon="['far', 'calendar-days']"
@@ -145,6 +154,7 @@
               >
                 <p
                   class="!leading-3 time-content whitespace-nowrap"
+                  :class="isDarkMode && 'text-[#888888]'"
                   :style="`font-size: ${Math.max(
                     textSize - 5,
                     11
@@ -168,7 +178,11 @@
                     style="color: rgb(262, 228, 0)"
                     >1
                   </span>
-                  {{ moment(itemChild.time).format("h:mm") }}
+                  {{
+                    moment(itemChild.time)
+                      .locale(language)
+                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                  }}
                 </p>
                 <img
                   v-if="
@@ -264,6 +278,7 @@
                         itemChild.isShowTime
                       "
                       class="time-content self-end whitespace-nowrap mt-1"
+                      :class="isDarkMode && 'text-[#888888]'"
                       :style="`font-size: ${Math.max(
                         textSize - 5,
                         11
@@ -283,7 +298,11 @@
                         style="color: rgb(262, 228, 0)"
                         >1
                       </span>
-                      {{ moment(itemChild.time).format("h:mm") }}
+                      {{
+                        moment(itemChild.time)
+                          .locale(language)
+                          .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                      }}
                     </p>
                   </div>
                 </div>
@@ -301,6 +320,7 @@
               >
                 <p
                   class="!leading-3 time-content whitespace-nowrap mr-2"
+                  :class="isDarkMode && 'text-[#888888]'"
                   :style="`font-size: ${Math.max(
                     textSize - 5,
                     11
@@ -317,6 +337,7 @@
                       index === dataShow.length - 1
                     "
                     class="block !leading-3 text-end"
+                    :class="isDarkMode && 'text-[#888888]'"
                     :style="`font-size: ${Math.max(
                       textSize - 5,
                       11
@@ -324,7 +345,11 @@
                     style="color: rgb(262, 228, 0)"
                     >1</span
                   >
-                  {{ moment(itemChild.time).format("h:mm") }}
+                  {{
+                    moment(itemChild.time)
+                      .locale(language)
+                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                  }}
                 </p>
                 <img
                   v-if="itemChild.type === ETypeUserChat.other"
@@ -343,12 +368,15 @@
                   <div
                     :class="`w-9 h-9 rounded-full bg-slate-400 flex justify-center items-center absolute top-1/2 ${
                       itemChild.type === ETypeUserChat.user
-                        ? 'right-full'
-                        : 'left-[116%]'
-                    } -translate-x-1/2`"
+                        ? 'right-[104%]'
+                        : 'left-[104%]'
+                    } -translate-y-1/2`"
                   >
                     <font-awesome-icon
-                      :icon="['fas', 'arrow-up-from-bracket']"
+                      :icon="[
+                        'fas',
+                        language === 'ko' ? 'comment' : 'arrow-up-from-bracket',
+                      ]"
                       class="text-white text-lg"
                     />
                   </div>
@@ -365,6 +393,7 @@
                     itemChild.isShowTime
                   "
                   class="time-content self-end whitespace-nowrap ml-3 mt-10"
+                  :class="isDarkMode && 'text-[#888888]'"
                   :style="`font-size: ${Math.max(textSize - 5, 11)}px`"
                 >
                   <span
@@ -381,7 +410,11 @@
                     style="color: rgb(262, 228, 0)"
                     >1
                   </span>
-                  {{ moment(itemChild.time).format("h:mm") }}
+                  {{
+                    moment(itemChild.time)
+                      .locale(language)
+                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                  }}
                 </p>
               </div>
               <div
@@ -413,7 +446,7 @@
           </div>
         </div>
         <div class="absolute bottom-0 left-0 right-0 w-full" v-if="footer">
-          <chat-input-area-component />
+          <chat-input-area-component :is-dark-mode="isDarkMode" />
         </div>
       </div>
     </div>
@@ -444,6 +477,7 @@ import { useHomeStore } from "../store/home.store";
 import { downloadFile, ETypeButton } from "~/src/services/constant";
 import * as htmlToImage from "html-to-image";
 import { useToolbarStore } from "../store/toolbar.store";
+import { EUserInterface } from "../models/toolbar.model";
 
 const toolbarStore = useToolbarStore();
 const homeStore = useHomeStore();
@@ -456,11 +490,11 @@ const {
   mode,
 } = storeToRefs(homeStore);
 const {
+  userInterface,
   language,
   avatars,
   names,
   statusBar,
-  battery,
   currentDate,
   showDate,
   bgColor,
@@ -474,6 +508,14 @@ const {
   showChatList,
   showOnRead,
 } = storeToRefs(toolbarStore);
+
+const isDarkMode = computed(() => {
+  return (
+    moment(currentDate.value).diff(
+      moment(currentDate.value).set("h", 12).set("m", 0)
+    ) >= 0
+  );
+});
 
 const onDownload = () => {
   const node = document.getElementById("chat-area");
@@ -560,4 +602,9 @@ const dataShow = computed(() => {
     margin-right: 8px;
   }
 }
+
+// .header-container {
+//   $bg-color: var(--bg-color);
+//   background-color: rgba($color: $bg-color, $alpha: 0.9);
+// }
 </style>

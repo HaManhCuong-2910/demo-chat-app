@@ -17,6 +17,24 @@
     </div>
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">Giao diện</p>
+      <div class="flex col-span-7">
+        <el-select
+          v-model="userInterface"
+          placeholder="Select"
+          style="width: 240px"
+        >
+          <el-option
+            v-for="item in userInterfaces"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-5 text-center">
         Thanh trạng thái
       </p>
@@ -259,6 +277,8 @@ import { useHomeStore } from "../../store/home.store";
 const toolbarStore = useToolbarStore();
 const homeStore = useHomeStore();
 const {
+  userInterface,
+  userInterfaces,
   languages,
   language,
   statusBar,

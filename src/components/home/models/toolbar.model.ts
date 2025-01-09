@@ -3,3 +3,8 @@ export enum EPositionToolbar {
   right = "end",
   center = "center",
 }
+
+export enum EUserInterface {
+  ios = "ios",
+  android = "android",
+}
