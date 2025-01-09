@@ -12,7 +12,7 @@
     :disabled="isdisabled"
   >
     <img :src="props.icon" class="mr-2" v-if="props.icon" />
-    <p :class="['text-style', props.classText]" v-if="props.text">
+    <p :class="['text-style text-wrap', props.classText]" v-if="props.text">
       {{ props.text }}
     </p>
     <slot></slot>
