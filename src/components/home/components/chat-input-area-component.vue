@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-2" :class="props.isDarkMode ? 'bg-[#111111]' : 'bg-white'">
+  <div class="pt-2" :class="props.isDarkMode ? 'bg-[#141414]' : 'bg-white'">
     <div class="flex space-x-2 items-center px-4 pt-4 pb-2">
       <div>
         <div

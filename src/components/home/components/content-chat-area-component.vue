@@ -7,11 +7,11 @@
           ? 'fixed top-0 left-0 right-0 bottom-0 z-10'
           : 'relative',
       ]"
-      :style="`background-color: ${isDarkMode ? '#111111' : bgColor};`"
+      :style="`background-color: ${isDarkMode ? '#141414' : bgColor};`"
     >
       <div
         class="absolute top-0 left-0 w-full z-10 header-container"
-        :style="`background-color: ${isDarkMode ? '#111111' : bgColor}F2;`"
+        :style="`background-color: ${isDarkMode ? '#141414' : bgColor}F2;`"
       >
         <div v-if="statusBar">
           <status-bar-android
@@ -208,7 +208,18 @@
                   </p>
                   <div class="flex items-end">
                     <div
-                      class="w-fit content min-h-7"
+                      class="w-fit content min-h-7 flex justify-between"
+                      :class="
+                        [
+                          ETypeAddChat.calling,
+                          ETypeAddChat.called,
+                          ETypeAddChat.call_canceled,
+                          ETypeAddChat.video_call_black,
+                          ETypeAddChat.video_call_green,
+                        ].includes(itemChild.typeMessage)
+                          ? 'min-w-[180px]'
+                          : ''
+                      "
                       :style="`font-size: ${textSize}px;font-weight: ${fontWeight}`"
                     >
                       <icon-call-chat-component :data="itemChild" />
