@@ -14,7 +14,7 @@
       </div>
       <div class="flex-1">
         <input-common
-          :placeholder="'Nhập tin nhắn'"
+          :placeholder="language === 'ko' ? '메시지 입력' : 'Nhập tin nhắn'"
           v-model:value="value"
           :class="`custom-input ${props.isDarkMode ? 'dark-mode' : ''}`"
         >
@@ -72,7 +72,7 @@ const props = defineProps({
   isDarkMode: Boolean,
 });
 
-const { userInterface } = storeToRefs(useToolbarStore());
+const { userInterface, language } = storeToRefs(useToolbarStore());
 const value = ref("");
 </script>
 

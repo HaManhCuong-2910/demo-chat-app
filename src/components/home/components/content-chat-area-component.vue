@@ -589,7 +589,7 @@ const dataShow = computed(() => {
 }
 
 .other {
-  max-width: 82%;
+  max-width: calc(82% + 32px);
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
