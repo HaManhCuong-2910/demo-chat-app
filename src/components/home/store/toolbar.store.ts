@@ -36,6 +36,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
   const isWifi = ref(true);
 
   const mode = ref<EMode>(EMode.light);
+  const iconChaxBoxImage = ref("/icon-chat-box-image.svg");
 
   const userInterface = ref<EUserInterface>(EUserInterface.ios);
 
@@ -75,6 +76,7 @@ export const useToolbarStore = defineStore("toolbarStore", () => {
   const showOnRead = ref(true);
   return {
     isWifi,
+    iconChaxBoxImage,
     mode,
     userInterfaces,
     userInterface,

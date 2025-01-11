@@ -285,6 +285,32 @@
       </div>
     </div>
 
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5 text-center">
+        Icon chax box ảnh
+      </p>
+
+      <div class="flex col-span-7">
+        <label
+          for="icon_chat_box_image"
+          class="preview-image relative w-20 h-20"
+        >
+          <img
+            :src="iconChaxBoxImage"
+            alt="icon"
+            class="w-full h-full object-contain"
+          />
+        </label>
+        <input
+          id="icon_chat_box_image"
+          class="hidden"
+          type="file"
+          accept="image/*"
+          @change="(event) => handleChange(event)"
+        />
+      </div>
+    </div>
+
     <div class="mt-4 grid grid-cols-2 gap-4">
       <button-common
         :text="'Xuất File'"
@@ -304,7 +330,7 @@
 </template>
 
 <script setup lang="ts">
-import { ETypeButton } from "~/src/services/constant";
+import { ETypeButton, toBase64 } from "~/src/services/constant";
 import { useToolbarStore } from "../../store/toolbar.store";
 import { useHomeStore } from "../../store/home.store";
 import { EMode } from "../../models/toolbar.model";
@@ -314,6 +340,7 @@ const homeStore = useHomeStore();
 const {
   isWifi,
   mode,
+  iconChaxBoxImage,
   userInterface,
   userInterfaces,
   languages,
@@ -344,6 +371,12 @@ const maxShowList = computed(() => {
   let newArray = arraysProduct.reduce((a, b) => a.concat(b), []);
   return newArray.length;
 });
+
+const handleChange = async (event: any) => {
+  if (event.target.files[0]) {
+    iconChaxBoxImage.value = await toBase64(event.target.files[0]);
+  }
+};
 
 const onExport = () => {
   const content = JSON.stringify(data.value);

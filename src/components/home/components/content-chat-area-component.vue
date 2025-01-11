@@ -362,12 +362,17 @@
                         : 'left-[104%]'
                     } -translate-y-1/2`"
                   >
-                    <font-awesome-icon
+                    <!-- <font-awesome-icon
                       :icon="[
                         'fas',
                         language === 'ko' ? 'comment' : 'arrow-up-from-bracket',
                       ]"
                       class="text-white text-lg"
+                    /> -->
+                    <img
+                      :src="iconChaxBoxImage"
+                      alt="chat box"
+                      class="w-[18px] !ml-[unset]"
                     />
                   </div>
                   <div class="flex flex-wrap w-full gap-1">
@@ -493,6 +498,7 @@ const {
   mode,
 } = storeToRefs(homeStore);
 const {
+  iconChaxBoxImage,
   mode: ModeChat,
   userInterface,
   language,

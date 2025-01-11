@@ -47,7 +47,7 @@
         :class="props.isDarkMode && 'text-white'"
         contenteditable="true"
       >
-        4G
+        5G
       </p>
 
       <svg
