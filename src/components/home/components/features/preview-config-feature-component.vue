@@ -291,23 +291,14 @@
       </p>
 
       <div class="flex col-span-7">
-        <label
-          for="icon_chat_box_image"
-          class="preview-image relative w-20 h-20"
-        >
-          <img
-            :src="iconChaxBoxImage"
-            alt="icon"
-            class="w-full h-full object-contain"
-          />
-        </label>
-        <input
-          id="icon_chat_box_image"
-          class="hidden"
-          type="file"
-          accept="image/*"
-          @change="(event) => handleChange(event)"
-        />
+        <el-radio-group v-model="iconChaxBoxImage">
+          <el-radio value="/icon-chat-box-image.svg" size="large"
+            >Loại 1</el-radio
+          >
+          <el-radio value="/icon-chat-box-image-2.svg" size="large"
+            >Loại 2</el-radio
+          >
+        </el-radio-group>
       </div>
     </div>
 
@@ -371,12 +362,6 @@ const maxShowList = computed(() => {
   let newArray = arraysProduct.reduce((a, b) => a.concat(b), []);
   return newArray.length;
 });
-
-const handleChange = async (event: any) => {
-  if (event.target.files[0]) {
-    iconChaxBoxImage.value = await toBase64(event.target.files[0]);
-  }
-};
 
 const onExport = () => {
   const content = JSON.stringify(data.value);
