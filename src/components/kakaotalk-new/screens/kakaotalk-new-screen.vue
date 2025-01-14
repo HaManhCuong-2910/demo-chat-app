@@ -3,8 +3,13 @@
     class="container-kakaotalk-new relative"
     style="background-color: #b6c6d6"
   >
-    <status-bar-kakaotalk-new />
-    <header-kakaotalk-new />
+    <div class="absolute top-0 left-0 w-full">
+      <status-bar-kakaotalk-new />
+      <header-kakaotalk-new />
+    </div>
+    <div class="pt-[273px] pb-[92.73px] px-10">
+      <chat-area-kakaotalk-new />
+    </div>
     <div class="absolute bottom-0 left-0 w-full">
       <footer-kakaotalk-new />
     </div>

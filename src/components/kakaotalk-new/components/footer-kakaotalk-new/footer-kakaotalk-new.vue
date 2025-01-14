@@ -37,7 +37,7 @@
 
     <div class="px-4 pb-8">
       <span
-        class="block w-[300px] h-2 mx-auto mt-4 rounded-full"
+        class="block w-[300px] h-2 mx-auto mt-12 rounded-full"
         :class="'bg-black'"
       ></span>
     </div>
