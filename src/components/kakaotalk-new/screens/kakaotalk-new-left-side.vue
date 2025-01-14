@@ -1,6 +1,6 @@
 <template>
   <div class="px-9">
-    <div class="mb-4">
+    <div class="flex flex-wrap gap-2">
       <el-checkbox
         v-model="isWifi"
         label="Wifi"

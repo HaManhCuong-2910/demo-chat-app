@@ -41,12 +41,20 @@
       <div class="flex items-end">
         <div class="w-fit content min-h-7 flex justify-between">
           <div
+            v-if="props.data.replicaIndex !== null"
             style="font-size: 41px; font-weight: 500; line-height: 48px"
             contenteditable="true"
           >
             <div class="pb-6 mb-4 border-b border-[#efd400]">
-              <p class="font-medium" style="font-size: 30px">Trả lời tôi</p>
-              <p class="mt-5" style="font-size: 30px">Ghi chú thoại</p>
+              <p class="font-medium" style="font-size: 30px; line-height: 38px">
+                Trả lời tôi
+              </p>
+              <p
+                class="mt-2 text-ellipsis-1-line"
+                style="font-size: 30px; line-height: 38px"
+              >
+                {{ dataChats[props.data.replicaIndex].value }}
+              </p>
             </div>
             {{ props.data.value }}
           </div>
@@ -114,8 +122,10 @@ import { ETypeUserChat } from "~/src/components/home/models/home.model";
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import moment from "moment";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
+import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 
 const { avatars } = storeToRefs(useKakaotalkNewStore());
+const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
   data: {
