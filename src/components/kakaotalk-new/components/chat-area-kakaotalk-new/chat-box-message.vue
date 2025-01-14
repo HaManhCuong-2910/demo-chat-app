@@ -40,12 +40,16 @@
       </p>
       <div class="flex items-end">
         <div class="w-fit content min-h-7 flex justify-between">
-          <p
+          <div
             style="font-size: 41px; font-weight: 500; line-height: 48px"
             contenteditable="true"
           >
+            <div class="pb-6 mb-4 border-b border-[#efd400]">
+              <p class="font-medium" style="font-size: 30px">Trả lời tôi</p>
+              <p class="mt-5" style="font-size: 30px">Ghi chú thoại</p>
+            </div>
             {{ props.data.value }}
-          </p>
+          </div>
           <svg
             v-if="
               props.data.type === ETypeUserChat.user && props.data.isShowAvatar

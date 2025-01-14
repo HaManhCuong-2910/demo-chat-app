@@ -1,5 +1,6 @@
 <template>
   <div
+    id="container-kakaotalk-new"
     class="container-kakaotalk-new relative"
     style="background-color: #b6c6d6"
   >

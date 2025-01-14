@@ -16,11 +16,12 @@
       <context-menu-item
         v-if="
           dataChats[dataContextMenu.index].replicaIndex === null &&
-          dataChats[dataContextMenu.index].typeMessage ===
-            ETypeAddChat.message &&
-          dataChats[dataContextMenu.index].typeMessage === ETypeAddChat.image
+          (dataChats[dataContextMenu.index].typeMessage ===
+            ETypeAddChat.message ||
+            dataChats[dataContextMenu.index].typeMessage === ETypeAddChat.image)
         "
         label="REP"
+        @click="onRepMessage"
       />
       <context-menu-item label="Xóa" @click="onDelete" />
     </context-menu>
