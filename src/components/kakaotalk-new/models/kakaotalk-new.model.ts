@@ -8,4 +8,5 @@ export interface IChatsKakaotalkNew {
   typeMessage: ETypeAddChat;
   isShowTime: boolean;
   isShowAvatar: boolean;
+  replicaIndex: number | null;
 }

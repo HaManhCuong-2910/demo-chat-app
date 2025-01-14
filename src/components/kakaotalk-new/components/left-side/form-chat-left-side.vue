@@ -67,7 +67,11 @@
       }"
       />
 
-      <button-common :text="'Gửi'" :class-text="'font-medium text-base'" />
+      <button-common
+        :text="'Gửi'"
+        :class-text="'font-medium text-base'"
+        @click="onAddMessage"
+      />
       <button-common
         :text="'Cuộc gọi thoại'"
         :class-text="'font-medium text-base'"
@@ -93,14 +97,25 @@
 </template>
 
 <script setup lang="ts">
-import { ETypeUserChat } from "~/src/components/home/models/home.model";
+import {
+  ETypeAddChat,
+  ETypeUserChat,
+} from "~/src/components/home/models/home.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 import { toBase64 } from "~/src/services/constant";
+import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
+import moment from "moment";
 
-const { avatars } = storeToRefs(useKakaotalkNewStore());
+const { avatars, isShowAvatar, isShowTime } = storeToRefs(
+  useKakaotalkNewStore()
+);
+const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
-  type: String as PropType<ETypeUserChat>,
+  type: {
+    type: String as PropType<ETypeUserChat>,
+    default: ETypeUserChat.user,
+  },
 });
 
 const data = ref<{
@@ -129,6 +144,19 @@ const handleChange = async (event: any) => {
   if (event.target.files[0]) {
     avatars.value.other = await toBase64(event.target.files[0]);
   }
+};
+
+const onAddMessage = () => {
+  dataChats.value.push({
+    images: [],
+    isShowAvatar: isShowAvatar.value,
+    isShowTime: isShowTime.value,
+    time: moment().format("YYYY-MM-DD HH:mm"),
+    type: props.type,
+    typeMessage: ETypeAddChat.message,
+    value: data.value.message,
+    replicaIndex: null,
+  });
 };
 </script>
 

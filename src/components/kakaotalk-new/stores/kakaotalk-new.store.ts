@@ -2,10 +2,13 @@ import { EMode, EUserInterface } from "../../home/models/toolbar.model";
 
 export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
   const isWifi = ref(true);
+  const isShowAvatar = ref(true);
+  const isShowTime = ref(true);
 
   const avatars = ref({
     other: "/avatar.png",
   });
+
   const names = ref({
     user: "Tôi",
     other: "Người khác",
@@ -61,5 +64,7 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
     battery,
     bgColor,
     scrollChat,
+    isShowAvatar,
+    isShowTime,
   };
 });

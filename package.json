@@ -26,6 +26,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@imengyu/vue3-context-menu": "^1.4.4",
     "@nuxtjs/i18n": "^8.0.0",
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/nuxt": "^4.12.4",
