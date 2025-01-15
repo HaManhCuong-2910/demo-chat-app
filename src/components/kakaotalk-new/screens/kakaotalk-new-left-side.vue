@@ -33,6 +33,14 @@
       </div>
     </div>
 
+    <div class="grid grid-cols-12 gap-1 items-center mt-3">
+      <p class="text-base font-medium col-span-5">Scroll Chat</p>
+
+      <div class="flex col-span-10">
+        <el-input-number v-model="scrollChat" :min="0" />
+      </div>
+    </div>
+
     <div class="mt-4">
       <form-chat-left-side :type="ETypeUserChat.user" />
     </div>
@@ -47,7 +55,7 @@
 import { ETypeUserChat } from "../../home/models/home.model";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
 
-const { isWifi, battery, isShowAvatar, isShowTime } = storeToRefs(
+const { isWifi, battery, isShowAvatar, isShowTime, scrollChat } = storeToRefs(
   useKakaotalkNewStore()
 );
 </script>

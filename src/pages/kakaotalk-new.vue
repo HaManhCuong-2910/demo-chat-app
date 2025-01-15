@@ -8,8 +8,9 @@
         <kakaotalk-new-screen />
       </div>
       <div>
+        <kakaotalk-new-right-side />
         <button-common
-          class="!rounded-xl"
+          class="!rounded-xl mt-5"
           :type="ETypeButton.primaryWhite"
           @click="onDownload"
         >

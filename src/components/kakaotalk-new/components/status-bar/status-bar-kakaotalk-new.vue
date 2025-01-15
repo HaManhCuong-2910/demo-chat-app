@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full px-10 grid grid-cols-2 py-10">
+  <div class="w-full pl-10 pr-9 grid grid-cols-2 py-14">
     <p class="text-[41px] !leading-8 font-medium">11:24</p>
     <div class="text-end flex space-x-[16px] justify-end items-center">
       <svg

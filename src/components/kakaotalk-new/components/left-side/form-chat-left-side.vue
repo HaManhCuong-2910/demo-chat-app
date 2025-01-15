@@ -75,22 +75,27 @@
       <button-common
         :text="'Cuộc gọi thoại'"
         :class-text="'font-medium text-base'"
+        @click="onAddCall(ETypeAddChat.calling, 'Cuộc gọi thoại')"
       />
       <button-common
         :text="'Kết thúc cuộc gọi'"
         :class-text="'font-medium text-base'"
+        @click="onAddCall(ETypeAddChat.called, '00:13')"
       />
       <button-common
         :text="'Hủy cuộc gọi'"
         :class-text="'font-medium text-base'"
+        @click="onAddCall(ETypeAddChat.call_canceled, 'Đã hủy')"
       />
       <button-common
         :text="'Cuộc gọi video 1'"
         :class-text="'font-medium text-base'"
+        @click="onAddCall(ETypeAddChat.video_call_green, 'Cuộc gọi video')"
       />
       <button-common
         :text="'Cuộc gọi video 2'"
         :class-text="'font-medium text-base'"
+        @click="onAddCall(ETypeAddChat.video_call_black, '2:13')"
       />
     </div>
   </div>
@@ -131,7 +136,7 @@ const preview = (file: File) => {
   data.value.images = [];
   if (!!document.querySelector(`#files_${props.type}`)) {
     // @ts-ignore
-    document.querySelector(`#files_${props.type}`).innerHTML = "";
+    document.querySelector(`#files_${props.type}`).value = null;
   }
 
   fr.onload = () => {
@@ -147,16 +152,52 @@ const handleChange = async (event: any) => {
 };
 
 const onAddMessage = () => {
+  if (data.value.images.length > 0) {
+    dataChats.value.push({
+      images: data.value.images,
+      isShowAvatar: isShowAvatar.value,
+      isShowTime: isShowTime.value,
+      time: moment().format("YYYY-MM-DD HH:mm"),
+      type: props.type,
+      typeMessage: ETypeAddChat.image,
+      value: "",
+      replicaIndex: null,
+    });
+  } else {
+    dataChats.value.push({
+      images: [],
+      isShowAvatar: isShowAvatar.value,
+      isShowTime: isShowTime.value,
+      time: moment().format("YYYY-MM-DD HH:mm"),
+      type: props.type,
+      typeMessage: ETypeAddChat.message,
+      value: data.value.message,
+      replicaIndex: null,
+    });
+  }
+
+  data.value = {
+    message: "",
+    images: [],
+  };
+};
+
+const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
   dataChats.value.push({
     images: [],
     isShowAvatar: isShowAvatar.value,
     isShowTime: isShowTime.value,
     time: moment().format("YYYY-MM-DD HH:mm"),
     type: props.type,
-    typeMessage: ETypeAddChat.message,
-    value: data.value.message,
+    typeMessage,
+    value,
     replicaIndex: null,
   });
+
+  data.value = {
+    message: "",
+    images: [],
+  };
 };
 </script>
 

@@ -222,7 +222,10 @@
                       "
                       :style="`font-size: ${textSize}px;font-weight: ${fontWeight}`"
                     >
-                      <icon-call-chat-component :data="itemChild" />
+                      <icon-call-chat-component
+                        :type-message="itemChild.typeMessage"
+                        :text-size="textSize"
+                      />
                       {{ itemChild.value }}
                       <svg
                         v-if="

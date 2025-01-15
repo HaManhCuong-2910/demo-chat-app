@@ -1,5 +1,5 @@
 <template>
-  <div class="header-chat grid grid-cols-12 p-10 text-center items-center">
+  <div class="header-chat grid grid-cols-12 px-10 p-8 text-center items-center">
     <div>
       <svg
         width="25"

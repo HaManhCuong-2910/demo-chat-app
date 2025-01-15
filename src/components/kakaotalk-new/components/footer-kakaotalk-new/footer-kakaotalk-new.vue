@@ -1,6 +1,6 @@
 <template>
   <div class="pt-10" :class="'bg-white'">
-    <div class="flex space-x-6 items-center px-4 pt-4 pb-2">
+    <div class="flex space-x-6 items-center px-10 pt-4 pb-2">
       <div>
         <div
           class="w-[72px] h-[72px] rounded-full flex justify-center items-center"
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="px-4 pb-8">
+    <div class="px-10 pb-8">
       <span
         class="block w-[300px] h-2 mx-auto mt-12 rounded-full"
         :class="'bg-black'"

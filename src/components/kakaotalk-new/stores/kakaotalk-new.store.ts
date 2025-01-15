@@ -35,6 +35,8 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
 
   const userInterface = ref<EUserInterface>(EUserInterface.ios);
 
+  const iconChaxBoxImage = ref("/icon-chat-box-image.svg");
+
   const userInterfaces = ref([
     {
       label: "Android",
@@ -55,6 +57,7 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
   return {
     isWifi,
     avatars,
+    iconChaxBoxImage,
     names,
     language,
     languages,
