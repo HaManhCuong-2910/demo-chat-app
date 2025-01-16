@@ -6,10 +6,11 @@
           props.data.type === ETypeUserChat.other && props.data.isShowAvatar
         "
         class="mb-6"
+        :class="props.isDarkMode && 'text-white'"
         :style="`font-size: 32px; line-height: 24px`"
         contenteditable="true"
       >
-        Người khác
+        {{ names.other }}
       </p>
       <div class="flex items-end">
         <div
@@ -30,7 +31,7 @@
                 ETypeAddChat.video_call_black,
                 ETypeAddChat.video_call_green,
               ].includes(props.data.typeMessage)
-                ? 'min-w-[420px]'
+                ? 'min-w-[380px]'
                 : ''
             "
           >
@@ -88,18 +89,16 @@ import {
   ETypeUserChat,
 } from "~/src/components/home/models/home.model";
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
-import moment from "moment";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
-import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 
 const { names } = storeToRefs(useKakaotalkNewStore());
-const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
   data: {
     type: Object as PropType<IChatsKakaotalkNew>,
     required: true,
   },
+  isDarkMode: Boolean,
 });
 </script>
 
@@ -114,7 +113,6 @@ const props = defineProps({
   .content {
     @apply py-[28px] px-7 relative;
     background-color: rgb(262, 228, 0);
-    margin-left: 18px;
     word-wrap: break-word;
     max-width: 100%;
     border-radius: 28px;

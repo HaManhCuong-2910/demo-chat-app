@@ -26,10 +26,14 @@
 <script setup lang="ts">
 import * as htmlToImage from "html-to-image";
 import { downloadFile, ETypeButton } from "../services/constant";
-
+import { ElLoading } from "element-plus";
 const onDownload = () => {
   const node = document.getElementById("container-kakaotalk-new");
-
+  const loading = ElLoading.service({
+    lock: true,
+    text: "Loading",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
   if (!node) return;
   htmlToImage
     .toPng(node, {
@@ -39,9 +43,11 @@ const onDownload = () => {
     })
     .then((dataUrl) => {
       downloadFile(dataUrl, "capture.png");
+      loading.close();
     })
     .catch((error) => {
       console.log("error", error);
+      loading.close();
     });
 };
 </script>

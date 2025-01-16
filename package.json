@@ -31,6 +31,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/nuxt": "^4.12.4",
     "@vee-validate/yup": "^4.12.4",
+    "click-outside-vue3": "^4.0.1",
     "emoji-mart-vue-fast": "^15.0.3",
     "html-to-image": "^1.11.11",
     "lightgallery": "^2.8.2",

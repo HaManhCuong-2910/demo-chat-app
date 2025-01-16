@@ -52,7 +52,7 @@
       <label
         :for="`files_${props.type}`"
         class="py-1 px-4 text-white rounded-md bg-gray-500 cursor-pointer h-8"
-        >Chọn ảnh</label
+        >Chọn ảnh (Có thể chọn nhiều ảnh)</label
       >
 
       <input
@@ -67,10 +67,30 @@
       }"
       />
 
+      <div class="relative">
+        <button-common
+          :text="'Gửi'"
+          :class-text="'font-medium text-base'"
+          @click="onAddMessage"
+        />
+        <button-common
+          :text="'Cảm xúc tin nhắn'"
+          :class-text="'font-medium text-base'"
+          @click="isShowImagePicker = true"
+        />
+
+        <div
+          v-if="isShowImagePicker"
+          v-click-outside="() => (isShowImagePicker = false)"
+          class="absolute bg-white p-4 rounded-lg shadow-sm"
+        >
+          <emoji-image-picker @update-image="onUpdateImage" />
+        </div>
+      </div>
       <button-common
-        :text="'Gửi'"
+        :text="'Ghi âm'"
         :class-text="'font-medium text-base'"
-        @click="onAddMessage"
+        @click="onAddCall(ETypeAddChat.record, '0:04')"
       />
       <button-common
         :text="'Cuộc gọi thoại'"
@@ -131,6 +151,8 @@ const data = ref<{
   images: [],
 });
 
+const isShowImagePicker = ref(false);
+
 const preview = (file: File) => {
   const fr = new FileReader();
   data.value.images = [];
@@ -164,6 +186,12 @@ const onAddMessage = () => {
       replicaIndex: null,
     });
   } else {
+    const messages = data.value.message
+      .replaceAll("{#", '<img src="')
+      .replaceAll(
+        "#}",
+        '" alt="icon" style="width: 60px;object-fit: cover;display: inline;margin-top: -7px;" />'
+      );
     dataChats.value.push({
       images: [],
       isShowAvatar: isShowAvatar.value,
@@ -171,7 +199,7 @@ const onAddMessage = () => {
       time: moment().format("YYYY-MM-DD HH:mm"),
       type: props.type,
       typeMessage: ETypeAddChat.message,
-      value: data.value.message,
+      value: messages,
       replicaIndex: null,
     });
   }
@@ -198,6 +226,10 @@ const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
     message: "",
     images: [],
   };
+};
+
+const onUpdateImage = (img: string) => {
+  data.value.message += `{#${img}#}`;
 };
 </script>
 

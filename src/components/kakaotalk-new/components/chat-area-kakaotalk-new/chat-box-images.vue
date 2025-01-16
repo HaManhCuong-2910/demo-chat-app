@@ -6,16 +6,19 @@
           props.data.type === ETypeUserChat.other && props.data.isShowAvatar
         "
         class="mb-6"
+        :class="props.isDarkMode && 'text-white'"
         :style="`font-size: 32px; line-height: 24px`"
         contenteditable="true"
       >
-        Người khác
+        {{ names.other }}
       </p>
       <div
-        :class="`w-20 h-20 rounded-full bg-slate-400 flex justify-center overflow-hidden items-center absolute top-1/2 ${
+        :class="`w-20 h-20 rounded-full flex justify-center overflow-hidden items-center absolute top-1/2 ${
           props.data.type === ETypeUserChat.user
             ? 'right-[104%]'
             : 'left-[104%]'
+        } ${
+          props.isDarkMode ? 'bg-[#2d2d2d]' : 'bg-slate-400'
         } -translate-y-1/2`"
       >
         <img
@@ -47,13 +50,14 @@ import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import { ETypeUserChat } from "~/src/components/home/models/home.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 
-const { iconChaxBoxImage } = storeToRefs(useKakaotalkNewStore());
+const { iconChaxBoxImage, names } = storeToRefs(useKakaotalkNewStore());
 
 const props = defineProps({
   data: {
     type: Object as PropType<IChatsKakaotalkNew>,
     required: true,
   },
+  isDarkMode: Boolean,
 });
 </script>
 

@@ -12,6 +12,7 @@ export enum ETypeAddChat {
   video_call_green = "video_call_green",
   video_call_black = "video_call_black",
   date = "date",
+  record = "record",
 }
 
 export enum EModeAction {

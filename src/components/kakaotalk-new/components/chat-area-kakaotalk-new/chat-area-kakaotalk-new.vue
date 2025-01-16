@@ -15,7 +15,10 @@
       :key="index"
       @contextmenu="onContextMenu($event, index)"
     >
-      <chat-box-date v-if="item.typeMessage === ETypeAddChat.date" />
+      <chat-box-date
+        v-if="item.typeMessage === ETypeAddChat.date"
+        :is-dark-mode="props.isDarkMode"
+      />
 
       <template v-else>
         <img
@@ -43,6 +46,7 @@
             <p
               class="time-content whitespace-nowrap mb-1 mr-[18px]"
               :style="`font-size: 28px;font-weight: 500`"
+              :class="props.isDarkMode && 'text-[#888888]'"
               v-if="item.type === ETypeUserChat.user && item.isShowTime"
               contenteditable="true"
             >
@@ -53,17 +57,29 @@
                 contenteditable="true"
                 >1
               </span>
-              {{ moment(item.time).format(`h:mm`) }}
+              {{
+                moment(item.time)
+                  .locale(language)
+                  .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+              }}
             </p>
+
+            <chat-box-record
+              v-if="item.typeMessage === ETypeAddChat.record"
+              :data="item"
+              :is-dark-mode="props.isDarkMode"
+            />
 
             <chat-box-message
               v-if="item.typeMessage === ETypeAddChat.message"
               :data="item"
+              :is-dark-mode="props.isDarkMode"
             />
 
             <chat-box-images
               v-if="item.typeMessage === ETypeAddChat.image"
               :data="item"
+              :is-dark-mode="props.isDarkMode"
             />
 
             <chat-box-call
@@ -77,11 +93,13 @@
                 ].includes(item.typeMessage)
               "
               :data="item"
+              :is-dark-mode="props.isDarkMode"
             />
 
             <p
               v-if="item.type === ETypeUserChat.other && item.isShowTime"
               class="time-content self-end whitespace-nowrap mt-1 mb-1 ml-[18px]"
+              :class="props.isDarkMode && 'text-[#888888]'"
               :style="`font-size: 28px;font-weight: 500`"
               contenteditable="true"
             >
@@ -92,7 +110,11 @@
                 contenteditable="true"
                 >1
               </span>
-              {{ moment(item.time).format(`h:mm`) }}
+              {{
+                moment(item.time)
+                  .locale(language)
+                  .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+              }}
             </p>
           </div>
         </div>
@@ -126,7 +148,11 @@ import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.s
 import type { MenuOptions } from "@imengyu/vue3-context-menu";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 
-const { avatars, isShowAvatar, isShowTime } = storeToRefs(
+const props = defineProps({
+  isDarkMode: Boolean,
+});
+
+const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
 );
 const { dataChats } = storeToRefs(useChatKakaotalkNewStore());

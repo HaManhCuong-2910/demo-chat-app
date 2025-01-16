@@ -6,59 +6,23 @@
           props.data.type === ETypeUserChat.other && props.data.isShowAvatar
         "
         class="mb-6"
-        :class="props.isDarkMode && 'text-white'"
         :style="`font-size: 32px; line-height: 24px`"
+        :class="props.isDarkMode && 'text-white'"
         contenteditable="true"
       >
         {{ names.other }}
       </p>
       <div
-        class="content min-h-7 flex justify-between"
+        class="content min-h-7 flex justify-between items-center"
         :class="
-          props.data.replicaIndex !== null ? 'min-w-72' : 'w-fit min-w-full'
+          props.data.replicaIndex !== null ? 'min-w-72' : 'w-fit min-w-[320px]'
         "
       >
-        <div class="w-full">
-          <div
-            v-if="props.data.replicaIndex !== null"
-            class="pb-6 mb-4 border-b flex space-x-4 items-center"
-            :class="
-              props.data.type === ETypeUserChat.user
-                ? 'border-[#efd400]'
-                : 'border-gray-100'
-            "
-          >
-            <img
-              v-if="
-                dataChats[props.data.replicaIndex].typeMessage ===
-                ETypeAddChat.image
-              "
-              :src="dataChats[props.data.replicaIndex].images[0]"
-              alt="images"
-              class="min-w-[92px] max-w-[92px] min-h-[92px] max-h-[92px] rounded-lg"
-            />
-            <div>
-              <p class="font-medium" style="font-size: 30px; line-height: 38px">
-                Trả lời {{ names[dataChats[props.data.replicaIndex].type] }}
-              </p>
-              <p
-                class="mt-2 text-ellipsis-1-line"
-                style="font-size: 30px; line-height: 38px"
-              >
-                {{
-                  dataChats[props.data.replicaIndex].typeMessage ===
-                  ETypeAddChat.message
-                    ? dataChats[props.data.replicaIndex].value
-                    : "Ảnh"
-                }}
-              </p>
-            </div>
-          </div>
-          <p
-            style="font-size: 41px; font-weight: 500; line-height: 48px"
-            contenteditable="true"
-            v-html="props.data.value"
-          ></p>
+        <div class="w-full flex justify-between" contenteditable="true">
+          <font-awesome-icon :icon="['fas', 'play']" class="text-[41px] mt-1" />
+          <p style="font-size: 41px; font-weight: 500; line-height: 41px">
+            {{ props.data.value }}
+          </p>
         </div>
         <svg
           v-if="
@@ -67,7 +31,7 @@
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 22.23 42.69"
           class="w-7 absolute right-[-7px] top-0"
-          style="fill: rgb(255, 228, 0)"
+          style="fill: rgb(255, 255, 255)"
         >
           <g data-name="Layer 2">
             <path
@@ -101,16 +65,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ETypeAddChat,
-  ETypeUserChat,
-} from "~/src/components/home/models/home.model";
+import { ETypeUserChat } from "~/src/components/home/models/home.model";
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
-import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 
 const { names } = storeToRefs(useKakaotalkNewStore());
-const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
   data: {
@@ -130,8 +89,8 @@ const props = defineProps({
   word-break: break-word;
 
   .content {
-    @apply py-[28px] px-7 relative;
-    background-color: rgb(262, 228, 0);
+    @apply py-[28px] px-9 relative;
+    background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
     border-radius: 28px;
@@ -145,7 +104,7 @@ const props = defineProps({
   align-items: flex-start;
   word-break: break-word;
   .content {
-    @apply py-[28px] px-7 relative;
+    @apply py-[28px] px-9 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
