@@ -64,7 +64,14 @@
         </defs>
       </svg>
 
-      <p v-else class="text-[40px] -mt-[2.2px]" contenteditable="true">5G</p>
+      <p
+        v-else
+        class="text-[40px] -mt-[2.2px]"
+        :class="props.isDarkMode && 'text-white'"
+        contenteditable="true"
+      >
+        5G
+      </p>
       <svg
         width="80"
         height="34"
