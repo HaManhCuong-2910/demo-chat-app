@@ -72,7 +72,20 @@
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-3">Ngôn ngữ</p>
       <div class="flex col-span-9">
-        <el-select v-model="language" placeholder="Select" style="width: 240px">
+        <el-select
+          v-model="language"
+          placeholder="Select"
+          style="width: 240px"
+          @change="
+            (val) => {
+              if (val === 'ko') {
+                date = '2024년 12월 27일 금요일';
+              } else {
+                date = 'Thứ Sáu, ngày 27 tháng 12, 2024';
+              }
+            }
+          "
+        >
           <el-option
             v-for="item in languages"
             :key="item.value"

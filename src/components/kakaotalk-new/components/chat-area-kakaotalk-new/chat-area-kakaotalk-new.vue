@@ -18,6 +18,7 @@
       <chat-box-date
         v-if="item.typeMessage === ETypeAddChat.date"
         :is-dark-mode="props.isDarkMode"
+        :data="item"
       />
 
       <template v-else>
@@ -143,7 +144,7 @@ import {
   ETypeUserChat,
 } from "~/src/components/home/models/home.model";
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import type { MenuOptions } from "@imengyu/vue3-context-menu";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
