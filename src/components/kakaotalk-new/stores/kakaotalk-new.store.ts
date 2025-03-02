@@ -14,7 +14,7 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
     other: "Người khác",
   });
 
-  const language = ref("en");
+  const language = ref("ko");
 
   const languages = ref([
     {
