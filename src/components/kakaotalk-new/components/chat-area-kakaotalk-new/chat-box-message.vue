@@ -152,4 +152,12 @@ const props = defineProps({
     border-radius: 28px;
   }
 }
+
+:deep(p) {
+  div {
+    font-size: 41px;
+    font-weight: 500;
+    line-height: 48px;
+  }
+}
 </style>

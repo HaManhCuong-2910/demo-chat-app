@@ -95,7 +95,12 @@
       <button-common
         :text="'Cuộc gọi thoại'"
         :class-text="'font-medium text-base'"
-        @click="onAddCall(ETypeAddChat.calling, 'Cuộc gọi thoại')"
+        @click="
+          onAddCall(
+            ETypeAddChat.calling,
+            language === 'ko' ? '음성통화' : 'Cuộc gọi thoại'
+          )
+        "
       />
       <button-common
         :text="'Kết thúc cuộc gọi'"
@@ -105,12 +110,22 @@
       <button-common
         :text="'Hủy cuộc gọi'"
         :class-text="'font-medium text-base'"
-        @click="onAddCall(ETypeAddChat.call_canceled, 'Đã hủy')"
+        @click="
+          onAddCall(
+            ETypeAddChat.call_canceled,
+            language === 'ko' ? '취소' : 'Đã hủy'
+          )
+        "
       />
       <button-common
         :text="'Cuộc gọi video 1'"
         :class-text="'font-medium text-base'"
-        @click="onAddCall(ETypeAddChat.video_call_green, 'Cuộc gọi video')"
+        @click="
+          onAddCall(
+            ETypeAddChat.video_call_green,
+            language === 'ko' ? '영상통화' : 'Cuộc gọi video'
+          )
+        "
       />
       <button-common
         :text="'Cuộc gọi video 2'"
@@ -131,7 +146,7 @@ import { toBase64 } from "~/src/services/constant";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import moment from "moment";
 
-const { avatars, isShowAvatar, isShowTime } = storeToRefs(
+const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
 );
 const { dataChats } = storeToRefs(useChatKakaotalkNewStore());

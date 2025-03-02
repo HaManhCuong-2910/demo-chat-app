@@ -40,7 +40,11 @@
               :text-size="46"
               :spacing="46"
             />
-            {{ props.data.value }}
+            {{
+              dataMessage[props.data.typeMessage]
+                ? dataMessage[props.data.typeMessage][language]
+                : props.data.value
+            }}
           </div>
           <svg
             v-if="
@@ -91,7 +95,7 @@ import {
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 
-const { names } = storeToRefs(useKakaotalkNewStore());
+const { names, language } = storeToRefs(useKakaotalkNewStore());
 
 const props = defineProps({
   data: {
@@ -99,6 +103,24 @@ const props = defineProps({
     required: true,
   },
   isDarkMode: Boolean,
+});
+
+const dataMessage = ref<any>({
+  [ETypeAddChat.calling]: {
+    vi: "Cuộc gọi thoại",
+    ko: "음성통화",
+    en: "Cuộc gọi thoại",
+  },
+  [ETypeAddChat.call_canceled]: {
+    vi: "Đã hủy",
+    ko: "취소",
+    en: "Đã hủy",
+  },
+  [ETypeAddChat.video_call_green]: {
+    vi: "Cuộc gọi video",
+    ko: "영상통화",
+    en: "Cuộc gọi video",
+  },
 });
 </script>
 
