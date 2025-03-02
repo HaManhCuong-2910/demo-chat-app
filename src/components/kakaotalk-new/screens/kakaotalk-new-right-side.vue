@@ -173,7 +173,7 @@ const {
 } = storeToRefs(useKakaotalkNewStore());
 const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
-const date = ref("Thứ Sáu, ngày 27 tháng 12, 2024");
+const date = ref("2024년 12월 27일 금요일");
 
 const onAddMessage = () => {
   dataChats.value.push({
