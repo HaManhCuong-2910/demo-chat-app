@@ -1,5 +1,5 @@
 <template>
-  <div :class="props.data.type">
+  <div :class="props.data.type" @click="openDialogChangeImages">
     <div class="w-full relative">
       <p
         v-if="
@@ -49,16 +49,39 @@
 import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import { ETypeUserChat } from "~/src/components/home/models/home.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
+import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 
 const { iconChaxBoxImage, names } = storeToRefs(useKakaotalkNewStore());
+const { dataDialogRoot, dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
   data: {
     type: Object as PropType<IChatsKakaotalkNew>,
     required: true,
   },
+  index: {
+    type: Number,
+    required: true,
+  },
   isDarkMode: Boolean,
 });
+
+const openDialogChangeImages = () => {
+  dataDialogRoot.value.isShowDialog = true;
+  dataDialogRoot.value.component = markRaw(
+    defineAsyncComponent(
+      () => import("../dialog-kakaotalk-new/edit-images-chats-dialog.vue")
+    )
+  );
+
+  dataDialogRoot.value.props = {
+    images: props.data.images,
+    onConfirm: (images: string[]) => {
+      dataChats.value[props.index].images = images;
+      dataDialogRoot.value.isShowDialog = false;
+    },
+  };
+};
 </script>
 
 <style scoped lang="scss">

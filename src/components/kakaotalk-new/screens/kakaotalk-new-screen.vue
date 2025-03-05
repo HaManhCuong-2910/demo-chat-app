@@ -25,10 +25,18 @@
       <footer-kakaotalk-new :is-dark-mode="isDarkMode" />
     </div>
   </div>
+
+  <el-dialog destroy-on-close v-model="dataDialogRoot.isShowDialog">
+    <component
+      :is="dataDialogRoot?.component"
+      v-bind="dataDialogRoot.props"
+    ></component>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { EMode } from "../../home/models/toolbar.model";
+import { useChatKakaotalkNewStore } from "../stores/chat-data-kakaotalk-new.store";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
 const {
   scrollChat,
@@ -36,6 +44,7 @@ const {
   bgColor,
   mode: ModeChat,
 } = storeToRefs(useKakaotalkNewStore());
+const { dataDialogRoot } = storeToRefs(useChatKakaotalkNewStore());
 
 const isDarkMode = computed(() => {
   return ModeChat.value === EMode.dark;

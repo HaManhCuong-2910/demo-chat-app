@@ -10,3 +10,10 @@ export interface IChatsKakaotalkNew {
   isShowAvatar: boolean;
   replicaIndex: number | null;
 }
+
+export interface IDialogRoot<T> {
+  isShowDialog: boolean;
+  isShowCloseDialog: boolean;
+  component?: Component;
+  props: T;
+}

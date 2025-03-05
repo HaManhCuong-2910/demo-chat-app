@@ -80,6 +80,7 @@
             <chat-box-images
               v-if="item.typeMessage === ETypeAddChat.image"
               :data="item"
+              :index="index"
               :is-dark-mode="props.isDarkMode"
             />
 
@@ -143,7 +144,6 @@ import {
   ETypeAddChat,
   ETypeUserChat,
 } from "~/src/components/home/models/home.model";
-import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import type { MenuOptions } from "@imengyu/vue3-context-menu";
