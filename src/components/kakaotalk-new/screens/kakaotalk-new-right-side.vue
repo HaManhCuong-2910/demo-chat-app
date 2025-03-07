@@ -185,6 +185,7 @@ const onAddMessage = () => {
     typeMessage: ETypeAddChat.date,
     value: date.value,
     replicaIndex: null,
+    icons: [],
   });
 };
 

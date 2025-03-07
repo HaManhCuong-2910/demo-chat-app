@@ -48,6 +48,23 @@
       </div>
     </div>
 
+    <div class="mt-2">
+      <div class="grid grid-cols-12 gap-4">
+        <div
+          v-for="item in dataIcons"
+          @click="onSelectIcons(item)"
+          :class="[isActiveIcon(item) && 'active-icon', 'p-1']"
+        >
+          <img
+            :key="item.type"
+            :src="item.src"
+            alt="icon"
+            class="w-6 cursor-pointer hover:scale-125 duration-300"
+          />
+        </div>
+      </div>
+    </div>
+
     <div class="mt-4 flex flex-wrap gap-2">
       <label
         :for="`files_${props.type}`"
@@ -145,6 +162,7 @@ import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 import { toBase64 } from "~/src/services/constant";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import moment from "moment";
+import { dataIcons } from "../../models/kakaotalk-new.model";
 
 const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
@@ -167,6 +185,29 @@ const data = ref<{
 });
 
 const isShowImagePicker = ref(false);
+
+const selectedIcons = ref<
+  {
+    type: string;
+    src: string;
+  }[]
+>([]);
+
+const onSelectIcons = (item: { type: string; src: string }) => {
+  for (let index = 0; index < selectedIcons.value.length; index++) {
+    const icon = selectedIcons.value[index];
+    if (icon.type === item.type) {
+      selectedIcons.value.splice(index, 1);
+      return;
+    }
+  }
+
+  selectedIcons.value.push(item);
+};
+
+const isActiveIcon = (item: { type: string; src: string }) => {
+  return selectedIcons.value.some((itemSome) => itemSome.type === item.type);
+};
 
 const preview = (file: File) => {
   const fr = new FileReader();
@@ -199,6 +240,12 @@ const onAddMessage = () => {
       typeMessage: ETypeAddChat.image,
       value: "",
       replicaIndex: null,
+      icons: selectedIcons.value.map((item) => {
+        return {
+          ...item,
+          count: 1,
+        };
+      }),
     });
   } else {
     const messages = data.value.message
@@ -216,6 +263,12 @@ const onAddMessage = () => {
       typeMessage: ETypeAddChat.message,
       value: messages,
       replicaIndex: null,
+      icons: selectedIcons.value.map((item) => {
+        return {
+          ...item,
+          count: 1,
+        };
+      }),
     });
   }
 
@@ -223,6 +276,7 @@ const onAddMessage = () => {
     message: "",
     images: [],
   };
+  selectedIcons.value = [];
 };
 
 const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
@@ -235,12 +289,19 @@ const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
     typeMessage,
     value,
     replicaIndex: null,
+    icons: selectedIcons.value.map((item) => {
+      return {
+        ...item,
+        count: 1,
+      };
+    }),
   });
 
   data.value = {
     message: "",
     images: [],
   };
+  selectedIcons.value = [];
 };
 
 const onUpdateImage = (img: string) => {
@@ -256,5 +317,9 @@ const onUpdateImage = (img: string) => {
   z-index: 100;
   width: 100%;
   height: 100%;
+}
+
+.active-icon {
+  @apply bg-black bg-opacity-20 rounded-full;
 }
 </style>

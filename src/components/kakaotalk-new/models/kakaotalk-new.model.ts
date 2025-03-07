@@ -9,6 +9,11 @@ export interface IChatsKakaotalkNew {
   isShowTime: boolean;
   isShowAvatar: boolean;
   replicaIndex: number | null;
+  icons: {
+    type: string;
+    src: string;
+    count: number;
+  }[];
 }
 
 export interface IDialogRoot<T> {
@@ -17,3 +22,30 @@ export interface IDialogRoot<T> {
   component?: Component;
   props: T;
 }
+
+export const dataIcons = [
+  {
+    type: "like",
+    src: "/emoji-kakaotalk-new/like.png",
+  },
+  {
+    type: "sad",
+    src: "/emoji-kakaotalk-new/sad.png",
+  },
+  {
+    type: "smile",
+    src: "/emoji-kakaotalk-new/smile.png",
+  },
+  {
+    type: "tich",
+    src: "/emoji-kakaotalk-new/tich.png",
+  },
+  {
+    type: "tim",
+    src: "/emoji-kakaotalk-new/tim.png",
+  },
+  {
+    type: "wow",
+    src: "/emoji-kakaotalk-new/wow.png",
+  },
+];

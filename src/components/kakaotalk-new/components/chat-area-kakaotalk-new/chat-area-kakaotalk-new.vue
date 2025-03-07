@@ -119,11 +119,45 @@
               }}
             </p>
           </div>
+          <div class="flex space-x-2 mt-[10px] ml-auto w-fit">
+            <div
+              v-for="iconItem in item.icons"
+              :key="iconItem.type"
+              :class="[
+                'rounded-full py-3 px-4',
+                isDarkMode ? 'bg-white' : 'bg-black bg-opacity-15',
+              ]"
+              contenteditable="true"
+            >
+              <div class="flex space-x-2 items-center">
+                <img :src="iconItem.src" class="w-10" alt="tim" />
+                <span
+                  class="text-[28px]"
+                  :style="`${
+                    isDarkMode ? 'color: #888888' : 'color: rgb(262, 228, 0)'
+                  }`"
+                  >{{ iconItem.count }}</span
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </template>
     </div>
 
     <context-menu v-model:show="show" :options="options">
+      <context-menu-item>
+        <div class="grid grid-cols-6 gap-4">
+          <img
+            v-for="item in dataIcons"
+            :key="item.type"
+            :src="item.src"
+            alt="icon"
+            class="w-6 cursor-pointer hover:scale-125 duration-300"
+            @click="onAddIcon(item)"
+          />
+        </div>
+      </context-menu-item>
       <context-menu-item
         v-if="
           dataChats[dataContextMenu.index].replicaIndex === null &&
@@ -148,6 +182,7 @@ import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import type { MenuOptions } from "@imengyu/vue3-context-menu";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
+import { dataIcons } from "../../models/kakaotalk-new.model";
 
 const props = defineProps({
   isDarkMode: Boolean,
@@ -180,6 +215,23 @@ const onContextMenu = (event: MouseEvent, index: number) => {
   };
 };
 
+const onAddIcon = (item: { type: string; src: string }) => {
+  const exitsIcons = dataChats.value[dataContextMenu.value.index].icons;
+
+  for (let index = 0; index < exitsIcons.length; index++) {
+    const icon = exitsIcons[index];
+    if (icon.type === item.type) {
+      dataChats.value[dataContextMenu.value.index].icons.splice(index, 1);
+      return;
+    }
+  }
+
+  dataChats.value[dataContextMenu.value.index].icons.push({
+    ...item,
+    count: 1,
+  });
+};
+
 const onDelete = () => {
   dataChats.value.splice(dataContextMenu.value.index, 1);
 };
@@ -197,6 +249,7 @@ const onRepMessage = () => {
         : ETypeUserChat.user,
     typeMessage: ETypeAddChat.message,
     value: "REP",
+    icons: [],
   });
 };
 </script>
