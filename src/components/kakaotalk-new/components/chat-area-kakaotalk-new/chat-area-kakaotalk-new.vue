@@ -119,7 +119,10 @@
               }}
             </p>
           </div>
-          <div class="flex space-x-2 mt-[10px] ml-auto w-fit">
+          <div
+            class="flex space-x-2 mt-[10px] w-fit"
+            :class="item.type === ETypeUserChat.user && 'ml-auto'"
+          >
             <div
               v-for="iconItem in item.icons"
               :key="iconItem.type"
@@ -130,7 +133,12 @@
               contenteditable="true"
             >
               <div class="flex space-x-2 items-center">
-                <img :src="iconItem.src" class="w-10" alt="tim" />
+                <img
+                  :src="iconItem.src"
+                  class="w-10"
+                  alt="tim"
+                  :class="iconItem.type === 'smile' && 'rotate-[12deg]'"
+                />
                 <span
                   class="text-[28px]"
                   :style="`${
