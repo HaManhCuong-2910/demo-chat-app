@@ -51,13 +51,13 @@
               v-if="item.type === ETypeUserChat.user && item.isShowTime"
               contenteditable="true"
             >
-              <span
+              <!-- <span
                 class="block text-end mb-3"
                 :style="`font-size: 27px;font-weight: 500`"
                 style="color: rgb(262, 228, 0)"
                 contenteditable="true"
                 >1
-              </span>
+              </span> -->
               {{
                 moment(item.time)
                   .locale(language)
@@ -105,13 +105,13 @@
               :style="`font-size: 28px;font-weight: 500`"
               contenteditable="true"
             >
-              <span
+              <!-- <span
                 class="block text-start mb-3"
                 :style="`font-size: 27px;font-weight: 500`"
                 style="color: rgb(262, 228, 0)"
                 contenteditable="true"
                 >1
-              </span>
+              </span> -->
               {{
                 moment(item.time)
                   .locale(language)
