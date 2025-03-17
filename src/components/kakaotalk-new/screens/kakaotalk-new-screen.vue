@@ -21,6 +21,19 @@
     >
       <chat-area-kakaotalk-new :is-dark-mode="isDarkMode" />
     </div>
+
+    <div
+      class="absolute rounded-full bottom-[290px] right-10 p-5"
+      :class="isDarkMode ? 'bg-[#2d2d2d]' : 'bg-white'"
+      v-if="isShowArrowDown"
+    >
+      <font-awesome-icon
+        :icon="['fas', 'chevron-down']"
+        class="text-[52px] font-thin"
+        :class="isDarkMode ? 'text-white' : 'text-black'"
+      />
+    </div>
+
     <div class="absolute bottom-0 left-0 w-full z-10">
       <footer-kakaotalk-new :is-dark-mode="isDarkMode" />
     </div>
@@ -39,6 +52,7 @@ import { EMode } from "../../home/models/toolbar.model";
 import { useChatKakaotalkNewStore } from "../stores/chat-data-kakaotalk-new.store";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
 const {
+  isShowArrowDown,
   scrollChat,
   backgroundScreen,
   bgColor,

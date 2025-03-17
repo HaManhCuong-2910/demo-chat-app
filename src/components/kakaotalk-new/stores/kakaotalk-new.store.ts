@@ -55,6 +55,7 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
   const bgColor = ref("#b6c6d6");
 
   const scrollChat = ref(0);
+  const isShowArrowDown = ref(true);
 
   return {
     backgroundScreen,
@@ -70,6 +71,7 @@ export const useKakaotalkNewStore = defineStore("KakaotalkNewStore", () => {
     battery,
     bgColor,
     scrollChat,
+    isShowArrowDown,
     isShowAvatar,
     isShowTime,
   };

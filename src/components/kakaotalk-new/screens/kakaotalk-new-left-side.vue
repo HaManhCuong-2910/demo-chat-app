@@ -10,6 +10,13 @@
       />
 
       <el-checkbox
+        v-model="isShowArrowDown"
+        label="Mũi tên kéo xuống"
+        size="large"
+        class="bg-white"
+        border
+      />
+      <el-checkbox
         v-model="isShowAvatar"
         label="Hiện ảnh đại diện"
         size="large"
@@ -55,9 +62,14 @@
 import { ETypeUserChat } from "../../home/models/home.model";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
 
-const { isWifi, battery, isShowAvatar, isShowTime, scrollChat } = storeToRefs(
-  useKakaotalkNewStore()
-);
+const {
+  isWifi,
+  battery,
+  isShowAvatar,
+  isShowArrowDown,
+  isShowTime,
+  scrollChat,
+} = storeToRefs(useKakaotalkNewStore());
 </script>
 
 <style scoped lang="scss"></style>

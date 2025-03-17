@@ -59,7 +59,7 @@
             :key="item.type"
             :src="item.src"
             alt="icon"
-            class="w-6 cursor-pointer hover:scale-125 duration-300"
+            class="min-w-6 max-w-6 cursor-pointer hover:scale-125 duration-300"
           />
         </div>
       </div>
