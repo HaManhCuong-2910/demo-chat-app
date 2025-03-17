@@ -1,5 +1,6 @@
 <template>
-  <div class="container-chat-input">
+  <div class="container-chat-input" id="export-chat-container">
+    <div id="input-export-chat-container"></div>
     <div
       v-for="(item, index) in dataChats"
       :class="[

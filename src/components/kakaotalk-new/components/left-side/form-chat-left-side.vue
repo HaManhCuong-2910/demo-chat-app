@@ -53,7 +53,7 @@
         <div
           v-for="item in dataIcons"
           @click="onSelectIcons(item)"
-          :class="[isActiveIcon(item) && 'active-icon', 'p-1']"
+          :class="[isActiveIcon(item) && 'active-icon', 'p-1 w-fit']"
         >
           <img
             :key="item.type"

@@ -77,7 +77,7 @@
           placeholder="Select"
           style="width: 240px"
           @change="
-            (val) => {
+            (val: string) => {
               if (val === 'ko') {
                 date = '2024년 12월 27일 금요일';
               } else {
@@ -204,10 +204,13 @@ const preview = (file: File) => {
 };
 
 const onExport = () => {
-  const content = JSON.stringify(dataChats.value);
-  const blob = new Blob([content], { type: "text/plain" });
+  const contentExport = document.getElementById(
+    "export-chat-container"
+  )?.innerHTML;
+  if (!contentExport) return;
   const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
+  link.href =
+    "data:text/plain;charset=utf-8," + encodeURIComponent(contentExport);
   link.download = "data.txt";
   document.body.appendChild(link);
   link.click();
@@ -230,7 +233,13 @@ const onInputFile = () => {
       reader.onload = (e) => {
         const res = e.target?.result;
         if (res) {
-          dataChats.value = JSON.parse(res as string);
+          const inputExportContainer = document.getElementById(
+            "input-export-chat-container"
+          );
+          dataChats.value = [];
+          if (inputExportContainer) {
+            inputExportContainer.innerHTML = res as string;
+          }
         }
         inputFile.remove();
       };
