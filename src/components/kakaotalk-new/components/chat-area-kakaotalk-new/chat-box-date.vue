@@ -7,7 +7,7 @@
       :icon="['far', 'calendar-days']"
       class="text-[36px] text-white mr-3"
     />
-    <p class="text-[35px] text-white" contenteditable="true">
+    <p class="text-[35px] text-white data-value" contenteditable="true">
       {{ props.data.value }}
     </p>
     <font-awesome-icon

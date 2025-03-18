@@ -40,11 +40,15 @@
               :text-size="46"
               :spacing="46"
             />
-            {{
-              dataMessage[props.data.typeMessage]
-                ? dataMessage[props.data.typeMessage][language]
-                : props.data.value
-            }}
+            <span
+              class="data-value"
+              style="font-size: 41px; font-weight: 500; line-height: 48px"
+              >{{
+                dataMessage[props.data.typeMessage]
+                  ? dataMessage[props.data.typeMessage][language]
+                  : props.data.value
+              }}</span
+            >
           </div>
           <svg
             v-if="

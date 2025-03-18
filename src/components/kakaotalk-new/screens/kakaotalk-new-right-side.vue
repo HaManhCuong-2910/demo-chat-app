@@ -77,7 +77,7 @@
           placeholder="Select"
           style="width: 240px"
           @change="
-            (val: string) => {
+            (val) => {
               if (val === 'ko') {
                 date = '2024년 12월 27일 금요일';
               } else {
@@ -155,7 +155,7 @@
 </template>
 
 <script setup lang="ts">
-import moment from "moment";
+import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../stores/chat-data-kakaotalk-new.store";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
 import { ETypeAddChat, ETypeUserChat } from "../../home/models/home.model";
@@ -203,14 +203,30 @@ const preview = (file: File) => {
   fr.readAsDataURL(file);
 };
 
+const updateDataChats = () => {
+  const nodeList = document.querySelectorAll(".items-data-chat");
+  for (let index = 0; index < nodeList.length; index++) {
+    const elementRoot = nodeList[index];
+    const time = moment(
+      elementRoot.querySelector(".time-content")?.textContent,
+      `${language.value === "ko" ? "A h:mm" : "h:mm"}`
+    )
+      .locale("vi")
+      .format("YYYY-MM-DD HH:mm");
+    const dataValue = elementRoot.querySelector(".data-value");
+    if (dataValue) {
+      dataChats.value[index].value = dataValue.innerHTML;
+    }
+    dataChats.value[index].time = time;
+  }
+};
+
 const onExport = () => {
-  const contentExport = document.getElementById(
-    "export-chat-container"
-  )?.innerHTML;
-  if (!contentExport) return;
+  updateDataChats();
+  const content = JSON.stringify(dataChats.value);
+  const blob = new Blob([content], { type: "text/plain" });
   const link = document.createElement("a");
-  link.href =
-    "data:text/plain;charset=utf-8," + encodeURIComponent(contentExport);
+  link.href = URL.createObjectURL(blob);
   link.download = "data.txt";
   document.body.appendChild(link);
   link.click();
@@ -233,13 +249,7 @@ const onInputFile = () => {
       reader.onload = (e) => {
         const res = e.target?.result;
         if (res) {
-          const inputExportContainer = document.getElementById(
-            "input-export-chat-container"
-          );
-          dataChats.value = [];
-          if (inputExportContainer) {
-            inputExportContainer.innerHTML = res as string;
-          }
+          dataChats.value = JSON.parse(res as string);
         }
         inputFile.remove();
       };
