@@ -10,8 +10,10 @@
             ? 'mt-10'
             : 'mt-4'
           : '',
-        'flex w-full',
+        'flex w-full items-data-chat',
       ]"
+      :data-index="index"
+      :data-type="item.typeMessage"
       :key="index"
       @contextmenu="onContextMenu($event, index)"
     >
@@ -51,13 +53,6 @@
               v-if="item.type === ETypeUserChat.user && item.isShowTime"
               contenteditable="true"
             >
-              <!-- <span
-                class="block text-end mb-3"
-                :style="`font-size: 27px;font-weight: 500`"
-                style="color: rgb(262, 228, 0)"
-                contenteditable="true"
-                >1
-              </span> -->
               {{
                 moment(item.time)
                   .locale(language)
@@ -101,17 +96,11 @@
             <p
               v-if="item.type === ETypeUserChat.other && item.isShowTime"
               class="time-content self-end whitespace-nowrap mt-1 mb-1 ml-[18px]"
+              :data-time="item.time"
               :class="props.isDarkMode && 'text-[#888888]'"
               :style="`font-size: 28px;font-weight: 500`"
               contenteditable="true"
             >
-              <!-- <span
-                class="block text-start mb-3"
-                :style="`font-size: 27px;font-weight: 500`"
-                style="color: rgb(262, 228, 0)"
-                contenteditable="true"
-                >1
-              </span> -->
               {{
                 moment(item.time)
                   .locale(language)
