@@ -167,6 +167,16 @@
         </div>
       </context-menu-item>
       <context-menu-item
+        v-if="dataContextMenu.index > 0"
+        label="Lên"
+        @click="onUp"
+      />
+      <context-menu-item
+        v-if="dataContextMenu.index < dataChats.length - 1"
+        label="Xuống"
+        @click="onDown"
+      />
+      <context-menu-item
         v-if="
           dataChats[dataContextMenu.index].replicaIndex === null &&
           (dataChats[dataContextMenu.index].typeMessage ===
@@ -221,6 +231,30 @@ const onContextMenu = (event: MouseEvent, index: number) => {
   dataContextMenu.value = {
     index,
   };
+};
+
+const onUp = () => {
+  dataChats.value.splice(
+    dataContextMenu.value.index,
+    1,
+    dataChats.value.splice(
+      dataContextMenu.value.index - 1,
+      1,
+      dataChats.value[dataContextMenu.value.index]
+    )[0]
+  );
+};
+
+const onDown = () => {
+  dataChats.value.splice(
+    dataContextMenu.value.index,
+    1,
+    dataChats.value.splice(
+      dataContextMenu.value.index + 1,
+      1,
+      dataChats.value[dataContextMenu.value.index]
+    )[0]
+  );
 };
 
 const onAddIcon = (item: { type: string; src: string }) => {
