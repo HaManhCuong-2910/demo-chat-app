@@ -56,7 +56,7 @@
               {{
                 moment(item.time)
                   .locale(language)
-                  .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                  .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
               }}
             </p>
 
@@ -104,7 +104,7 @@
               {{
                 moment(item.time)
                   .locale(language)
-                  .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                  .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
               }}
             </p>
           </div>

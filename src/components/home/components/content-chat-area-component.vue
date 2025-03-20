@@ -177,7 +177,7 @@
                   {{
                     moment(itemChild.time)
                       .locale(language)
-                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                      .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
                   }}
                 </p>
                 <img
@@ -294,7 +294,7 @@
                       {{
                         moment(itemChild.time)
                           .locale(language)
-                          .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                          .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
                       }}
                     </p>
                   </div>
@@ -341,7 +341,7 @@
                   {{
                     moment(itemChild.time)
                       .locale(language)
-                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                      .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
                   }}
                 </p>
                 <img
@@ -419,7 +419,7 @@
                   {{
                     moment(itemChild.time)
                       .locale(language)
-                      .format(`${language === "ko" ? "A h:mm" : "h:mm"}`)
+                      .format(`${language === "ko" ? "h:mm" : "h:mm"}`)
                   }}
                 </p>
               </div>

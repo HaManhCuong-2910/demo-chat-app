@@ -209,7 +209,7 @@ const updateDataChats = () => {
     const elementRoot = nodeList[index];
     const time = moment(
       elementRoot.querySelector(".time-content")?.textContent,
-      `${language.value === "ko" ? "A h:mm" : "h:mm"}`
+      `${language.value === "ko" ? "h:mm" : "h:mm"}`
     )
       .locale("vi")
       .format("YYYY-MM-DD HH:mm");
