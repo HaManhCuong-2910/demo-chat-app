@@ -194,11 +194,11 @@ import { dataIcons } from "../../models/kakaotalk-new.model";
 const props = defineProps({
   isDarkMode: Boolean,
 });
-
+const chatKakaotalkNewStore = useChatKakaotalkNewStore();
 const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
 );
-const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
+const { dataChats } = storeToRefs(chatKakaotalkNewStore);
 
 const show = ref(false);
 const dataContextMenu = ref({
@@ -223,6 +223,7 @@ const onContextMenu = (event: MouseEvent, index: number) => {
 };
 
 const onUp = () => {
+  chatKakaotalkNewStore.updateDataChats();
   dataChats.value.splice(
     dataContextMenu.value.index,
     1,
@@ -235,6 +236,7 @@ const onUp = () => {
 };
 
 const onDown = () => {
+  chatKakaotalkNewStore.updateDataChats();
   dataChats.value.splice(
     dataContextMenu.value.index,
     1,

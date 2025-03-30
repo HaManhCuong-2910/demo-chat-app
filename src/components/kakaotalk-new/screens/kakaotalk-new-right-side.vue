@@ -171,7 +171,8 @@ const {
   mode,
   bgColor,
 } = storeToRefs(useKakaotalkNewStore());
-const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
+const chatKakaotalkNewStore = useChatKakaotalkNewStore();
+const { dataChats } = storeToRefs(chatKakaotalkNewStore);
 
 const date = ref("2024년 12월 27일 금요일");
 
@@ -203,26 +204,8 @@ const preview = (file: File) => {
   fr.readAsDataURL(file);
 };
 
-const updateDataChats = () => {
-  const nodeList = document.querySelectorAll(".items-data-chat");
-  for (let index = 0; index < nodeList.length; index++) {
-    const elementRoot = nodeList[index];
-    const time = moment(
-      elementRoot.querySelector(".time-content")?.textContent,
-      `${language.value === "ko" ? "h:mm" : "h:mm"}`
-    )
-      .locale("vi")
-      .format("YYYY-MM-DD HH:mm");
-    const dataValue = elementRoot.querySelector(".data-value");
-    if (dataValue) {
-      dataChats.value[index].value = dataValue.innerHTML;
-    }
-    dataChats.value[index].time = time;
-  }
-};
-
 const onExport = () => {
-  updateDataChats();
+  chatKakaotalkNewStore.updateDataChats();
   const content = JSON.stringify(dataChats.value);
   const blob = new Blob([content], { type: "text/plain" });
   const link = document.createElement("a");
