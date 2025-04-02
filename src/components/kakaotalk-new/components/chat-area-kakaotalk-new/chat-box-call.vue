@@ -21,7 +21,12 @@
         >
           <div
             class="w-full flex justify-between"
-            style="font-size: 41px; font-weight: 500; line-height: 48px"
+            style="
+              font-size: 41px;
+              font-weight: 500;
+              line-height: 48px;
+              word-spacing: -4px;
+            "
             contenteditable="true"
             :class="
               [
@@ -42,7 +47,12 @@
             />
             <span
               class="data-value"
-              style="font-size: 41px; font-weight: 500; line-height: 48px"
+              style="
+                font-size: 41px;
+                font-weight: 500;
+                line-height: 48px;
+                word-spacing: -4px;
+              "
               >{{
                 dataMessage[props.data.typeMessage]
                   ? dataMessage[props.data.typeMessage][language]

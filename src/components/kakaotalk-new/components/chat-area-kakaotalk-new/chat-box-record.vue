@@ -21,7 +21,12 @@
         <div class="w-full flex justify-between" contenteditable="true">
           <font-awesome-icon :icon="['fas', 'play']" class="text-[41px] mt-1" />
           <p
-            style="font-size: 41px; font-weight: 500; line-height: 41px"
+            style="
+              font-size: 41px;
+              font-weight: 500;
+              line-height: 41px;
+              word-spacing: -4px;
+            "
             class="data-value"
           >
             {{ props.data.value }}
