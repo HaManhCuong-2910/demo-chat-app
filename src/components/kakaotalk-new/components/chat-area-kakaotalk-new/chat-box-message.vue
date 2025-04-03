@@ -55,7 +55,12 @@
             </div>
           </div>
           <p
-            style="font-size: 41px; font-weight: 500; line-height: 48px;word-spacing: -4px;"
+            style="
+              font-size: 41px;
+              font-weight: 500;
+              line-height: 48px;
+              word-spacing: -6px;
+            "
             contenteditable="true"
             class="data-value"
             v-html="props.data.value"

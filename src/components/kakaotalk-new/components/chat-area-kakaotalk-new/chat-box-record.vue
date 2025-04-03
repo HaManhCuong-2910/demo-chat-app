@@ -25,7 +25,7 @@
               font-size: 41px;
               font-weight: 500;
               line-height: 41px;
-              word-spacing: -4px;
+              word-spacing: -6px;
             "
             class="data-value"
           >
