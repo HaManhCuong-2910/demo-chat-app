@@ -25,7 +25,7 @@
               font-size: 41px;
               font-weight: 500;
               line-height: 48px;
-              letter-spacing: -2px;
+              letter-spacing: -6px;
             "
             contenteditable="true"
             :class="
@@ -51,7 +51,7 @@
                 font-size: 41px;
                 font-weight: 500;
                 line-height: 48px;
-                letter-spacing: -2px;
+                letter-spacing: -6px;
               "
               >{{
                 dataMessage[props.data.typeMessage]
@@ -147,7 +147,7 @@ const dataMessage = ref<any>({
   word-break: break-word;
 
   .content {
-    @apply py-[28px] px-7 relative;
+    @apply py-[14px] px-7 relative;
     background-color: rgb(262, 228, 0);
     word-wrap: break-word;
     max-width: 100%;
@@ -166,7 +166,7 @@ const dataMessage = ref<any>({
   align-items: flex-start;
   word-break: break-word;
   .content {
-    @apply py-[28px] px-7 relative;
+    @apply py-[14px] px-7 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;

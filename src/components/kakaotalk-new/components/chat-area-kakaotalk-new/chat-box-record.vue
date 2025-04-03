@@ -25,7 +25,7 @@
               font-size: 41px;
               font-weight: 500;
               line-height: 41px;
-              letter-spacing: -2px;
+              letter-spacing: -6px;
             "
             class="data-value"
           >
@@ -97,7 +97,7 @@ const props = defineProps({
   word-break: break-word;
 
   .content {
-    @apply py-[28px] px-9 relative;
+    @apply py-[14px] px-9 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
@@ -112,7 +112,7 @@ const props = defineProps({
   align-items: flex-start;
   word-break: break-word;
   .content {
-    @apply py-[28px] px-9 relative;
+    @apply py-[14px] px-9 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
