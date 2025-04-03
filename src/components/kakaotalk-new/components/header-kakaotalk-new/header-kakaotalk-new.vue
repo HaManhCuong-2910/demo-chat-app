@@ -23,7 +23,7 @@
     </div>
     <div class="text-center col-span-10">
       <p
-        class="text-[48px] font-medium"
+        class="text-[48px] font-medium -tracking-[4px]"
         :class="props.isDarkMode && 'text-white'"
       >
         {{ names.other }}

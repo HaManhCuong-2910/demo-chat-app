@@ -25,7 +25,7 @@
               font-size: 41px;
               font-weight: 500;
               line-height: 48px;
-              word-spacing: -6px;
+              letter-spacing: -2px;
             "
             contenteditable="true"
             :class="
@@ -51,7 +51,7 @@
                 font-size: 41px;
                 font-weight: 500;
                 line-height: 48px;
-                word-spacing: -6px;
+                letter-spacing: -2px;
               "
               >{{
                 dataMessage[props.data.typeMessage]
