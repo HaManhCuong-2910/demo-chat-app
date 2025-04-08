@@ -18,9 +18,15 @@
           props.data.replicaIndex !== null ? 'min-w-72' : 'w-fit min-w-[320px]'
         "
       >
-        <div class="w-full flex justify-between" contenteditable="true">
+        <div
+          class="w-full flex justify-between items-center"
+          contenteditable="true"
+        >
           <font-awesome-icon :icon="['fas', 'play']" class="text-[41px] mt-1" />
-          <p style="font-size: 41px; line-height: 41px" class="data-value">
+          <p
+            style="font-size: 38px; line-height: 38px; margin-top: 7px"
+            class="data-value"
+          >
             {{ props.data.value }}
           </p>
         </div>
@@ -89,7 +95,7 @@ const props = defineProps({
   word-break: break-word;
 
   .content {
-    @apply py-[14px] px-9 relative;
+    @apply py-[28px] px-9 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
@@ -104,7 +110,7 @@ const props = defineProps({
   align-items: flex-start;
   word-break: break-word;
   .content {
-    @apply py-[14px] px-9 relative;
+    @apply py-[28px] px-9 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;

@@ -55,12 +55,7 @@
             </div>
           </div>
           <p
-            style="
-              font-size: 41px;
-              font-weight: 500;
-              line-height: 48px;
-              letter-spacing: -6px;
-            "
+            style="font-size: 38px; font-weight: 500; line-height: 48px"
             contenteditable="true"
             class="data-value"
             v-html="props.data.value"
@@ -115,7 +110,7 @@ import type { IChatsKakaotalkNew } from "../../models/kakaotalk-new.model";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 
-const { names } = storeToRefs(useKakaotalkNewStore());
+const { names, language } = storeToRefs(useKakaotalkNewStore());
 const { dataChats } = storeToRefs(useChatKakaotalkNewStore());
 
 const props = defineProps({
@@ -161,7 +156,7 @@ const props = defineProps({
 
 :deep(p) {
   div {
-    font-size: 41px;
+    font-size: 38px;
     font-weight: 500;
     line-height: 48px;
   }

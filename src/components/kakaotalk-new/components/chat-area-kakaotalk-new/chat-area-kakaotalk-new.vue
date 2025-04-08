@@ -48,8 +48,8 @@
           >
             <p
               class="time-content whitespace-nowrap mb-1 mr-[18px]"
-              :style="`font-size: 28px;font-weight: 500`"
-              :class="props.isDarkMode && 'text-[#888888]'"
+              :style="`font-size: 24px;font-weight: 500`"
+              :class="props.isDarkMode ? 'text-[#888888]' : 'text-[#536573]'"
               v-if="item.type === ETypeUserChat.user && item.isShowTime"
               contenteditable="true"
             >
@@ -97,8 +97,8 @@
               v-if="item.type === ETypeUserChat.other && item.isShowTime"
               class="time-content self-end whitespace-nowrap mt-1 mb-1 ml-[18px]"
               :data-time="item.time"
-              :class="props.isDarkMode && 'text-[#888888]'"
-              :style="`font-size: 28px;font-weight: 500`"
+              :class="props.isDarkMode ? 'text-[#888888]' : 'text-[#536573]'"
+              :style="`font-size: 24px;font-weight: 500`"
               contenteditable="true"
             >
               {{

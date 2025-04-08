@@ -14,14 +14,14 @@
       </p>
       <div class="flex items-end">
         <div
-          class="content min-h-7 flex justify-between"
+          class="content min-h-7 flex justify-between items-center"
           :class="
             props.data.replicaIndex !== null ? 'min-w-72' : 'w-fit min-w-full'
           "
         >
           <div
-            class="w-full flex justify-between"
-            style="font-size: 41px; line-height: 48px"
+            class="w-full flex justify-between items-center"
+            style="font-size: 38px; line-height: 38px; font-weight: 500"
             contenteditable="true"
             :class="
               [
@@ -42,7 +42,12 @@
             />
             <span
               class="data-value"
-              style="font-size: 41px; line-height: 48px"
+              style="
+                font-size: 38px;
+                line-height: 38px;
+                font-weight: 500;
+                margin-top: 7px;
+              "
               >{{
                 dataMessage[props.data.typeMessage]
                   ? dataMessage[props.data.typeMessage][language]
@@ -137,7 +142,7 @@ const dataMessage = ref<any>({
   word-break: break-word;
 
   .content {
-    @apply py-[14px] px-7 relative;
+    @apply py-[28px] px-7 relative;
     background-color: rgb(262, 228, 0);
     word-wrap: break-word;
     max-width: 100%;
@@ -156,7 +161,7 @@ const dataMessage = ref<any>({
   align-items: flex-start;
   word-break: break-word;
   .content {
-    @apply py-[14px] px-7 relative;
+    @apply py-[28px] px-7 relative;
     background-color: rgb(255, 255, 255);
     word-wrap: break-word;
     max-width: 100%;
