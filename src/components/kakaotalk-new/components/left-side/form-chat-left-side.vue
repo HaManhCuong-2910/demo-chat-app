@@ -67,13 +67,15 @@
 
     <div class="mt-4 flex flex-wrap gap-2">
       <label
-        :for="`files_${props.type}`"
+        :for="`files_${props.type}${
+          props.quickAdd ? `_${props.quickAdd}` : ''
+        }`"
         class="py-1 px-4 text-white rounded-md bg-gray-500 cursor-pointer h-8"
         >Chọn ảnh (Có thể chọn nhiều ảnh)</label
       >
 
       <input
-        :id="`files_${props.type}`"
+        :id="`files_${props.type}${props.quickAdd ? `_${props.quickAdd}` : ''}`"
         type="file"
         accept="image/*"
         multiple
@@ -162,7 +164,7 @@ import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
 import { toBase64 } from "~/src/services/constant";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import moment from "moment";
-import { dataIcons } from "../../models/kakaotalk-new.model";
+import { dataIcons, ETypeQuickChat } from "../../models/kakaotalk-new.model";
 
 const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
@@ -174,7 +176,11 @@ const props = defineProps({
     type: String as PropType<ETypeUserChat>,
     default: ETypeUserChat.user,
   },
+  quickAdd: String as PropType<ETypeQuickChat>,
+  indexAbove: Number,
 });
+
+const emit = defineEmits(["onClose"]);
 
 const data = ref<{
   message: string;
@@ -212,9 +218,16 @@ const isActiveIcon = (item: { type: string; src: string }) => {
 const preview = (file: File) => {
   const fr = new FileReader();
   data.value.images = [];
-  if (!!document.querySelector(`#files_${props.type}`)) {
+  if (
+    !!document.querySelector(
+      `#files_${props.type}${props.quickAdd ? `_${props.quickAdd}` : ""}`
+    )
+  ) {
     // @ts-ignore
-    document.querySelector(`#files_${props.type}`).value = null;
+    document.querySelector(
+      `#files_${props.type}${props.quickAdd ? `_${props.quickAdd}` : ""}`
+      // @ts-ignore
+    ).value = null;
   }
 
   fr.onload = () => {
@@ -231,7 +244,7 @@ const handleChange = async (event: any) => {
 
 const onAddMessage = () => {
   if (data.value.images.length > 0) {
-    dataChats.value.push({
+    const newData = {
       images: data.value.images,
       isShowAvatar: isShowAvatar.value,
       isShowTime: isShowTime.value,
@@ -246,7 +259,26 @@ const onAddMessage = () => {
           count: 1,
         };
       }),
-    });
+    };
+
+    if (props.quickAdd === ETypeQuickChat.above) {
+      dataChats.value.splice(
+        props.indexAbove || dataChats.value.length - 1,
+        0,
+        newData
+      );
+    } else if (
+      props.quickAdd === ETypeQuickChat.under &&
+      props.indexAbove !== undefined
+    ) {
+      dataChats.value.splice(
+        props.indexAbove + 1 || dataChats.value.length - 1,
+        0,
+        newData
+      );
+    } else {
+      dataChats.value.push(newData);
+    }
   } else {
     const messages = data.value.message
       .replaceAll("{#", '<img src="')
@@ -254,7 +286,7 @@ const onAddMessage = () => {
         "#}",
         '" alt="icon" style="width: 60px;object-fit: cover;display: inline;margin-top: -7px;" />'
       );
-    dataChats.value.push({
+    const newData = {
       images: [],
       isShowAvatar: isShowAvatar.value,
       isShowTime: isShowTime.value,
@@ -269,7 +301,26 @@ const onAddMessage = () => {
           count: 1,
         };
       }),
-    });
+    };
+
+    if (props.quickAdd === ETypeQuickChat.above) {
+      dataChats.value.splice(
+        props.indexAbove || dataChats.value.length - 1,
+        0,
+        newData
+      );
+    } else if (
+      props.quickAdd === ETypeQuickChat.under &&
+      props.indexAbove !== undefined
+    ) {
+      dataChats.value.splice(
+        props.indexAbove + 1 || dataChats.value.length - 1,
+        0,
+        newData
+      );
+    } else {
+      dataChats.value.push(newData);
+    }
   }
 
   data.value = {
@@ -277,10 +328,11 @@ const onAddMessage = () => {
     images: [],
   };
   selectedIcons.value = [];
+  emit("onClose");
 };
 
 const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
-  dataChats.value.push({
+  const newData = {
     images: [],
     isShowAvatar: isShowAvatar.value,
     isShowTime: isShowTime.value,
@@ -295,13 +347,32 @@ const onAddCall = (typeMessage: ETypeAddChat, value: string) => {
         count: 1,
       };
     }),
-  });
+  };
+  if (props.quickAdd === ETypeQuickChat.above) {
+    dataChats.value.splice(
+      props.indexAbove || dataChats.value.length - 1,
+      0,
+      newData
+    );
+  } else if (
+    props.quickAdd === ETypeQuickChat.under &&
+    props.indexAbove !== undefined
+  ) {
+    dataChats.value.splice(
+      props.indexAbove + 1 || dataChats.value.length - 1,
+      0,
+      newData
+    );
+  } else {
+    dataChats.value.push(newData);
+  }
 
   data.value = {
     message: "",
     images: [],
   };
   selectedIcons.value = [];
+  emit("onClose");
 };
 
 const onUpdateImage = (img: string) => {

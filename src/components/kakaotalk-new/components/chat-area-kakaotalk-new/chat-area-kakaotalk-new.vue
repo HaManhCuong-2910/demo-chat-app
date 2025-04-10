@@ -176,8 +176,68 @@
         @click="onRepMessage"
       />
       <context-menu-item label="Xóa" @click="onDelete" />
+      <context-menu-item
+        label="Thêm tin nhắn lên trên"
+        @click="
+          () => {
+            dataDialog.isShowDialog = true;
+            dataDialog.typeUser = dataChats[dataContextMenu.index].type;
+            dataDialog.typeQuickChat = ETypeQuickChat.above;
+          }
+        "
+      />
+      <context-menu-item
+        label="Thêm tin nhắn xuống dưới"
+        @click="
+          () => {
+            dataDialog.isShowDialog = true;
+            dataDialog.typeUser = dataChats[dataContextMenu.index].type;
+            dataDialog.typeQuickChat = ETypeQuickChat.under;
+          }
+        "
+      />
     </context-menu>
   </div>
+
+  <Teleport defer to="#dialog-add-message">
+    <el-dialog destroy-on-close v-model="dataDialog.isShowDialog" :width="700">
+      <div class="p-4">
+        <div class="">
+          <el-checkbox
+            v-model="isShowAvatar"
+            label="Hiện ảnh đại diện"
+            size="large"
+            class="bg-white"
+            border
+          />
+          <el-checkbox
+            v-model="isShowTime"
+            label="Hiển thị thời gian"
+            size="large"
+            class="bg-white"
+            border
+          />
+        </div>
+        <input-date-kakaotalk-new @on-close="dataDialog.isShowDialog = false" />
+        <div class="mt-4">
+          <form-chat-left-side
+            :type="ETypeUserChat.user"
+            :index-above="dataContextMenu.index"
+            :quick-add="dataDialog.typeQuickChat"
+            @on-close="dataDialog.isShowDialog = false"
+          />
+        </div>
+        <div class="mt-4">
+          <form-chat-left-side
+            :type="ETypeUserChat.other"
+            :index-above="dataContextMenu.index"
+            :quick-add="dataDialog.typeQuickChat"
+            @on-close="dataDialog.isShowDialog = false"
+          />
+        </div>
+      </div>
+    </el-dialog>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -189,7 +249,7 @@ import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../../stores/chat-data-kakaotalk-new.store";
 import type { MenuOptions } from "@imengyu/vue3-context-menu";
 import { useKakaotalkNewStore } from "../../stores/kakaotalk-new.store";
-import { dataIcons } from "../../models/kakaotalk-new.model";
+import { dataIcons, ETypeQuickChat } from "../../models/kakaotalk-new.model";
 
 const props = defineProps({
   isDarkMode: Boolean,
@@ -199,7 +259,11 @@ const { avatars, isShowAvatar, isShowTime, language } = storeToRefs(
   useKakaotalkNewStore()
 );
 const { dataChats } = storeToRefs(chatKakaotalkNewStore);
-
+const dataDialog = ref({
+  isShowDialog: false,
+  typeUser: ETypeUserChat.user,
+  typeQuickChat: ETypeQuickChat.under,
+});
 const show = ref(false);
 const dataContextMenu = ref({
   index: 0,

@@ -49,3 +49,8 @@ export const dataIcons = [
     src: "/emoji-kakaotalk-new/wow.png",
   },
 ];
+
+export enum ETypeQuickChat {
+  above = "above",
+  under = "under",
+}

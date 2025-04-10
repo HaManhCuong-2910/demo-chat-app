@@ -39,6 +39,8 @@
     </div>
   </div>
 
+  <div id="dialog-add-message"></div>
+
   <el-dialog destroy-on-close v-model="dataDialogRoot.isShowDialog">
     <component
       :is="dataDialogRoot?.component"

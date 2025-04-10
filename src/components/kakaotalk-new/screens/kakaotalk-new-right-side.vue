@@ -72,20 +72,7 @@
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-3">Ngôn ngữ</p>
       <div class="flex col-span-9">
-        <el-select
-          v-model="language"
-          placeholder="Select"
-          style="width: 240px"
-          @change="
-            (val) => {
-              if (val === 'ko') {
-                date = '2024년 12월 27일 금요일';
-              } else {
-                date = 'Thứ Sáu, ngày 27 tháng 12, 2024';
-              }
-            }
-          "
-        >
+        <el-select v-model="language" placeholder="Select" style="width: 240px">
           <el-option
             v-for="item in languages"
             :key="item.value"
@@ -96,25 +83,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-2 items-center mt-3">
-      <p class="text-base font-medium col-span-3">Ngày tháng</p>
-
-      <div class="flex col-span-8">
-        <input-common
-          v-model:value="date"
-          class="custom-input"
-          :class-container="'w-full'"
-        ></input-common>
-      </div>
-
-      <div>
-        <button-common
-          :text="'Gửi'"
-          :class-text="'font-medium text-base'"
-          @click="onAddMessage"
-        />
-      </div>
-    </div>
+    <input-date-kakaotalk-new />
 
     <div class="grid grid-cols-12 gap-1 items-center mt-3">
       <p class="text-base font-medium col-span-3">Ảnh nền</p>
@@ -155,10 +124,8 @@
 </template>
 
 <script setup lang="ts">
-import moment from "moment/min/moment-with-locales";
 import { useChatKakaotalkNewStore } from "../stores/chat-data-kakaotalk-new.store";
 import { useKakaotalkNewStore } from "../stores/kakaotalk-new.store";
-import { ETypeAddChat, ETypeUserChat } from "../../home/models/home.model";
 import { EMode } from "../../home/models/toolbar.model";
 import { ETypeButton } from "~/src/services/constant";
 
@@ -173,22 +140,6 @@ const {
 } = storeToRefs(useKakaotalkNewStore());
 const chatKakaotalkNewStore = useChatKakaotalkNewStore();
 const { dataChats } = storeToRefs(chatKakaotalkNewStore);
-
-const date = ref("2024년 12월 27일 금요일");
-
-const onAddMessage = () => {
-  dataChats.value.push({
-    images: [],
-    isShowAvatar: false,
-    isShowTime: false,
-    time: moment().format("YYYY-MM-DD HH:mm"),
-    type: ETypeUserChat.user,
-    typeMessage: ETypeAddChat.date,
-    value: date.value,
-    replicaIndex: null,
-    icons: [],
-  });
-};
 
 const preview = (file: File) => {
   const fr = new FileReader();
@@ -244,16 +195,4 @@ const onInputFile = () => {
 };
 </script>
 
-<style scoped lang="scss">
-:deep(.custom-input) {
-  .el-input__wrapper {
-    @apply bg-gray-100;
-
-    .el-input__inner {
-      font-size: 16px;
-      line-height: 24px;
-      text-align: center;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
