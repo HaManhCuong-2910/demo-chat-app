@@ -155,7 +155,7 @@ const props = defineProps({
 }
 
 :deep(p) {
-  div {
+  div,span {
     font-size: 38px;
     font-weight: 500;
     line-height: 48px;
